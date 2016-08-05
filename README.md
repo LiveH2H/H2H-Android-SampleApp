@@ -1,4 +1,4 @@
-H2H Sample Android App that uses H2H SDK
+H2H Sample Android App uses H2H SDK
 ===
 
 H2H Video Conference APIs
@@ -16,18 +16,20 @@ http://developer.liveh2h.com/account-management/####
 
 
 ####Create A Meeting REST API:####
---
+```
 URL:https://app.liveh2h.com/tutormeetweb/corpmeeting.do?action=createMeeting&json=
     {           "recordMeeting":true,            "subject":"Global warming",           "meetingSn":"",           "description":" Causes and effects of global warming.",           "groupList":[],           "emailList":["h2h1@sharklasers.com"],           "translatorList":[{"lang":"fr","email":"h2h3@sharklasers.com"}],          "meetingType":6,          "action":"createMeeting",          "location":"TC"  }
 HTTP Method: POST
 HTTP Header: 
 apiToken:”apiToken you get from Login api”
 Content-Type:application/json
-
+```
 
 ####Join A Meeting REST API(No need apiToken):####
+```
 URL:https://app.liveh2h.com/tutormeetweb/corpmeeting.do?json={"meetingId”:”MEETING_ID”,”locale":"en","action":"joinMeeting","app":"meet","name”:”YOUR_NAME”,”email”:”YOUR_EMAIL”}
 HTTP Method: POST
+```
 
 ####If Create A Meeting API or Join A Meeting API call is successful, you should get the JSON response:####
 ```
@@ -42,7 +44,7 @@ HTTP Method: POST
    "meetingURL":"https://meet1.liveh2h.com/launcher.html?p=JTdCJTIydXNlcl9pZCUyMiUzQSUyMnBHNEpGYSUyRk9mUVlMT0hHUVBiJTJGU240MnRLaGFpJTIyJTJDJTIybWVldGluZ19pZCUyMiUzQSUyMjE3OTAyMTU3MiUyMiUyQyUyMm9yaWdpbiUyMiUzQSUyMlRNRSUyMiU3RA==&b=true"
 }
 ```
-###Pass origin, serverURL and userToken to the H2HSDK###
+####Pass origin, serverURL and userToken to the H2HSDK####
 
 
 
