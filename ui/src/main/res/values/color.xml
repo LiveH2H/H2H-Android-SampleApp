@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="actionsheet_gray">#8F8F8F</color>
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="default_ascv_selected_color">#0099CC</color>
+    <color name="default_ascv_unselected_color">#FFFFFF</color>
+</resources>

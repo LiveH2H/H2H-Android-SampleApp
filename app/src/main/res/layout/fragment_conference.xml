@@ -1,0 +1,66 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.ConferenceFragment"
+    android:background="@color/colorTitlebar"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:background="@color/colorTitlebar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titleheight">
+        <ImageButton
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ib_hangup"
+            android:src="@drawable/ic_action_end_call"
+            android:background="@drawable/round_button"
+            />
+        <ImageView
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/iv_audio"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/selector_operate_audio"/>
+        <ImageView
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/iv_video"
+            android:layout_toLeftOf="@+id/iv_audio"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/selector_operate_video"/>
+        <TextView
+            android:id="@+id/tv_meetingId"
+          style="@style/TitleTextStyle"/>
+    </RelativeLayout>
+    <FrameLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        >
+
+        <android.opengl.GLSurfaceView
+            android:id="@+id/gl_surface"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent" />
+        <AbsoluteLayout
+            android:background="@android:color/transparent"
+            android:id="@+id/alt_avatars"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </AbsoluteLayout>
+
+    </FrameLayout>
+</LinearLayout>

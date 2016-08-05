@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context="itutorgroup.h2h.fragment.ChatFragment">
+    <RelativeLayout
+        android:background="@color/colorTitlebar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titleheight">
+        <Spinner
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:id="@+id/sr_member"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"></Spinner>
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_addChat"
+            android:enabled="false"
+            android:layout_margin="5dp"
+            android:layout_alignParentRight="true"
+            android:text="@string/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/iv_chatroom"
+            style="@style/listviewstyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:dividerHeight="0dp" />
+
+
+
+            <LinearLayout
+                android:background="@color/bgetcolor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <EditText
+                    android:textColor="@color/white"
+                    android:padding="5dp"
+                    android:textColorHint="@color/actionsheet_gray"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:background="@drawable/shape_white"
+                    android:id="@+id/et_msg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/input_text" />
+
+                <ImageButton
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:padding="5dp"
+                    android:background="@drawable/ic_send"
+                    android:id="@+id/btn_sendmsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                     />
+            </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

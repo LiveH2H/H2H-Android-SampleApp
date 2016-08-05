@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">H2HChatApp</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="error">Error</string>
+    <string name="ok">OK</string>
+    <string name="loading_text">loading&#8230;</string>
+    <string name="crash">Sorry,the program appears unusual, about to exit.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="conference">Conference</string>
+    <string name="participants">Participants</string>
+    <string name="chat">Chat</string>
+    <string name="send">Send</string>
+    <string name="input_text">input text</string>
+    <string name="msg_empty_tip">Message can\'t be empty</string>
+    <string name="meetingId_tip">MeetingId can\'t be empty</string>
+    <string name="displayName_tip">DisplayName can\'t be empty</string>
+    <string name="emailAddress_tip">Email Address can\'t be empty</string>
+    <string name="add">Add</string>
+    <string name="logout">Logout</string>
+    <string name="logout_tips">Do you want to logout?</string>
+    <string name="new_message">New Message</string>
+    <string name="check_network_tip">Please check the network Settings</string>
+    <string name="chat_me_left_tip">You left</string>
+    <string name="chat_me_join_tip">You joined</string>
+    <string name="hint_meeingId">9 Digit Meeting ID</string>
+    <string name="hint_displayName">Display Name</string>
+    <string name="hint_emailAddress">Email Address</string>
+    <string name="whiteboard">whiteboard</string>
+</resources>

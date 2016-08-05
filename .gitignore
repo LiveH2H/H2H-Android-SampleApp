@@ -1,0 +1,7 @@
+*.iml
+*.log
+/local.properties
+/.gradle/
+build/
+/.idea/
+/javatestlib/

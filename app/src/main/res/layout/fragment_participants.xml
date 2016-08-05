@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.ParticipantsFragment"
+    android:background="@color/black"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:background="@color/colorTitlebar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titleheight">
+
+    </RelativeLayout>
+    <!-- TODO: Update blank fragment layout -->
+    <ListView
+        android:id="@+id/iv_participants"
+        style="@style/listviewstyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/inset_divider_partipicant"
+        android:dividerHeight="1dp" />
+
+</LinearLayout>

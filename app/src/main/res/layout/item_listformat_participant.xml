@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:descendantFocusability="blocksDescendants">
+<TextView
+    android:id="@+id/tv_name"
+    android:textSize="18sp"
+    android:textColor="@color/white"
+    android:layout_marginLeft="20dp"
+    android:text="test member"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_alignParentRight="true"
+        android:id="@+id/iv_video"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/selector_operate_video"
+        android:layout_width="@dimen/tabheight"
+        android:layout_height="@dimen/tabheight" />
+
+    <ImageView
+        android:id="@+id/iv_audio"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/iv_video"
+        android:src="@drawable/selector_operate_audio"
+        android:layout_width="@dimen/tabheight"
+        android:layout_height="@dimen/tabheight" />
+    <ImageView
+        android:visibility="gone"
+        android:layout_toLeftOf="@+id/iv_audio"
+        android:id="@+id/iv_whiteboard"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/icon_whiteboard"
+        android:layout_width="@dimen/tabheight"
+        android:layout_height="@dimen/tabheight" />
+</RelativeLayout>
