@@ -8,45 +8,42 @@ H2H Video Conference APIs
 
 
 ###How to Create a Meeting or Join a Meeting###
+If you are the host, you need to create a meeting. If you are an invitee, you should already have the meeting id, you need to join a meeting
 
-If you are a host, you need to be a logged in H2HUser to schedule a meeting. If you are an invitee, you should have the meetingId already, just join the meeting directly. 
-
-####H2HUser Login and Signup API:
-http://developer.liveh2h.com/account-management/####
-
-
-####Create A Meeting REST API:####
+####Create a Meeting####
 ```
-URL:https://app.liveh2h.com/tutormeetweb/corpmeeting.do?action=createMeeting&json=
-    {           "recordMeeting":true,            "subject":"Global warming",           "meetingSn":"",           "description":" Causes and effects of global warming.",           "groupList":[],           "emailList":["h2h1@sharklasers.com"],           "translatorList":[{"lang":"fr","email":"h2h3@sharklasers.com"}],          "meetingType":6,          "action":"createMeeting",          "location":"TC"  }
-HTTP Method: POST
-HTTP Header: 
-apiToken:”apiToken you get from Login api”
-Content-Type:application/json
+h2HHttpRequest = H2HHttpRequest.getInstance();
+h2HHttpRequest.instantMeeting(
+		etDisplayName.getText().toString().trim(),
+		etEmailAddress.getText().toString().trim(),
+		new H2HCallback() {
+			@Override
+			public void onCompleted(Exception ex, H2HCallBackStatus status) {
+				if (status == H2HCallBackStatus.H2HCallBackStatusOK){
+					launchMeeting(h2HHttpRequest.getOrigin(),h2HHttpRequest.getServerURL(),h2HHttpRequest.getUserToken());
+				}
+			}
+		});
+```
+####Join a Meeting####
+
+```
+h2HHttpRequest = H2HHttpRequest.getInstance();
+h2HHttpRequest.joinMeeting(
+		etMeetingId.getText().toString().trim().replace("-", ""),
+		etDisplayName.getText().toString().trim(),
+		etEmailAddress.getText().toString().trim(),
+		new H2HCallback() {
+	@Override
+	public void onCompleted(Exception ex, H2HCallBackStatus status) {
+		if (status == H2HCallBackStatus.H2HCallBackStatusOK){
+			launchMeeting(h2HHttpRequest.getOrigin(),h2HHttpRequest.getServerURL(),h2HHttpRequest.getUserToken());
+		}
+	}
+});
 ```
 
-####Join A Meeting REST API(No need apiToken):####
-```
-URL:https://app.liveh2h.com/tutormeetweb/corpmeeting.do?json={"meetingId”:”MEETING_ID”,”locale":"en","action":"joinMeeting","app":"meet","name”:”YOUR_NAME”,”email”:”YOUR_EMAIL”}
-HTTP Method: POST
-```
-
-####If Create A Meeting API or Join A Meeting API call is successful, you should get the JSON response:####
-```
-{  
-   "returnCode":0,
-   "referer":"web1.liveh2h.com",
-   "meetingPassword":"",
-   "serverURL":"https://meet1.liveh2h.com",
-   "origin":"TME",
-   "meetingUri":"JTdCJTIydXNlcl9pZCUyMiUzQSUyMnBHNEpGYSUyRk9mUVlMT0hHUVBiJTJGU240MnRLaGFpJTIyJTJDJTIybWVldGluZ19pZCUyMiUzQSUyMjE3OTAyMTU3MiUyMiUyQyUyMm9yaWdpbiUyMiUzQSUyMlRNRSUyMiU3RA==",
-   "meetingId":"179021572",
-   "meetingURL":"https://meet1.liveh2h.com/launcher.html?p=JTdCJTIydXNlcl9pZCUyMiUzQSUyMnBHNEpGYSUyRk9mUVlMT0hHUVBiJTJGU240MnRLaGFpJTIyJTJDJTIybWVldGluZ19pZCUyMiUzQSUyMjE3OTAyMTU3MiUyMiUyQyUyMm9yaWdpbiUyMiUzQSUyMlRNRSUyMiU3RA==&b=true"
-}
-```
-####Pass origin, serverURL and userToken to the H2HSDK####
-
-
+####Launnch a Meeting: Pass origin, serverURL and userToken to the H2HSDK####
 
 ```
 final H2HModel model = H2HModel.getInstance();

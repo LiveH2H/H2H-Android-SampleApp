@@ -32,10 +32,10 @@ import itutorgroup.h2h.widget.progress.TextProgressIndicator;
  * 时间：2016年07月12日 11:41
  * 邮箱：nianbin@mosainet.com
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class MeetingRoomBaseActivity extends AppCompatActivity {
     protected String TAG = getClass().getSimpleName();
     private TextProgressIndicator textProgressIndicator;
-    protected Context mContext;
+    protected Context context;
     private HintDialog hintDialog;
     protected DefaultProgressIndicator progressIndicator;
 
@@ -44,7 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         Log.e(TAG,"onCreate");
-        mContext = this;
+        context = this;
         AppManager.getAppManager().addActivity(this);
         setContentView(setContent());
         fitsSystemWindows();
@@ -92,7 +92,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showProgressDialog() {
         if (progressIndicator == null) {
-            progressIndicator = DefaultProgressIndicator.newInstance(mContext);
+            progressIndicator = DefaultProgressIndicator.newInstance(context);
 
         }
         progressIndicator.show();
@@ -116,7 +116,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public HintDialog showHintDialog(CharSequence text) {
         if (hintDialog == null) {
-            hintDialog = new HintDialog(mContext);
+            hintDialog = new HintDialog(context);
         }
         hintDialog.setMessages(text);
         if (!hintDialog.isShowing()) {
@@ -138,14 +138,14 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 显示Toast
      */
     public void showToast(CharSequence text) {
-        ToastUtils.showToast(mContext,text);
+        ToastUtils.showToast(context,text);
     }
 
     /**
      * 显示Toast
      */
     public void showToast(int resId) {
-        ToastUtils.showToast(mContext,resId);
+        ToastUtils.showToast(context,resId);
     }
 
     private void fitsSystemWindows() {
@@ -213,8 +213,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
     }
+    /**************************************监听网络变化*********************************/
     protected boolean openEventBus(){
         return false;
     }
-    /**************************************监听网络变化*********************************/
 }

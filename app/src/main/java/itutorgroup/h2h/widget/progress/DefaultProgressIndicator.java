@@ -37,7 +37,7 @@ public class DefaultProgressIndicator extends Dialog implements IProgressIndicat
 
     private void initViews(Context context) {
         this.context = context;
-//        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_dialog_loading, null);
+//        View view = LayoutInflater.from(context).inflate(R.layout.layout_dialog_loading, null);
 //        messages = ViewUtil.findViewById(view, R.id.messages);
         View view = View.inflate(context,R.layout.layout_dialog_loading,null);
         ImageView iv = (ImageView) view.findViewById(R.id.iv_progress);

@@ -49,7 +49,8 @@ dependencies {
     apt 'com.zhy:mpermission-compiler:1.0.0'
     compile 'com.zhy:mpermission-api:1.0.0'
     compile 'com.android.support:support-v4:24.0.0-beta1'
-    compile(name:'h2h-rtc-v1.0', ext:'aar')
+    //H2H SDK
+    compile(name:'h2h', ext:'aar')
     compile 'io.pristine:libjingle:9694@aar'
     compile 'com.koushikdutta.async:androidasync:2.+'
 }

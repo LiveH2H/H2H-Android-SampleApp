@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="serverUrl">
-        <item>meet1.liveh2h.com</item>
-        <item>meet3.liveh2h.com</item>
-        <item>meet6.liveh2h.com</item>
-    </string-array>
-</resources>

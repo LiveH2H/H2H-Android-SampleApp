@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">H2HChatApp</string>
+    <string name="app_name">H2HSampleApp</string>
     <string name="title_activity_chat">ChatActivity</string>
     <string name="error">Error</string>
     <string name="ok">OK</string>

@@ -31,7 +31,7 @@ public class ParticipantAdapter extends CommonAdapter<Participant> implements Vi
         ImageView ivWhiteboard = holder.getView(R.id.iv_whiteboard);
         TextView tvName = holder.getView(R.id.tv_name);
         final Participant participant = listDatas.get(position);
-        tvName.setText(participant.displayName);
+        tvName.setText(participant.displayName+(participant.isHost?"":"(Host)"));
         setSelectState(ivAudio, participant.isAudio);
         setSelectState(ivVideo, participant.isVideo);
         setSelectState(ivWhiteboard, participant.isWhiteboard);
@@ -44,12 +44,6 @@ public class ParticipantAdapter extends CommonAdapter<Participant> implements Vi
     }
     private void setSelectState(ImageView iv,boolean select) {
         iv.setSelected(select);
-//        Drawable drawable = iv.getDrawable().mutate();
-//        if (!select) {
-//            drawable.setColorFilter(mContext.getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
-//        } else {
-//            drawable.setColorFilter(mContext.getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
-//        }
     }
     private ContactorOperateCallback contactorOperateCallback;
 

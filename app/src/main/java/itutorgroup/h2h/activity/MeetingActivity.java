@@ -24,7 +24,7 @@ import me.drakeet.materialdialog.MaterialDialog;
  * 时间：2016年07月12日 15:34
  * 邮箱：nianbin@mosainet.com
  */
-public class MeetingActivity extends BaseActivity implements BottomNavigatorView.OnBottomNavigatorViewItemClickListener,BaseActivity.NetworkChangedInterface {
+public class MeetingActivity extends MeetingRoomBaseActivity implements BottomNavigatorView.OnBottomNavigatorViewItemClickListener,MeetingRoomBaseActivity.NetworkChangedInterface {
     private MaterialDialog mdLogout;
     public FragmentNavigator mNavigator;
     private BottomNavigatorView bottomNavigatorView;
@@ -76,14 +76,14 @@ public class MeetingActivity extends BaseActivity implements BottomNavigatorView
     @Override
     protected int setContent() {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        return R.layout.activity_meeting;
+        return R.layout.activity_meeting_meeting;
     }
 
     @Override
     protected void addListener() {
-        mdLogout = new MaterialDialog(mContext)
-                .setMessage(mContext.getString(R.string.logout_tips))
-                .setPositiveButton(mContext.getString(R.string.ok), new View.OnClickListener() {
+        mdLogout = new MaterialDialog(context)
+                .setMessage(context.getString(R.string.logout_tips))
+                .setPositiveButton(context.getString(R.string.ok), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         mdLogout.dismiss();
@@ -93,7 +93,7 @@ public class MeetingActivity extends BaseActivity implements BottomNavigatorView
                         finish();
                     }
                 })
-                .setNegativeButton(mContext.getString(R.string.cancel), new View.OnClickListener() {
+                .setNegativeButton(context.getString(R.string.cancel), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         mdLogout.dismiss();
