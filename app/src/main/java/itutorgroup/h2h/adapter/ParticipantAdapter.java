@@ -31,7 +31,7 @@ public class ParticipantAdapter extends CommonAdapter<Participant> implements Vi
         ImageView ivWhiteboard = holder.getView(R.id.iv_whiteboard);
         TextView tvName = holder.getView(R.id.tv_name);
         final Participant participant = listDatas.get(position);
-        tvName.setText(participant.displayName+(participant.isHost?"":"(Host)"));
+        tvName.setText(participant.displayName+(participant.isHost?" (Host)":""));
         setSelectState(ivAudio, participant.isAudio);
         setSelectState(ivVideo, participant.isVideo);
         setSelectState(ivWhiteboard, participant.isWhiteboard);

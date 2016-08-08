@@ -1,6 +1,15 @@
 H2H Sample Android App uses H2H SDK
 ===
 
+How to Get H2H SDK
+---
+Copy the following code into your app level build.gradle file, under dependencies:
+```
+compile 'com.liveh2h:h2h-video-conference:1+'
+compile 'io.pristine:libjingle:9694@aar'
+compile 'com.koushikdutta.async:androidasync:2.+'
+```
+
 H2H Video Conference APIs
 ---
 

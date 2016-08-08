@@ -34,6 +34,12 @@ allprojects {
     }
 }
 
+repositories {
+    maven {
+        url 'https://dl.bintray.com/liveh2h/maven/'
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -50,7 +56,7 @@ dependencies {
     compile 'com.zhy:mpermission-api:1.0.0'
     compile 'com.android.support:support-v4:24.0.0-beta1'
     //H2H SDK
-    compile(name:'h2h', ext:'aar')
+    compile 'com.liveh2h:h2h-video-conference:1+'
     compile 'io.pristine:libjingle:9694@aar'
     compile 'com.koushikdutta.async:androidasync:2.+'
 }
