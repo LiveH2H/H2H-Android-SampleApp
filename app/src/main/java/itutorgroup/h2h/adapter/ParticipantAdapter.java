@@ -42,6 +42,7 @@ public class ParticipantAdapter extends CommonAdapter<Participant> implements Vi
         ivVideo.setOnClickListener(this);
         ivWhiteboard.setOnClickListener(this);
     }
+    
     private void setSelectState(ImageView iv,boolean select) {
         iv.setSelected(select);
     }

@@ -34,11 +34,6 @@ allprojects {
     }
 }
 
-repositories {
-    maven {
-        url 'https://dl.bintray.com/liveh2h/maven/'
-    }
-}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
