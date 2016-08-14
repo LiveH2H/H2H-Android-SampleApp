@@ -16,10 +16,101 @@ H2H Video Conference APIs
 ###WebRTC Library is a multithreading environment, but the H2HSDK and WebRTC API have dispatched the background threads to do what needs to be done. The UI/Clinet app should always call H2HConference SDK on Main/UI thread. ###
 
 
-###How to Create a Meeting or Join a Meeting###
-If you are the host, you need to create a meeting. If you are an invitee, you should already have the meeting id, you need to join a meeting
+###User Management###
+####How to login####
+```
+H2HHttpRequest.getInstance().loginH2H(email, pwd, new H2HCallback() {
+	@Override
+	public void onCompleted(Exception ex, H2HCallBackStatus status) {
+		if (status == H2HCallBackStatus.H2HCallBackStatusOK){
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
+				}
+			});
+		}else {
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(LoginActivity.this,"Failed to Login",Toast.LENGTH_SHORT).show();
+				}
+			});
+		}
+	}
+});
+```
 
-####Create a Meeting####
+####How to signup####
+```
+H2HHttpRequest.getInstance().signUpH2HUser(userName, firstName, lastName, email, pwd, new H2HCallback() {
+	@Override
+	public void onCompleted(Exception ex, H2HCallBackStatus status) {
+		if (status==H2HCallBackStatus.H2HCallBackStatusOK){
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(SignupActivity.this,"User Sign Up Success",Toast.LENGTH_SHORT).show();
+				}
+			});
+		}else {
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(SignupActivity.this,"Sign Up Failed",Toast.LENGTH_SHORT).show();
+				}
+			});
+		}
+	}
+});
+```
+
+###Meetings###
+If you are the host, you need to schedule a meeting or create an instant meeting. If you are an invitee, you should already have the meeting id, you need to join a meeting. Please note that you need to signin to H2H in order to schedule a meeting. 
+
+####Schedule a Meeting####
+```
+H2HHttpRequest.getInstance().scheduleMeeting(subject, description, startTime,invitees, translators, isGroupMeeting, shouldRecord, new H2HScheduleMeetingCallback() {
+	@Override
+	public void onCompleted(final Exception ex, final H2HCallBackStatus status) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (status == H2HCallBackStatus.H2HCallBackStatusOK){
+					Toast.makeText(ScheduleMeetingActivity.this,"Schedule a meeting success: "+meetingID,Toast.LENGTH_SHORT).show();
+					//You can put Join meeting code here
+				}else {
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							Toast.makeText(ScheduleMeetingActivity.this,"Failed to schedule a meeting",Toast.LENGTH_SHORT).show();
+						}
+					});
+				}
+			}
+		});
+	}
+});
+
+```
+####Join a Meeting####
+
+```
+h2HHttpRequest = H2HHttpRequest.getInstance();
+h2HHttpRequest.joinMeeting(
+		etMeetingId.getText().toString().trim().replace("-", ""),
+		email,
+		new H2HCallback() {
+	@Override
+	public void onCompleted(Exception ex, H2HCallBackStatus status) {
+		if (status == H2HCallBackStatus.H2HCallBackStatusOK){
+			launchMeeting(h2HHttpRequest.getOrigin(),h2HHttpRequest.getServerURL(),h2HHttpRequest.getUserToken());
+		}
+	}
+});
+```
+
+####Instant Meeting####
 ```
 h2HHttpRequest = H2HHttpRequest.getInstance();
 h2HHttpRequest.instantMeeting(
@@ -34,26 +125,8 @@ h2HHttpRequest.instantMeeting(
 			}
 		});
 ```
-####Join a Meeting####
-
-```
-h2HHttpRequest = H2HHttpRequest.getInstance();
-h2HHttpRequest.joinMeeting(
-		etMeetingId.getText().toString().trim().replace("-", ""),
-		etDisplayName.getText().toString().trim(),
-		etEmailAddress.getText().toString().trim(),
-		new H2HCallback() {
-	@Override
-	public void onCompleted(Exception ex, H2HCallBackStatus status) {
-		if (status == H2HCallBackStatus.H2HCallBackStatusOK){
-			launchMeeting(h2HHttpRequest.getOrigin(),h2HHttpRequest.getServerURL(),h2HHttpRequest.getUserToken());
-		}
-	}
-});
-```
 
 ####Launnch a Meeting: Pass origin, serverURL and userToken to the H2HSDK####
-
 ```
 final H2HModel model = H2HModel.getInstance();
 model.getLaunchParameters(origin, serverURL, userToken, new H2HCallback() {
