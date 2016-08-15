@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D1D1D1"
+    tools:context="itutorgroup.h2h.activity.SignupActivity">
+
+    <RelativeLayout
+        android:background="@android:color/white"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/userNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:singleLine="true"
+            android:nextFocusForward="@+id/firstNameEditText"
+            android:hint="Enter your user name" />
+
+        <EditText
+            android:id="@+id/firstNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:singleLine="true"
+            android:nextFocusForward="@+id/lastNameEditText"
+            android:layout_below="@+id/userNameEditText"
+            android:hint="Enter your first name" />
+
+        <EditText
+            android:id="@+id/lastNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/firstNameEditText"
+            android:singleLine="true"
+            android:nextFocusForward="@+id/emailAddressEditText"
+            android:hint="Enter your last name" />
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:singleLine="true"
+            android:nextFocusForward="@+id/pwdEditText"
+            android:layout_below="@+id/lastNameEditText"
+            android:hint="Enter your email" />
+
+        <EditText
+            android:id="@+id/pwdEditText"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:singleLine="true"
+            android:layout_below="@+id/emailEditText"
+            android:hint="Enter your password" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textColor="@android:color/white"
+            android:background="#e85e30"
+            android:layout_below="@+id/pwdEditText"
+            android:onClick="signupClicked"
+            android:text="Sign Up" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</RelativeLayout>

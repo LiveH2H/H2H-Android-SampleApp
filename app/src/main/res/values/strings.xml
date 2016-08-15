@@ -28,4 +28,5 @@
     <string name="hint_displayName">Display Name</string>
     <string name="hint_emailAddress">Email Address</string>
     <string name="whiteboard">whiteboard</string>
+    <string name="title_activity_schedule_meeting">ScheduleMeetingActivity</string>
 </resources>

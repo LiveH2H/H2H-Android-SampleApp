@@ -189,8 +189,6 @@ public class ConferenceFragment extends BaseFragment {
                 @Override
                 public void run() {
                     Log.e(tag, "onConnected");
-//                    EventBus.getDefault().post(new Event.UpdateParticipants());
-//                    updateAvatars(userId);
                 }
             });
         }
@@ -213,17 +211,7 @@ public class ConferenceFragment extends BaseFragment {
             ((MeetingActivity) mContext).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-//                    if (peer.getId().equals(conference.getLocalUserName())) {
-//                        //On Connect to Myself
-//                        updateVideoViewLayoutByAdding(1, peer);
-//                    } else {
-//                        //On Connect to other people
-//                        updateVideoViewLayoutByAdding(conference.getRemoteRenders().size() + 1, peer);
-//                    }
                     Log.e(tag, "onRemoveRemoteStream");
-//                    EventBus.getDefault().post(new Event.UpdateParticipants());
-//                    updateAvatars(peer.getId());
-//                    updateVideoViewLayoutByAdding(peer.getId());
                 }
             });
 
@@ -240,7 +228,7 @@ public class ConferenceFragment extends BaseFragment {
                         String mediaType = jsonObject.getString("type");
                         String action = jsonObject.getString("action");
                         //Handle UI
-                        //Update me Viedo/Audio State
+                        //Update me Video/Audio State
                         updateVideoAudioState(participantName, mediaType, action);
                         //notice to update participants
                         EventBus.getDefault().post(new Event.UpdateParticipants());
@@ -390,6 +378,8 @@ public class ConferenceFragment extends BaseFragment {
         }
     }
     private void updateVideoViewLayoutByAdding(String peerId,boolean isClosing) {
+
+
         if (conference.getRemoteRenders().size() == 0) {
             if (conference.getLocalRender() != null) {
                 VideoRendererGui.update(conference.getLocalRender(), 37, 75, 25, 25, VideoRendererGui.ScalingType.SCALE_ASPECT_FILL, true);

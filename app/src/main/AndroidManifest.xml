@@ -36,13 +36,14 @@
         <activity
             android:name=".activity.JoinMeetingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/BaseAppTheme"></activity>
+            android:theme="@style/BaseAppTheme" />
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -51,7 +52,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".activity.InstantMeetingActivity"></activity>
+        <activity android:name=".activity.InstantMeetingActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.SignupActivity" />
+        <activity
+            android:name=".activity.ScheduleMeetingActivity"
+            android:label="@string/title_activity_schedule_meeting"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

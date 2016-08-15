@@ -3,26 +3,235 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="itutorgroup.h2h.activity.MainActivity">
 
-    <Button
+    <TextView
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="JOIN MEETING"
-        android:onClick="joinBtnClicked"
-        android:id="@+id/joinBtn"/>
+        android:layout_height="60dp"
+        android:background="#4d4d4d"
+        android:gravity="center"
+        android:text="LiveH2H Demo Main Menu"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
 
-    <Button
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/joinBtn"
-        android:text="INSTANT MEETING"
-        android:layout_marginTop="20dp"
-        android:onClick="instantMeetingBtnClicked"
-        android:id="@+id/instantBtn"/>
+        android:layout_below="@+id/topBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/signUp"
+                android:onClick="signupBtnClicked"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/signUpTV1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Up"
+                    android:textColor="#e85e30"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/signUpTV2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/signUpTV1"
+                    android:layout_marginTop="6dp"
+                    android:text="Using LiveH2H doesn't require an account, however by signing up you get access to additional features such as recording the meeting, scheduling and more." />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/signUpTV2"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/darker_gray"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/login"
+                android:onClick="loginBtnClicked"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/loginTV1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:textColor="#e85e30"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/loginTV2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/loginTV1"
+                    android:layout_marginTop="6dp"
+                    android:text="Login to LiveH2H." />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/loginTV2"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/darker_gray"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/instant"
+                android:onClick="instantMeetingBtnClicked"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/instantTV1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Instant Meeting"
+                    android:textColor="#e85e30"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/instantTV2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/instantTV1"
+                    android:layout_marginTop="6dp"
+                    android:text="Start an Instant meeting, no need to login." />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/instantTV2"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/darker_gray"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/schedule"
+                android:onClick="scheduleBtnClicked"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/scheduleTV1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Schedule a Meeting."
+                    android:textColor="#e85e30"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/scheduleTV2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/scheduleTV1"
+                    android:layout_marginTop="6dp"
+                    android:text="Use this option to schedule a meeting on your chosen time. You need to login to use this." />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/scheduleTV2"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/darker_gray"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/join"
+                android:onClick="joinBtnClicked"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/joinTV1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Join a Meeting"
+                    android:textColor="#e85e30"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/joinTV2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/joinTV1"
+                    android:layout_marginTop="6dp"
+                    android:text="Use this option to join a meeting that is already started. No need to login." />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/joinTV2"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/darker_gray"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/signout"
+                android:onClick="signoutBtnClicked"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/signoutTV1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Out"
+                    android:textColor="#e85e30"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/signoutTV2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/signoutTV1"
+                    android:layout_marginTop="6dp"
+                    android:text="Sign out of H2H" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/signoutTV2"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/darker_gray"></View>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

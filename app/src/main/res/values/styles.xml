@@ -4,13 +4,14 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
     </style>
+
     <style name="BaseAppTheme" parent="AppTheme">
         <item name="android:screenOrientation">portrait</item>
     </style>
-    <style name="TranslucentTheme" parent="BaseAppTheme">
-    </style>
-    <style name="MainActivityTheme" parent="TranslucentTheme">
-    </style>
+
+    <style name="TranslucentTheme" parent="BaseAppTheme"></style>
+
+    <style name="MainActivityTheme" parent="TranslucentTheme"></style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

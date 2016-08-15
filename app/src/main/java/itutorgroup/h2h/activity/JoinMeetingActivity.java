@@ -3,8 +3,10 @@ package itutorgroup.h2h.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -26,9 +28,6 @@ import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
 import com.zhy.m.permission.PermissionGrant;
 
-import java.util.Arrays;
-import java.util.List;
-
 import itutorgroup.h2h.AppManager;
 import itutorgroup.h2h.R;
 import itutorgroup.h2h.bean.ServerConfig;
@@ -37,7 +36,7 @@ import itutorgroup.h2h.utils.StringUtil;
 public class JoinMeetingActivity extends MeetingRoomBaseActivity {
     private static final int PERMISSION_CAMERA = 0;
     private static final int PERMISSION_RECORD_AUDIO = 1;
-    private EditText etMeetingId, etDisplayName, etEmailAddress;
+    private EditText etMeetingId, etEmailAddress;
     private String email;
     private Button joinMeetingBtn;
     private ProgressBar spinner;
@@ -50,10 +49,20 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity {
     @Override
     protected void initView() {
         etMeetingId = (EditText) findViewById(R.id.meetingidEditText);
-        etDisplayName = (EditText) findViewById(R.id.displayNameEditText);
         etEmailAddress = (EditText) findViewById(R.id.emailAddressEditText);
         joinMeetingBtn = (Button) findViewById(R.id.joinMeetingBtn);
         spinner = (ProgressBar)findViewById(R.id.progressBar);
+        Intent intent = getIntent();
+        String meetingId = intent.getStringExtra("meetingId");
+        if (meetingId!=null){
+            etMeetingId.setText(meetingId);
+            etEmailAddress.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -100,17 +109,14 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity {
 
         spinner.setVisibility(View.VISIBLE);
         joinMeetingBtn.setClickable(false);
-        if (TextUtils.isEmpty(etMeetingId.getText().toString().trim())) {
+        String meetingId = getIntent().getStringExtra("meetingId");
+        if (TextUtils.isEmpty(etMeetingId.getText().toString().trim()) ) {
             showToast(getString(R.string.meetingId_tip));
             cancelJoinMeeting();
             return;
         }
-        if (TextUtils.isEmpty(etDisplayName.getText().toString().trim())) {
-            showToast(getString(R.string.displayName_tip));
-            cancelJoinMeeting();
-            return;
-        }
-        if (TextUtils.isEmpty(etEmailAddress.getText().toString().trim())) {
+
+        if (TextUtils.isEmpty(etEmailAddress.getText().toString().trim()) && meetingId == null) {
             showToast(getString(R.string.emailAddress_tip));
             cancelJoinMeeting();
             return;
@@ -125,7 +131,6 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity {
     }
 
     private void launchMeeting(String origin,String serverURL, final String userToken) {
-
 
         final H2HModel model = H2HModel.getInstance();
         model.getLaunchParameters(origin, serverURL, userToken, new H2HCallback() {
@@ -182,11 +187,11 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity {
                     && (ContextCompat.checkSelfPermission(context,
                     Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)) {
 
+                    String email =  etEmailAddress.getText().toString().trim();
                     h2HHttpRequest = H2HHttpRequest.getInstance();
                     h2HHttpRequest.joinMeeting(
                             etMeetingId.getText().toString().trim().replace("-", ""),
-                            etDisplayName.getText().toString().trim(),
-                            etEmailAddress.getText().toString().trim(),
+                            email,
                             new H2HCallback() {
                         @Override
                         public void onCompleted(Exception ex, H2HCallBackStatus status) {
@@ -207,7 +212,6 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity {
                 if (ContextCompat.checkSelfPermission(context,
                         Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                     requestAudioPermission();
-
                 }
             }
         }
@@ -254,7 +258,5 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK){
-        }
     }
 }
