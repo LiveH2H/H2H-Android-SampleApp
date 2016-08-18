@@ -126,7 +126,7 @@ h2HHttpRequest.instantMeeting(
 		});
 ```
 
-####Launnch a Meeting: Pass origin, serverURL and userToken to the H2HSDK####
+####Launch a Meeting: Pass origin, serverURL and userToken to the H2HSDK####
 ```
 final H2HModel model = H2HModel.getInstance();
 model.getLaunchParameters(origin, serverURL, userToken, new H2HCallback() {
