@@ -15,6 +15,8 @@ import android.widget.ToggleButton;
 import com.itutorgroup.h2hmodel.H2HHttpRequest;
 import com.itutorgroup.h2hmodel.H2HScheduleMeetingCallback;
 
+import java.util.HashMap;
+
 import itutorgroup.h2h.R;
 
 public class ScheduleMeetingActivity extends MeetingRoomBaseActivity {
@@ -47,7 +49,7 @@ public class ScheduleMeetingActivity extends MeetingRoomBaseActivity {
         String subject = ((EditText)findViewById(R.id.subjectEditText)).getText().toString().trim();
         String description = ((EditText)findViewById(R.id.descriptionEditText)).getText().toString().trim();
         String[] invitees = ((EditText)findViewById(R.id.attendeesEditText)).getText().toString().trim().split(",");
-        String[] translators = ((EditText)findViewById(R.id.translatorEditText)).getText().toString().trim().split(",");
+        String[] translatorString = ((EditText)findViewById(R.id.translatorEditText)).getText().toString().trim().split(",");
         Boolean isGroupMeeting = ((ToggleButton) findViewById(R.id.meetingTypeToggle)).isChecked();
         Boolean shouldRecord = ((ToggleButton) findViewById(R.id.recordToggle)).isChecked();
         TimePicker timePicker = (TimePicker)findViewById(R.id.timePicker);
@@ -61,6 +63,16 @@ public class ScheduleMeetingActivity extends MeetingRoomBaseActivity {
         time.set(0,min,hour,date, month, year);
         long startTime = time.toMillis(true);
 
+        HashMap<String, String> translators = new HashMap<>();
+        for (String translator : translatorString){
+            if (translator.contains(":")){
+                String[] parts = translator.split(":");
+                if (parts.length==2) {
+                    translators.put(parts[0].trim(),parts[1].trim());
+                }
+            }
+        }
+
         if (subject.length()>0 && description.length()>0) {
             H2HHttpRequest.getInstance().scheduleMeeting(subject, description, startTime,invitees, translators, isGroupMeeting, shouldRecord, new H2HScheduleMeetingCallback() {
                 @Override
@@ -73,7 +85,7 @@ public class ScheduleMeetingActivity extends MeetingRoomBaseActivity {
                                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ScheduleMeetingActivity.this);
                                 alertDialogBuilder.setMessage("Do you want to join the meeting now?");
 
-                                alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                                alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
                                         Intent i = new Intent(ScheduleMeetingActivity.this, JoinMeetingActivity.class);

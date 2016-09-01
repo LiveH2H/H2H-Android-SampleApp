@@ -19,7 +19,6 @@ public class LoginActivity extends MeetingRoomBaseActivity {
 
     @Override
     protected void initDatas() {
-
     }
 
     @Override
@@ -29,7 +28,6 @@ public class LoginActivity extends MeetingRoomBaseActivity {
 
     @Override
     protected void initView() {
-
     }
 
     @Override
@@ -51,7 +49,6 @@ public class LoginActivity extends MeetingRoomBaseActivity {
                                 Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
                             }
                         });
-
                     }else {
                         runOnUiThread(new Runnable() {
                             @Override

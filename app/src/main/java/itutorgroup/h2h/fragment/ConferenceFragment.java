@@ -2,6 +2,8 @@ package itutorgroup.h2h.fragment;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,9 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.itutorgroup.h2hchat.H2HChat;
 import com.itutorgroup.h2hconference.H2HConference;
@@ -56,6 +60,7 @@ public class ConferenceFragment extends BaseFragment {
     private MaterialDialog mdLogout;
     private ImageView ivVideo, ivAudio;
     private TextView tvMeetingId;
+    private Boolean isUsingFrontCamera = true;
 
     public ConferenceFragment() {
     }
@@ -94,6 +99,7 @@ public class ConferenceFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tvMeetingId.setText(StringUtil.formatMeetingId(H2HModel.getInstance().getMeetingId()));
+
         ivAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,7 +108,6 @@ public class ConferenceFragment extends BaseFragment {
                 } else {
                     turnOffAudio();
                 }
-//                ivAudio.setSelected(!ivAudio.isSelected());
             }
         });
         ivVideo.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +118,6 @@ public class ConferenceFragment extends BaseFragment {
                 } else {
                     turnOffVideo();
                 }
-//                ivVideo.setSelected(!ivVideo.isSelected());
             }
         });
         ivHungup.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +150,6 @@ public class ConferenceFragment extends BaseFragment {
         conference.initRTCConnection();
         ivAudio.setSelected(true);
         ivVideo.setSelected(true);
-//        updateAvatars();
     }
 
     @Override
@@ -169,52 +172,31 @@ public class ConferenceFragment extends BaseFragment {
 
     private class RTCListener extends H2HRTCListener {
 
-
         @Override
-        public void onAddRemoteStream(final MediaStream remoteStream, final String peer) {
-            ((MeetingActivity) mContext).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.e(tag, peer);
-                    EventBus.getDefault().post(new Event.UpdateParticipants());
-                    updateVideoViewLayoutByAdding(peer,false);
-                    updateAvatars(peer);
-                }
-            });
+        public void onConnectivityStrengthChanged(int connectivityStrength) {
+            Log.e("App level", "Connectivity Strength:" + connectivityStrength);
         }
 
         @Override
-        public void onConnected(final String userId) {
-            ((MeetingActivity) mContext).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.e(tag, "onConnected");
-                }
-            });
+        public void onAddRemoteStream(final MediaStream remoteStream, final H2HPeer peer) {
+            Log.e("App Level", "onAddRemoteStream" + peer.getId());
+            EventBus.getDefault().post(new Event.UpdateParticipants());
+            updateVideoViewLayoutByAdding(peer.getId(), false);
+            updateAvatars(peer.getId());
+        }
+
+
+        @Override
+        public void onPeerConnectionClosed(final H2HPeer peer) {
+            Log.e(tag, "onPeerConnectionClosed, number of remotes: " + conference.getRemoteRenders().size());
+            EventBus.getDefault().post(new Event.UpdateParticipants());
+            updateVideoViewLayoutByClosing(peer.getId());
+            updateAvatars(peer.getId());
         }
 
         @Override
-        public void onPeerConnectionClosed(final String peer) {
-            ((MeetingActivity) mContext).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.e(tag, "onPeerConnectionClosed, number of remotes: "+conference.getRemoteRenders().size());
-                    EventBus.getDefault().post(new Event.UpdateParticipants());
-                    updateVideoViewLayoutByClosing(peer);
-                    updateAvatars(peer);
-                }
-            });
-        }
-
-        @Override
-        public void onRemoveRemoteStream(final String peer) {
-            ((MeetingActivity) mContext).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.e(tag, "onRemoveRemoteStream");
-                }
-            });
-
+        public void onRemoveRemoteStream(final H2HPeer peer) {
+            Log.e(tag, "onRemoveRemoteStream");
         }
 
         @Override
@@ -241,6 +223,40 @@ public class ConferenceFragment extends BaseFragment {
 
                 }
             });
+        }
+
+        @Override
+        public void onForceLogout() {
+            Log.e("App level", "on Force Logout");
+            H2HChat.getInstance().leaveRoom();
+            H2HConference.getInstance().closeAllConnections();
+
+            AlertDialog alertDialog = new AlertDialog.Builder(
+                    mContext).create();
+            alertDialog.setTitle("Error");
+            alertDialog.setMessage("Someone else used your credential to join the meeting. You are forced to logout.");
+            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    ((MeetingActivity) mContext).setResult(Activity.RESULT_OK);
+                    ((MeetingActivity) mContext).finish();
+                }
+            });
+            alertDialog.show();
+        }
+
+        @Override
+        public void onPeerRaiseHand(H2HPeer peer) {
+            Toast.makeText(mContext,peer.getId()+" raises hand",Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onRaiseHandPermissionChanged(Boolean enable) {
+            Toast.makeText(mContext,"raise hand enabled:" +enable, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onChatPermissionChanged(Boolean enable) {
+            Toast.makeText(mContext,"chat enabled:" +enable,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -362,23 +378,24 @@ public class ConferenceFragment extends BaseFragment {
             }
         }
     }
-    private void updateVideoViewLayoutByClosing(String peerId){
-        if(!TextUtils.equals(conference.getLocalUserName(),peerId)){
+
+    private void updateVideoViewLayoutByClosing(String peerId) {
+        if (!TextUtils.equals(conference.getLocalUserName(), peerId)) {
             VideoRendererGui.remove(conference.getRemoteRenders().get(peerId));
             conference.getRemoteRenders().remove(peerId);
-            updateVideoViewLayoutByAdding(peerId,true);
-           Iterator<H2HPeer> iterator = conference.getPeers().iterator();
-           while(iterator.hasNext()){
-               H2HPeer h2HPeer = iterator.next();
-               if(TextUtils.equals(peerId,h2HPeer.getId())){
-                  conference.getPeers().remove(h2HPeer);
-                   return;
-               }
-           }
+            updateVideoViewLayoutByAdding(peerId, true);
+            Iterator<H2HPeer> iterator = conference.getPeers().iterator();
+            while (iterator.hasNext()) {
+                H2HPeer h2HPeer = iterator.next();
+                if (TextUtils.equals(peerId, h2HPeer.getId())) {
+                    conference.getPeers().remove(h2HPeer);
+                    return;
+                }
+            }
         }
     }
-    private void updateVideoViewLayoutByAdding(String peerId,boolean isClosing) {
 
+    private void updateVideoViewLayoutByAdding(String peerId, boolean isClosing) {
 
         if (conference.getRemoteRenders().size() == 0) {
             if (conference.getLocalRender() != null) {
@@ -387,21 +404,19 @@ public class ConferenceFragment extends BaseFragment {
         } else if (conference.getRemoteRenders().size() == 1) {
             try {
                 VideoRendererGui.update(conference.getLocalRender(), 37, 75, 25, 25, VideoRendererGui.ScalingType.SCALE_ASPECT_FILL, true);
-                if(!isClosing){
+                if (!isClosing) {
                     VideoRendererGui.update(conference.getRemoteRenders().get(peerId), 0, 0, 100, 75, VideoRendererGui.ScalingType.SCALE_ASPECT_FILL, true);
-                }else{
+                } else {
                     Set<String> keys = conference.getRemoteRenders().keySet();
                     for (String key : keys) {
-                        VideoRendererGui.update(conference.getRemoteRenders().get(key), 0 , 0, 100, 75, VideoRendererGui.ScalingType.SCALE_ASPECT_FILL, true);
+                        VideoRendererGui.update(conference.getRemoteRenders().get(key), 0, 0, 100, 75, VideoRendererGui.ScalingType.SCALE_ASPECT_FILL, true);
                     }
                 }
-                //Update the size and location of each video view
             } catch (Exception e) {
                 Log.e("onAddRemoteStream", e.getMessage());
             }
         } else {
             try {
-                //Update the size and location of each video view
                 VideoRendererGui.update(conference.getLocalRender(), 0, 0, 100, 75, VideoRendererGui.ScalingType.SCALE_ASPECT_FILL, true);
                 Set<String> keys = conference.getRemoteRenders().keySet();
                 int i = 0;

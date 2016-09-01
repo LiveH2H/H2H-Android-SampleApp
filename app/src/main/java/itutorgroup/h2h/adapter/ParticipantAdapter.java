@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.itutorgroup.h2hconference.H2HPeer;
 import com.mosai.utils.CommonAdapter;
 import com.mosai.utils.CommonViewHolder;
 
@@ -31,7 +32,13 @@ public class ParticipantAdapter extends CommonAdapter<Participant> implements Vi
         ImageView ivWhiteboard = holder.getView(R.id.iv_whiteboard);
         TextView tvName = holder.getView(R.id.tv_name);
         final Participant participant = listDatas.get(position);
-        tvName.setText(participant.displayName+(participant.isHost?" (Host)":""));
+        if (participant.userRole == H2HPeer.UserRole.Host){
+            tvName.setText(participant.displayName+ " (Host)");
+        }else if (participant.userRole == H2HPeer.UserRole.Translator) {
+            tvName.setText(participant.displayName);
+        }else {
+            tvName.setText(participant.displayName);
+        }
         setSelectState(ivAudio, participant.isAudio);
         setSelectState(ivVideo, participant.isVideo);
         setSelectState(ivWhiteboard, participant.isWhiteboard);

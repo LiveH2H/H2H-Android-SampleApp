@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.itutorgroup.h2hmodel.H2HModel;
+import com.itutorgroup.h2hwhiteboard.H2HWhiteboardManager;
 import com.mosai.utils.DensityUtil;
 
 import itutorgroup.h2h.R;
@@ -75,7 +76,8 @@ public class WhiteBoardFragment extends BaseFragment {
                 super.onProgressChanged(view, newProgress);
             }
         });
-        webView.loadUrl(H2HModel.getInstance().getWhiteboardUrl());
+        if (H2HWhiteboardManager.getInstance().getWhiteboardUrls().size()>0)
+        webView.loadUrl(H2HWhiteboardManager.getInstance().getWhiteboardUrls().get(0));
     }
     private class MyBrowser extends WebViewClient {
         @Override

@@ -1,6 +1,7 @@
 package itutorgroup.h2h.bean;
 
 import com.itutorgroup.h2hconference.H2HConference;
+import com.itutorgroup.h2hconference.H2HPeer;
 
 import java.io.Serializable;
 
@@ -12,7 +13,7 @@ import java.io.Serializable;
  */
 public class Participant implements Serializable{
     public String displayName;
-    public boolean isHost;
+    public H2HPeer.UserRole userRole;
     public boolean isAudio;
     public boolean isVideo;
     public boolean isWhiteboard;

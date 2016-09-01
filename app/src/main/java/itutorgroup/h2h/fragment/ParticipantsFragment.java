@@ -82,7 +82,10 @@ public class ParticipantsFragment extends BaseFragment {
             participant.isVideo = peer.isVideoOn();
             participant.isAudio = peer.isAudioOn();
             participant.isLocalUser = peer.isLocalUser();
-            participant.isHost = peer.isHost();
+            participant.userRole = peer.userRole();
+            if (participant.userRole == H2HPeer.UserRole.Translator){
+                participant.displayName = peer.getTranslator().getLanguage();
+            }
             participants.add(participant);
         }
         adapter.notifyDataSetChanged();
