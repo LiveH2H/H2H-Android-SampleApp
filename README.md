@@ -5,7 +5,7 @@ How to Get H2H SDK
 ---
 Copy the following code into your app level build.gradle file, under dependencies:
 ```
-compile 'com.liveh2h:h2h-video-conference:1+'
+compile 'com.liveh2h:h2h-video-conference:1.0.16'
 compile 'io.pristine:libjingle:9694@aar'
 compile 'com.koushikdutta.async:androidasync:2.+'
 ```
@@ -311,7 +311,7 @@ H2H Whiteboard URL
 ---
 Currently, we use webview, we can get the url:
 ```
-H2HModel.getInstance().getWhiteboardUrl();
+H2HModel.getInstance().getWhiteboardUrls();
 
 webView.getSettings().setJavaScriptEnabled(true);
 webView.setInitialScale(99);
