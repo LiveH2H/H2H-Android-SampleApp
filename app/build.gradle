@@ -47,11 +47,10 @@ dependencies {
     compile rootProject.ext.dependencies["materialdialog"]
     compile rootProject.ext.dependencies["fastjson"]
     compile rootProject.ext.dependencies["eventbus"]
+    compile rootProject.ext.dependencies["androidasync"]
     apt 'com.zhy:mpermission-compiler:1.0.0'
     compile 'com.zhy:mpermission-api:1.0.0'
-    compile 'com.android.support:support-v4:24.0.0-beta1'
     //H2H SDK
-    compile 'com.liveh2h:h2h-video-conference:1.0.14'
+    compile 'com.liveh2h:h2h-video-conference:1.0.28'
     compile 'io.pristine:libjingle:9694@aar'
-    compile 'com.koushikdutta.async:androidasync:2.+'
 }
