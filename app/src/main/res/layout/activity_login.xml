@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,49 +8,43 @@
     tools:context="itutorgroup.h2h.activity.LoginActivity">
 
     <RelativeLayout
-        android:background="@android:color/white"
-        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="@android:color/white">
 
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:singleLine="true"
+            android:hint="Enter your email"
+            android:inputType="textEmailAddress"
+            android:lines="1"
             android:nextFocusForward="@+id/pwdEditText"
-            android:layout_below="@+id/lastNameEditText"
-            android:hint="Enter your email" />
+            android:text="kkk@qq.com"/>
 
         <EditText
             android:id="@+id/pwdEditText"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:singleLine="true"
             android:layout_below="@+id/emailEditText"
-            android:hint="Enter your password" />
+            android:hint="Enter your password"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:text="123456"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/pwdEditText"
             android:layout_marginBottom="25dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:textColor="@android:color/white"
+            android:layout_marginTop="20dp"
             android:background="#e85e30"
-            android:layout_below="@+id/pwdEditText"
             android:onClick="signinClicked"
-            android:text="Login" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:visibility="invisible" />
+            android:text="Login"
+            android:textColor="@android:color/white"/>
     </RelativeLayout>
 
 </RelativeLayout>

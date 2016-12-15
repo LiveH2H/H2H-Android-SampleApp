@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="password_min_length">5</integer>
+    <integer name="password_max_length">20</integer>
+
+    <integer name="meeting_id_max_length">11</integer>
+    <integer name="meeting_password_max_length">12</integer>
+    <integer name="meeting_default_duration">60</integer>
+
+    <integer name="action_menu_start_angle">-30</integer>
+    <integer name="action_menu_end_angle">-150</integer>
+
+    <integer name="item_share_date_max_lines">2</integer>
+
+    <integer name="default_to_loading_more_scrolling_duration">500</integer>
+    <integer name="load_more_complete_delay_duration">0</integer>
+
+    <integer name="phone_max_lenght">13</integer>
+</resources>
+

@@ -88,10 +88,10 @@ public class ChatFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
-        lv = ViewUtil.findViewById(view, R.id.iv_chatroom);
-        etMsg = ViewUtil.findViewById(view, R.id.et_msg);
-        btnSend = ViewUtil.findViewById(view, R.id.btn_sendmsg);
-        btnAddChat = ViewUtil.findViewById(view, R.id.btn_addChat);
+//        lv = ViewUtil.findViewById(view, R.id.iv_chatroom);
+//        etMsg = ViewUtil.findViewById(view, R.id.et_msg);
+//        btnSend = ViewUtil.findViewById(view, R.id.btn_sendmsg);
+//        btnAddChat = ViewUtil.findViewById(view, R.id.btn_addChat);
         return view;
     }
 

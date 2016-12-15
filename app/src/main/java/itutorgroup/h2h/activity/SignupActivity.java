@@ -38,35 +38,34 @@ public class SignupActivity extends MeetingRoomBaseActivity {
     }
 
     public void signupClicked(View view) {
-
-        String userName = ((EditText) findViewById(R.id.userNameEditText)).getText().toString().trim();
         String firstName = ((EditText) findViewById(R.id.firstNameEditText)).getText().toString().trim();
         String lastName = ((EditText) findViewById(R.id.lastNameEditText)).getText().toString().trim();
         String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString().trim();
         String pwd = ((EditText) findViewById(R.id.pwdEditText)).getText().toString();
-        if (userName.length()>0 && firstName.length()>0 && lastName.length()>0 && email.length()>0 && pwd.length()>=5 && pwd.length()<=19){
-            H2HHttpRequest.getInstance().signUpH2HUser(userName, firstName, lastName, email, pwd, new H2HCallback() {
+        if (firstName.length() > 0 && lastName.length() > 0 && email.length() > 0 && pwd.length() >= 5 && pwd.length() <= 19) {
+            showLoadingDialog();
+            H2HHttpRequest.getInstance().signUpH2HUser(firstName, lastName, email, pwd, new H2HCallback() {
+
                 @Override
-                public void onCompleted(Exception ex, H2HCallBackStatus status) {
-                    if (status==H2HCallBackStatus.H2HCallBackStatusOK){
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(SignupActivity.this,"User Sign Up Success",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }else {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(SignupActivity.this,"Sign Up Failed",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                public void onCompleted(Exception ex, final H2HCallBackStatus status) {
+                    if (isFinishing()) {
+                        return;
                     }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dismissLoadingDialog();
+                            if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+                                showToast("User Sign Up Success");
+                            } else {
+                                showToast("Sign Up Failed");
+                            }
+                        }
+                    });
                 }
             });
-        }else{
-            Toast.makeText(this,"Please fill all the blanks, password must between 5-19 characters",Toast.LENGTH_LONG).show();
+        } else {
+            showToast("Please fill all the blanks, password must between 5-19 characters");
         }
     }
 }

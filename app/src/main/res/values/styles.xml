@@ -1,24 +1,101 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="chatDialog" parent="dialog">
+        <item name="android:windowIsTranslucent">false</item><!--半透明-->
     </style>
 
-    <style name="BaseAppTheme" parent="AppTheme">
-        <item name="android:screenOrientation">portrait</item>
+    <style name="dialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">false</item><!--半透明-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item><!--模糊-->
     </style>
 
-    <style name="TranslucentTheme" parent="BaseAppTheme"></style>
+    <style name="TextView.LaunchMeeting.Label" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/create_meeting_title_color</item>
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin_double</item>
+        <item name="android:layout_marginLeft">@dimen/activity_vertical_margin</item>
+    </style>
 
-    <style name="MainActivityTheme" parent="TranslucentTheme"></style>
+    <style name="EditText.LaunchMeeting" parent="@android:style/Widget.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/default_text</item>
+        <item name="android:textColorHint">@color/create_meeting_edit_hint_color</item>
+        <item name="android:background">@drawable/edittext_gray_bg</item>
+        <item name="android:paddingLeft">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingRight">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Base"></style>
 
-    <!--dialog-->
-    <style name="dialog" parent="android:style/Theme.Dialog">
+    <style name="Base.Layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Base.LinearLayout" parent="Base.Layout">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Base.ScrollView" parent="Base.Layout">
+        <item name="android:overScrollMode">never</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <style name="Base.Imageview" parent="@android:style/Widget">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Base.Button" parent="@style/Widget.AppCompat.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Base.TextView" parent="@android:style/Widget.Holo.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:textColor">@color/default_text</item>
+    </style>
+
+    <style name="Base.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">text</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textColorHint">@color/text_hint_gray</item>
+    </style>
+
+    <style name="Base.ListView" parent="@android:style/Widget.ListView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:listSelector">@drawable/transparent_selector</item>
+        <item name="android:dividerHeight">@dimen/divider_height_small</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <style name="Base.Dialog" parent="android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -27,6 +104,568 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="Dialog.SublimePicker" parent="Base.Dialog">
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- 文字样式按钮 -->
+    <style name="Button.Label" parent="Base.Button">
+        <item name="android:padding">@dimen/text_padding_default</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/white_gray_selector</item>
+    </style>
+
+    <style name="Imageview.Logo" parent="Base.Imageview">
+        <item name="android:layout_width">@dimen/logo_width</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">@dimen/standard_margin_small</item>
+        <item name="android:layout_marginBottom">@dimen/standard_margin_medium</item>
+        <item name="android:src">@drawable/icon_logo_small</item>
+    </style>
+
+    <style name="Imageview.Logo.Big" parent="Imageview.Logo">
+        <item name="android:src">@drawable/icon_logo</item>
+    </style>
+
+    <!-- 登录/注册模块标题 -->
+    <style name="TextView.LoginLabel" parent="Base.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/login_label_margin_top</item>
+    </style>
+
+    <style name="LinearLayout.InputLayout.Base" parent="Base.LinearLayout">
+        <item name="android:layout_marginLeft">@dimen/content_margin_left_right</item>
+        <item name="android:layout_marginRight">@dimen/content_margin_left_right</item>
+        <item name="android:layout_marginTop">@dimen/standard_margin_default</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="LinearLayout.InputLayout" parent="LinearLayout.InputLayout.Base"></style>
+
+    <style name="LinearLayout.Horizontal" parent="Base.LinearLayout">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="TextView.InputLabel" parent="Base.TextView">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:alpha">0.5</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:textSize">@dimen/text_size_mini</item>
+    </style>
+
+    <style name="Button.InputClear" parent="@android:style/Widget.Holo.ImageButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:src">@drawable/ic_edittext_clear</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <!-- 登录/注册模块确认按钮 -->
+    <style name="Button.LoginConfirm" parent="Base.Button">
+        <item name="android:layout_marginTop">@dimen/standard_margin_large</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:background">@drawable/btn_login_bg</item>
+        <item name="android:textColor">@color/white_gray_selector</item>
+    </style>
+
+    <style name="EditText.Login" parent="Base.EditText">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:paddingBottom">@dimen/standard_padding_default</item>
+        <item name="android:paddingTop">@dimen/standard_padding_default</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+    <style name="TextView.Password.Show.Hide" parent="Base.TextView">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:alpha">0.6</item>
+        <item name="android:text">@string/password_show</item>
+        <item name="android:tag">false</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="Button.ThirdPartyLogin" parent="Base.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">@dimen/standard_padding_medium</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginBottom">@dimen/standard_margin_double</item>
+        <item name="android:paddingBottom">@dimen/standard_padding_default</item>
+        <item name="android:paddingLeft">@dimen/standard_padding_double</item>
+        <item name="android:paddingRight">@dimen/standard_padding_default</item>
+        <item name="android:paddingTop">@dimen/standard_padding_default</item>
+        <item name="android:textColor">@color/white_gray_selector</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="Line" parent="@android:style/Widget">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/divider_height_small</item>
+        <item name="android:background">@color/gray_transparent</item>
+    </style>
+
+    <style name="Line.InputBottom" parent="Line">
+        <item name="android:layout_marginBottom">@dimen/standard_margin_default</item>
+    </style>
+
+    <style name="Line.Gray.D" parent="Line">
+        <item name="android:background">@color/gray_d</item>
+    </style>
+
+    <style name="Line_d_marginLeft" parent="Line.Gray.D">
+        <item name="android:layout_marginLeft">@dimen/activity_vertical_margin</item>
+    </style>
+
+    <style name="TextView.EmailBottomLabel" parent="Base.TextView">
+        <item name="android:text">@string/input_email_bottom_label</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextView.Webinar.Title" parent="Base.TextView">
+        <item name="android:padding">@dimen/standard_padding_default</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextView.Webinar.Time" parent="Base.TextView">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@drawable/bg_black_translucent_corner</item>
+        <item name="android:layout_margin">@dimen/standard_margin_default</item>
+        <item name="android:paddingLeft">@dimen/standard_padding_default</item>
+        <item name="android:paddingRight">@dimen/standard_padding_default</item>
+        <item name="android:paddingTop">@dimen/text_padding_top_bottom</item>
+        <item name="android:paddingBottom">@dimen/text_padding_top_bottom</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/item_webinar_time_text_size</item>
+    </style>
+
+    <style name="Button.Webinar.Bottom" parent="Base.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxHeight">35dp</item>
+        <item name="android:layout_marginLeft">@dimen/standard_margin_double</item>
+        <item name="android:layout_marginRight">@dimen/standard_margin_double</item>
+        <item name="android:background">@drawable/bg_webinar_item_bottom_pink</item>
+        <item name="android:text">@string/register</item>
+        <item name="android:textSize">@dimen/item_webinar_bottom_text_size</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="LinearLayout.Webinar.Preview" parent="Base.LinearLayout">
+        <item name="android:layout_width">@dimen/item_webinar_width</item>
+        <item name="android:background">@drawable/bg_webinar_item</item>
+        <!--<item name="android:minHeight">@dimen/item_webinar_min_height</item>-->
+    </style>
+
+    <style name="LinearLayout.Webinar" parent="Base.LinearLayout">
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="LinearLayout.MeetingList.Item" parent="Base.Layout">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@android:drawable/dialog_holo_light_frame</item>
+    </style>
+
+    <style name="AccountSetting_TextView_Item" parent="@android:style/Widget.Holo.Light.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/default_text</item>
+        <item name="android:padding">@dimen/activity_vertical_margin</item>
+        <item name="android:drawableRight">@drawable/arrow_right_black</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:background">@drawable/white_bg_gray_bottom_left_border_layer</item>
+    </style>
+
+    <style name="Support_Item_LinearLayout" parent="@android:style/Widget.Holo">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingRight">@dimen/activity_vertical_margin</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/white_bg_gray_bottom_left_border_layer</item>
+    </style>
+
+    <style name="Support_Item_ImageView" parent="@android:style/Widget.Holo">
+        <item name="android:layout_width">27dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="Support_TextView_Item" parent="@android:style/Widget.Holo.Light.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/default_text</item>
+        <item name="android:layout_marginLeft">@dimen/activity_vertical_margin</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawableRight">@drawable/arrow_right_black</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <style name="PersonalInfo_TextView_Item_title" parent="@android:style/Widget.Holo.Light.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/default_text</item>
+        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <style name="dialogWindowAnim" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/bottom_out</item>
+    </style>
+
+    <style name="Edittext_Bottom_line" parent="@android:style/Widget.Holo.Light.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:textColor">@color/default_text</item>
+        <item name="android:textColorHint">@color/black9</item>
+        <item name="android:background">@drawable/white_bg_gray_bottom_left_border_layer</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+    <style name="ImageView.MeetingList.Rectangle" parent="Base.Imageview">
+        <item name="android:layout_width">6dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/rectangle_red</item>
+    </style>
+
+    <style name="LinearLayout.MeetingList.Content" parent="Base.LinearLayout">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:padding">@dimen/standard_padding_default</item>
+    </style>
+
+    <style name="TextView.MeetingList.Type" parent="Base.TextView">
+        <item name="android:textColor">@color/drak_red_d</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextView.MeetingList.Date" parent="Base.TextView">
+        <item name="android:paddingBottom">@dimen/text_padding_default</item>
+        <item name="android:paddingTop">@dimen/text_padding_default</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/default_text</item>
+    </style>
+
+    <style name="TextView.MeetingList.Title" parent="Base.TextView">
+        <item name="android:textColor">@color/default_text</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <style name="rating_bar_default" parent="@android:style/Widget.Holo.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_bar_default</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">28dp</item>
+        <item name="android:maxHeight">28dp</item>
+        <item name="android:numStars">5</item>
+        <item name="android:stepSize">1</item>
+        <item name="android:rating">0</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="TextView.MeetDashboard.Bottom" parent="Base.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">@dimen/standard_padding_small</item>
+        <item name="android:paddingTop">@dimen/standard_padding_small</item>
+        <item name="android:paddingBottom">@dimen/standard_padding_small</item>
+        <item name="android:textSize">@dimen/text_size_mini</item>
+        <item name="android:textColor">@color/black9b</item>
+        <item name="android:gravity">center_horizontal|bottom</item>
+    </style>
+
+    <style name="ViewStub.NoData" parent="Base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout">@layout/main_no_data</item>
+    </style>
+
+    <style name="ListView.MeetingList" parent="Base.ListView"></style>
+
+    <style name="ImageView.SwitchIcon" parent="Base.Imageview">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginBottom">@dimen/standard_margin_default</item>
+        <item name="android:layout_gravity">center_horizontal|bottom</item>
+    </style>
+
+    <style name="EditText.MeetingContent" parent="Base.EditText">
+        <item name="android:background">@drawable/white_bg_gray_top_bottom_border_layer</item>
+        <item name="android:padding">@dimen/standard_padding_medium</item>
+        <item name="android:layout_marginTop">@dimen/standard_margin_large</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/meeting_edittext_hint</item>
+    </style>
+
+    <style name="TextView.MeetingDateTimeTitle" parent="Base.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingLeft">@dimen/standard_margin_medium</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:textColor">@color/default_text</item>
+    </style>
+
+    <style name="TextView.MeetingDateTimeValue" parent="TextView.MeetingDateTimeTitle">
+        <item name="android:paddingTop">@dimen/standard_margin_medium</item>
+        <item name="android:paddingBottom">@dimen/standard_margin_medium</item>
+    </style>
+
+    <style name="ListView.ContactsList" parent="Base.ListView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:divider">@color/gray_d</item>
+        <item name="android:dividerHeight">@dimen/divider_height_small</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <style name="SideBar.ContactsList" parent="Base">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">right|center</item>
+        <item name="android:paddingBottom">@dimen/standard_padding_default</item>
+    </style>
+
+    <style name="TextView.AddressBookDenied.Bottom" parent="Base">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextView.ContactsList.Dialog" parent="Base.TextView">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/region_spell_dalog</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="Base.CheckBox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextView.ContactList.Catalog" parent="Base.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/region_list_catelog_bg</item>
+        <item name="android:paddingBottom">5dip</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/standard_padding_small</item>
+        <item name="android:textColor">@color/black9b</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RelativeLayout.LoginFrame" parent="Base.Layout">
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:paddingBottom">@dimen/standard_padding_large</item>
+    </style>
+
+    <style name="TextView.Meeting.Attendees" parent="Base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/white_gray_border_selector</item>
+        <item name="android:drawableEnd">@drawable/invite</item>
+        <item name="android:drawablePadding">@dimen/standard_padding_default</item>
+        <item name="android:drawableRight">@drawable/invite</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:padding">@dimen/standard_margin_medium</item>
+        <item name="android:textColor">@color/meeting_text_attendees</item>
+        <item name="android:textColorHint">@color/meeting_edittext_hint</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <style name="RelativeLayout.MeetingType" parent="Base.Layout">
+        <item name="android:background">@drawable/white_gray_border_selector</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">@dimen/activity_vertical_margin</item>
+    </style>
+
+    <style name="EditText.MeetingDesc" parent="EditText.MeetingContent">
+        <item name="android:gravity">top</item>
+        <item name="android:lines">3</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:inputType">textMultiLine</item>
+    </style>
+
+    <style name="TextView.MeetingType" parent="Base.TextView">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:lines">1</item>
+        <item name="android:text">@string/meeting_type_normal</item>
+    </style>
+
+    <style name="TextView.MeetingTypeValue" parent="Base.TextView">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:drawableEnd">@drawable/arrow_right</item>
+        <item name="android:drawablePadding">@dimen/standard_padding_default</item>
+        <item name="android:drawableRight">@drawable/arrow_right</item>
+        <item name="android:textColor">@color/day_text</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <style name="LinearLayout.MeetingDateTimeTitle" parent="LinearLayout.Horizontal">
+        <item name="android:layout_marginTop">@dimen/standard_margin_default</item>
+    </style>
+
+    <style name="LinearLayout.MeetingDateTime" parent="LinearLayout.Horizontal">
+        <item name="android:layout_marginTop">@dimen/standard_margin_small</item>
+        <item name="android:background">@drawable/white_bg_gray_top_border_layer</item>
+        <!--<item name="android:paddingBottom">@dimen/standard_margin_medium</item>
+        <item name="android:paddingTop">@dimen/standard_margin_medium</item>-->
+    </style>
+
+    <style name="RelativeLayout.MeetingDuration" parent="Base.Layout">
+        <item name="android:background">@drawable/white_gray_border_selector</item>
+        <item name="android:padding">@dimen/activity_vertical_margin</item>
+    </style>
+
+    <style name="TextView.MeetingDuration" parent="Base.TextView">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/default_text</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:text">@string/duration</item>
+    </style>
+
+    <style name="TextView.MeetingDurationValue" parent="Base.TextView">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:drawableEnd">@drawable/arrow_right</item>
+        <item name="android:drawablePadding">@dimen/standard_padding_default</item>
+        <item name="android:drawableRight">@drawable/arrow_right</item>
+        <item name="android:textColor">@color/day_text</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <style name="TextView.MeetingRecording" parent="Base.TextView">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:padding">@dimen/standard_margin_medium</item>
+        <item name="android:textColor">@color/meeting_text_black</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <style name="SwitchButton.MeetingRecording" parent="@style/SwitchButtonMD">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:checked">false</item>
+    </style>
+
+    <style name="Layout.WhiteBgGrayBottomLeftBorder" parent="Base.Layout">
+        <item name="android:background">@drawable/white_bg_gray_bottom_left_border_layer</item>
+    </style>
+
+    <style name="TextView.MoreOptions" parent="Base.TextView">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/meeting_text_black</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <style name="RelativeLayout.MoreOptions" parent="Layout.WhiteBgGrayBottomLeftBorder">
+        <item name="android:clickable">true</item>
+        <item name="android:padding">@dimen/standard_margin_medium</item>
+    </style>
+
+    <style name="TextView.ServerLocation" parent="Base.TextView">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:drawableEnd">@drawable/arrow_right</item>
+        <item name="android:drawablePadding">@dimen/standard_padding_default</item>
+        <item name="android:drawableRight">@drawable/arrow_right</item>
+        <item name="android:textColor">@color/day_text</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <style name="Layout.Root" parent="Base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="LinearLayout.Root" parent="Layout.Root">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="ImageButton.Invite.List" parent="@android:style/Widget.Holo.ImageButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ListView.Default" parent="@android:style/Widget.Holo.Light.ListView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:divider">@color/gray_d</item>
+        <item name="android:dividerHeight">@dimen/divider_height_small</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <style name="View.Overlay" parent="@android:style/Widget.Holo.Light">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <!--<item name="android:background">@drawable/bg_overlay</item>-->
+        <item name="android:visibility">gone</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="Button.Update.Head.Portrait" parent="@style/Widget.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/white_bg_gray_bottom_border_layer</item>
+        <item name="android:textColor">@color/default_text</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:stateListAnimator" tools:targetApi="lollipop">@null</item>
+    </style>
+
+
+    <style name="gridviewstyle">
+        <item name="android:cacheColorHint">@null</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+    </style>
     <!--listview-->
     <style name="listviewstyle">
         <item name="android:cacheColorHint">@null</item>
@@ -43,5 +682,338 @@
         <item name="android:layout_centerInParent">true</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="popwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popup_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_out</item>
+    </style>
+
+    <style name="ImageButton.ShareItem.Icon" parent="Base">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">@dimen/standard_padding_default</item>
+    </style>
+
+    <!-- 自定义仿IOS的ActionSheet底部Dialog的样式 ，有模糊效果 -->
+    <style name="ActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
+
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog以外的区域模糊效果 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Dialog进入及退出动画 -->
+        <item name="android:windowAnimationStyle">@style/ActionSheetDialogAnimation</item>
+    </style>
+
+    <!-- ActionSheet进出动画 -->
+    <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/actionsheet_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
+    </style>
+
+    <style name="ImageView.MeetItem.ExpandedIcon" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/standard_margin_default</item>
+        <item name="android:padding">@dimen/standard_padding_default</item>
+		</style>
+    
+    <style name="TestView.Dashboard.Top.Button" parent="@android:style/Widget.Holo.Light.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/dashboard_join_instant_schedule</item>
+        <item name="android:textSize">@dimen/text_size_mini</item>
+        <item name="android:gravity">center_horizontal|bottom</item>
+        <item name="android:paddingLeft">@dimen/standard_padding_default</item>
+        <item name="android:paddingRight">@dimen/standard_padding_default</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="TestView.Dashboard.Category" parent="@android:style/Widget.Holo.Light.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">@dimen/standard_padding_default</item>
+        <item name="android:paddingBottom">@dimen/standard_padding_default</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="Button.Filter.Item" parent="@style/Widget.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:background">@android:color/black</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="FrameLayout.MeetTypeHeader" parent="Base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="LinearLayout.MeetTypeHeader" parent="Base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/standard_margin_small</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="Line.MeetTypeHeader" parent="Line">
+        <item name="android:background">#2A2A2A</item>
+    </style>
+
+
+    <style name="RelativeLayout.PersonHeader" parent="Base">
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:background">@drawable/ic_header_bg</item>
+        <item name="android:paddingTop">@dimen/standard_padding_default</item>
+        <item name="android:paddingLeft">@dimen/standard_padding_default</item>
+        <item name="android:paddingBottom">@dimen/standard_padding_default</item>
+    </style>
+
+    <style name="TextView.PersonHeader.MeetingIcon" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/standard_padding_small</item>
+        <item name="android:layout_marginRight">@dimen/standard_margin_default</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_mini</item>
+    </style>
+
+    <style name="LinearLayout.ItemLearn" parent="Base">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">@dimen/standard_margin_default</item>
+        <item name="android:paddingRight">@dimen/standard_margin_default</item>
+    </style>
+
+    <!-- 月份 -->
+    <style name="TextView.MonthBar" parent="Base">
+        <item name="android:background">@color/black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/standard_padding_small</item>
+        <item name="android:textColor">#f3f3f3</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <style name="ImageButton.Dashboard.List.Item" parent="@style/Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/btn_bg_top_shadow</item>
+    </style>
+
+    <style name="ImageButton.Dashboard.List.Item.Meet" parent="ImageButton.Dashboard.List.Item">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="RelativeLayout.ItemNoData" parent="Base">
+        <item name="android:layout_marginBottom">@dimen/standard_margin_small</item>
+        <item name="android:background">@color/bg_item_nodata</item>
+        <item name="android:paddingBottom">@dimen/standard_padding_medium</item>
+        <item name="android:paddingLeft">@dimen/standard_padding_large</item>
+        <item name="android:paddingRight">@dimen/standard_padding_large</item>
+        <item name="android:paddingTop">@dimen/standard_padding_medium</item>
+    </style>
+
+    <style name="TextView.ItemNoData" parent="Base">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/nodateview_text_size</item>
+    </style>
+
+    <style name="Imageview.ItemNoData" parent="Base.Imageview">
+        <item name="android:layout_marginRight">@dimen/nodateview_margin_right</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="LinearLayout.Candidate.Root" parent="Base">
+        <item name="android:minHeight">500dp</item>
+        <item name="android:minWidth">500dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="RelativeLayout.Candidate.Title" parent="Base">
+        <item name="android:background">@color/jobs_blue</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/actionbar_size</item>
+        <!--<item name="android:padding">@dimen/standard_padding_medium</item>-->
+    </style>
+
+    <style name="View.Candidate.TitleBase" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingLeft">@dimen/standard_padding_medium</item>
+        <item name="android:paddingRight">@dimen/standard_padding_medium</item>
+    </style>
+
+    <style name="TextView.Candidate.TitleLeftRight" parent="View.Candidate.TitleBase">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/candidate_text_size_small</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextView.Candidate.Title" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/candidate_text_size_default</item>
+    </style>
+
+    <style name="RadioButton.InterviewFeedback" parent="Base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/standard_padding_default</item>
+        <item name="android:button">@android:color/transparent</item>
+        <item name="android:textSize">@dimen/candidate_text_size_small</item>
+        <item name="android:textColor">@color/text_interview_feedback_selector</item>
+    </style>
+
+    <style name="TextView.Candidate.ListTitle" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/standard_margin_default</item>
+        <item name="android:layout_marginLeft">@dimen/standard_margin_double</item>
+        <item name="android:layout_marginTop">@dimen/standard_margin_large</item>
+        <item name="android:textColor">@color/jobs_blue</item>
+        <item name="android:textSize">@dimen/candidate_text_size_medium</item>
+    </style>
+
+    <style name="TextView.JobDetail.Title" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/standard_margin_small</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/candidate_text_size_default</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextView.JobDetail.Content" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/candidate_text_size_default</item>
+    </style>
+
+    <style name="LinearLayout.AboutJob.Container" parent="Base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginRight">@dimen/standard_margin_default</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="ImageView.AboutJob.Icon" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:paddingBottom">@dimen/standard_padding_medium</item>
+    </style>
+
+    <style name="ImageView.AboutJob.Title" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_marginBottom">@dimen/standard_margin_default</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ImageView.AboutJob.Content" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="TextView.LoginType" parent="@android:style/Widget.Holo.Light.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="ImageView.LoginType" parent="@android:style/Widget">
+        <item name="android:layout_width">26dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/standard_margin_medium</item>
+        <item name="android:layout_marginRight">@dimen/standard_margin_default</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+
+    <style name="LinearLayout.LoginType" parent="@android:style/Widget.Holo.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:layout_marginBottom">@dimen/standard_margin_double</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="Today" parent="@android:style/Widget.Holo.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:text">@string/today</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_mini_</item>
+        <item name="android:background">@drawable/ic_mark_today</item>
+        <item name="android:layout_gravity">right|top</item>
+    </style>
+
+    <style name="Today2" parent="Today">
+        <item name="android:textSize">@dimen/text_size_mini</item>
+        <item name="android:background">@drawable/ic_mark_today2</item>
+    </style>
+
+    <style name="TextView.AppVersion" parent="Base.TextView">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:padding">@dimen/standard_padding_default</item>
+        <item name="android:textSize">@dimen/text_size_mini</item>
+    </style>
+
+    <style name="TextView.CreateShareItem.Title" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/standard_padding_default</item>
+        <item name="android:paddingLeft">@dimen/standard_padding_medium</item>
+        <item name="android:paddingBottom">@dimen/standard_padding_small</item>
+    </style>
+
+    <style name="TestView.SupportRequest.Title" parent="@android:style/Widget.Holo.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/standard_margin_default</item>
+        <item name="android:layout_marginTop">@dimen/standard_margin_default</item>
+        <item name="android:layout_marginBottom">@dimen/standard_margin_default</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/default_text</item>
     </style>
 </resources>

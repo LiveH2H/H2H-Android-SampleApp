@@ -1,66 +1,147 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.ConferenceFragment"
-    android:background="@color/colorTitlebar"
-    android:orientation="vertical">
-    <RelativeLayout
-        android:background="@color/colorTitlebar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/titleheight">
-        <ImageButton
-            android:padding="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ib_hangup"
-            android:src="@drawable/ic_action_end_call"
-            android:background="@drawable/round_button"
-            />
-        <ImageView
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/iv_audio"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/selector_operate_audio"/>
-        <ImageView
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/iv_video"
-            android:layout_toLeftOf="@+id/iv_audio"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/selector_operate_video"/>
-        <TextView
-            android:id="@+id/tv_meetingId"
-          style="@style/TitleTextStyle"/>
-    </RelativeLayout>
+    android:layout_height="match_parent">
+
     <FrameLayout
-        android:layout_weight="1"
+        android:id="@+id/ft_meeting"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        >
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <android.opengl.GLSurfaceView
             android:id="@+id/gl_surface"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
         <AbsoluteLayout
-            android:background="@android:color/transparent"
             android:id="@+id/alt_avatars"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
 
         </AbsoluteLayout>
 
+        <AbsoluteLayout
+            android:id="@+id/alt_names"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
+
+        </AbsoluteLayout>
+
+        <TextView
+            android:id="@+id/tv_webinar_host_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/webinar_host_offline"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioGroup
+                android:id="@+id/rg_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_pointrank"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/selector_pointrank"
+                    android:button="@null"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/rb_rowrank"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/selector_rowrank"
+                    android:button="@null"/>
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/rg_rank"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_timer_alarm"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="05:00"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+            <ListView
+                android:id="@+id/lv_chat_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_timer"
+                android:background="@android:color/transparent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:listSelector="@android:color/transparent"
+                android:stackFromBottom="true"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
     </FrameLayout>
-</LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/ft_broadcast"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            xmlns:fresco="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ivDefaultAvatar"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            fresco:actualImageScaleType="fitCenter"
+            fresco:failureImage="@drawable/ic_blank_avatar"
+            fresco:failureImageScaleType="fitCenter"
+            fresco:placeholderImage="@drawable/ic_blank_avatar"
+            fresco:placeholderImageScaleType="fitCenter"
+            fresco:progressBarImage="@drawable/ic_blank_avatar"
+            fresco:progressBarImageScaleType="fitCenter"
+            fresco:roundBottomLeft="false"
+            fresco:roundBottomRight="false"
+            fresco:roundTopLeft="false"
+            fresco:roundTopRight="false"
+            fresco:viewAspectRatio="1.0"/>
+
+        <TextView
+            android:id="@+id/tvWaitHost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/wait_host"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_default"
+            android:visibility="gone"/>
+
+        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+            android:id="@+id/videoview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"/>
+    </FrameLayout>
+</RelativeLayout>

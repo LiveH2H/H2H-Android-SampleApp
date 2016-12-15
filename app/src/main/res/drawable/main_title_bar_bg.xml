@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="#D3D3D3"/>
+    </item>
+    <item android:bottom="@dimen/divider_height">
+        <color android:color="@color/main_title_bar_bg"/>
+    </item>
+</layer-list>

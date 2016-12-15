@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <ImageView
+        android:id="@+id/iv_minus"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_previous_page"
+        android:background="#555555"
+        android:padding="5dp"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        />
+
+    <TextView
+        android:id="@+id/tv_count_page"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:text="1/1"
+        android:background="#555555"
+        android:textColor="#FEFEFE"
+        android:textSize="16sp"
+        />
+
+    <ImageView
+        android:id="@+id/iv_plus"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:background="#555555"
+        android:src="@drawable/ic_next_page"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        />
+
+</merge>

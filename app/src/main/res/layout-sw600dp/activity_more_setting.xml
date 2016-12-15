@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cpiz.android.bubbleview.BubbleLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:bb_arrowDirection="Up"
+    app:bb_arrowHeight="10dp"
+    app:bb_arrowOffset="280dp"
+    app:bb_arrowWidth="10dp"
+    app:bb_cornerRadius="10dp"
+    app:bb_fillColor="@color/white"
+    tools:mContext="com.meetingroom.activity.MoreSettingActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titleheight"
+        android:background="@color/gray">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="@string/more"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_live_support"
+                style="@style/AccountSetting_TextView_Item"
+                android:background="@drawable/white_bg_gray_bottom_left_border_layer"
+                android:text="@string/live_support"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/tv_submit_support_request"
+                style="@style/AccountSetting_TextView_Item"
+                android:background="@drawable/white_bg_gray_bottom_left_border_layer"
+                android:text="@string/support_request_title_submit"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/tv_live_transcript"
+                style="@style/AccountSetting_TextView_Item"
+                android:background="@drawable/white_bg_gray_bottom_left_border_layer"
+                android:text="@string/live_transcript"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_bg_gray_bottom_left_border_layer"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/AccountSetting_TextView_Item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@android:color/transparent"
+                    android:text="@string/allow_chat"/>
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/switchChat"
+                    style="@style/SwitchButtonMD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:checked="true"
+                    app:kswThumbMarginLeft="-12dp"
+                    app:kswThumbMarginRight="-10dp"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_chat_overlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/switchChat"
+                    android:paddingTop="5dp"
+                    android:visibility="gone">
+
+                    <com.kyleduo.switchbutton.SwitchButton
+
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/switchChatOverlay"
+                        style="@style/SwitchButtonMD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        app:kswThumbMarginLeft="-12dp"
+                        app:kswThumbMarginRight="-10dp"/>
+
+                    <TextView
+                        style="@style/AccountSetting_TextView_Item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@android:color/transparent"
+                        android:drawableRight="@android:color/transparent"
+                        android:text="@string/allow_chat_overay"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_raisehand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_bg_gray_bottom_left_border_layer"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/AccountSetting_TextView_Item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@android:color/transparent"
+                    android:text="@string/allow_raiseHand"/>
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/switchRaisehand"
+                    style="@style/SwitchButtonMD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:checked="true"
+                    app:kswThumbMarginLeft="-12dp"
+                    app:kswThumbMarginRight="-10dp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_bg_gray_bottom_left_border_layer"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/AccountSetting_TextView_Item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@android:color/transparent"
+                    android:text="@string/showTimer"/>
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/switchshowTimer"
+                    style="@style/SwitchButtonMD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    app:kswThumbMarginLeft="-12dp"
+                    app:kswThumbMarginRight="-10dp"/>
+
+                <TextView
+                    android:id="@+id/tv_set_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/switchshowTimer"
+                    android:padding="20dp"
+                    android:text="@string/settingmins"
+                    android:textColor="@color/red"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_particiipant_setting"
+                style="@style/AccountSetting_TextView_Item"
+                android:background="@drawable/white_bg_gray_bottom_left_border_layer"
+                android:text="@string/particiipant_settings"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_device_setting"
+                style="@style/AccountSetting_TextView_Item"
+                android:background="@drawable/white_bg_gray_bottom_left_border_layer"
+                android:text="@string/device_settings"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_theme_color"
+                style="@style/AccountSetting_TextView_Item"
+                android:background="@drawable/white_bg_gray_bottom_left_border_layer"
+                android:text="@string/theme_colors"/>
+        </LinearLayout>
+    </ScrollView>
+</com.cpiz.android.bubbleview.BubbleLinearLayout>

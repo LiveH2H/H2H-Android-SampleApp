@@ -1,0 +1,22 @@
+<resources>
+    <dimen name="item_webinar_width">240dp</dimen>
+    <dimen name="item_webinar_preview_height">120dp</dimen>
+    <dimen name="item_webinar_bottom_text_size">@dimen/text_size_mini_</dimen>
+    <dimen name="item_webinar_time_text_size">@dimen/text_size_mini</dimen>
+
+    <dimen name="content_margin_left_right">100dp</dimen>
+
+    <dimen name="nodataview_margin_left_right">@dimen/standard_margin_super_large</dimen>
+    <dimen name="nodateview_text_size">@dimen/text_size_medium</dimen>
+    <dimen name="nodateview_margin_right">@dimen/standard_margin_default</dimen>
+
+    <dimen name="login_preview_button_width">200dp</dimen>
+
+    <dimen name="candidate_name">@dimen/text_size_medium</dimen>
+    <dimen name="candidate_last_submission">@dimen/text_size_default</dimen>
+    <dimen name="candidate_drawable_padding">@dimen/standard_padding_medium</dimen>
+    <dimen name="candidate_text_size_small">@dimen/text_size_default</dimen>
+    <dimen name="candidate_text_size_default">@dimen/text_size_medium</dimen>
+    <dimen name="candidate_text_size_medium">@dimen/text_size_large</dimen>
+
+</resources>

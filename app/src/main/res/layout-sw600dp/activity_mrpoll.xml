@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titleheight"
+        >
+
+        <!--<include layout="@layout/layout_back"></include>-->
+        <ImageView
+            android:tint="@color/black"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/icon_back_arrow"
+            android:id="@+id/iv_back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/poll"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+        <TextView
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:id="@+id/tv_endline"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+        <TextView
+            android:visibility="gone"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:text="1/3"
+            android:id="@+id/tv_page"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+    <!--<include layout="@layout/layout_horizontalline"></include>-->
+    <com.meetingroom.view.CantScrollViewPager
+        android:layout_weight="1"
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        >
+    </com.meetingroom.view.CantScrollViewPager>
+
+    <Button
+        android:text="@string/submit"
+        android:textColor="@color/white"
+        android:background="@drawable/selector_imagebutton_green"
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:background="@color/white"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titleheight">
+        <LinearLayout
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/ll_next"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_imagebutton"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="16sp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/black"
+                android:text="@string/next_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:tint="@color/black"
+                android:src="@drawable/ic_next_step"
+                android:scaleType="centerInside"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
+        <ImageView
+            android:tint="@color/black"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/bg_imagebutton"
+            android:id="@+id/iv_last_step"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_last_step"
+            android:scaleType="centerInside"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="12:00"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>

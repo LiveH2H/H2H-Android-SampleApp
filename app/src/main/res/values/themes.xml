@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+    Base application theme, dependent on API level. This theme is replaced
+    by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="AppTheme.Translucent" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="status_bar_bg">@color/black_translucent_login</item>
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+    </style>
+
+    <style name="LoginTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_login</item>
+        <item name="status_bar_bg">@color/black_translucent_login</item>
+    </style>
+
+    <style name="LoginPreviewTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_dashboard_vertical</item>
+        <item name="status_bar_bg">@android:color/transparent</item>
+    </style>
+
+    <style name="WhiteTheme" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="MeetingTheme" parent="AppTheme">
+        <item name="status_bar_bg">@android:color/black</item>
+    </style>
+
+    <style name="AccountSettingTheme" parent="AppTheme">
+        <item name="status_bar_bg">@color/account_setting_status_bar_bg</item>
+        <item name="android:windowBackground">@color/account_setting_window_bg</item>
+    </style>
+
+    <style name="LiveShareTheme" parent="AppTheme">
+        <item name="status_bar_bg">@color/account_setting_status_bar_bg</item>
+        <item name="android:windowBackground">@color/account_setting_window_bg</item>
+    </style>
+
+    <style name="SupportChatTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/account_setting_window_bg</item>
+        <item name="colorPrimaryDark">@color/red</item>
+    </style>
+
+    <style name="HomeTheme" parent="AppTheme">
+        <item name="status_bar_bg">@color/home_status_bar_bg</item>
+        <item name="android:windowBackground">@color/home_bg</item>
+    </style>
+
+    <style name="DashboardTheme" parent="AppTheme">
+        <item name="status_bar_bg">@android:color/black</item>
+        <item name="android:windowBackground">@drawable/bg_dashboard_vertical</item>
+    </style>
+    <style name="InviteContactTheme" parent="AppTheme">
+        <item name="status_bar_bg">@color/home_status_bar_bg</item>
+        <item name="android:windowBackground">@color/home_bg</item>
+    </style>
+    <style name="PollTheme" parent="AppTheme">
+        <item name="status_bar_bg">@color/home_status_bar_bg</item>
+        <item name="android:windowBackground">@color/home_bg</item>
+    </style>
+    <style name="FilterTheme" parent="AppTheme">
+        <item name="status_bar_bg">@color/home_status_bar_bg</item>
+        <item name="android:windowBackground">@color/home_bg</item>
+    </style>
+
+    <style name="AnimBottomIn" parent="AppTheme.Translucent">
+        <item name="android:windowBackground">@drawable/bg_login</item>
+        <item name="status_bar_bg">@color/black_translucent_login</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="GuideTheme" parent="AppTheme">
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="CandidateTheme" parent="AppTheme">
+        <item name="status_bar_bg">@android:color/black</item>
+        <item name="android:windowBackground">@color/candidate_window_bg</item>
+    </style>
+
+    <style name="MeetingRoomTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/bg_meetingview</item>
+    </style>
+
+</resources>

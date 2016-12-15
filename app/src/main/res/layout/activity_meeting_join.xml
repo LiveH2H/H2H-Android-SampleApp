@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,51 +8,43 @@
     tools:context="itutorgroup.h2h.activity.JoinMeetingActivity">
 
     <RelativeLayout
-        android:background="@android:color/white"
-        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="@android:color/white">
 
         <EditText
             android:id="@+id/emailAddressEditText"
-            android:singleLine="true"
-            android:nextFocusForward="@+id/meetingidEditText"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:hint="@string/hint_emailAddress" />
+            android:hint="@string/hint_emailAddress"
+            android:inputType="textEmailAddress"
+            android:lines="1"
+            android:nextFocusForward="@+id/meetingidEditText"/>
 
         <EditText
             android:id="@+id/meetingidEditText"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:singleLine="true"
             android:layout_below="@+id/emailAddressEditText"
             android:hint="@string/hint_meeingId"
-            android:inputType="numberDecimal"
-            android:maxLength="11" />
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="11"/>
 
         <Button
             android:id="@+id/joinMeetingBtn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/meetingidEditText"
             android:layout_marginBottom="25dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:textColor="@android:color/white"
+            android:layout_marginTop="20dp"
             android:background="#e85e30"
-            android:layout_below="@+id/meetingidEditText"
             android:onClick="joinMeetingClicked"
-            android:text="Join Meeting" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/joinMeetingBtn"
-            android:layout_centerHorizontal="true"
-            android:visibility="invisible" />
+            android:text="Join Meeting"
+            android:textColor="@android:color/white"/>
     </RelativeLayout>
 
 </RelativeLayout>

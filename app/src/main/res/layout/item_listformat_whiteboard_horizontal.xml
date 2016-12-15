@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="120dp"
+    android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:id="@+id/ll_container"
+        android:background="@drawable/selector_item_whiteboard"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:orientation="vertical">
+        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="100dp" android:layout_height="50dp"
+            android:id="@+id/iv_whiteboard"
+            android:scaleType="centerInside"
+            />
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tv_whiteboard"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/whiteboard"/>
+    </LinearLayout>
+</RelativeLayout>

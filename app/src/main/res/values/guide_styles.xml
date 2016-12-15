@@ -1,0 +1,81 @@
+<resources>
+
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+    </style>-->
+
+    <style name="ImageView.Guide.Big" parent="@android:style/Widget.Holo.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">122dp</item>
+        <item name="android:layout_marginTop">120dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="ImageView.Guide.Small" parent="@android:style/Widget.Holo.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">55dp</item>
+    </style>
+
+    <style name="ImageView.Guide.Small.Top.I" parent="ImageView.Guide.Small">
+        <item name="android:layout_marginTop">67dp</item>
+    </style>
+
+    <style name="ImageView.Guide.Small.Top" parent="ImageView.Guide.Small">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">45dp</item>
+    </style>
+
+    <style name="ImageView.Guide.Small.Bottom" parent="ImageView.Guide.Small.Top">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
+    <style name="ImageView.Guide.Small.Left" parent="ImageView.Guide.Small">
+        <item name="android:layout_marginRight">20dp</item>
+    </style>
+
+    <style name="ImageView.Guide.Small.Left.Normal" parent="ImageView.Guide.Small.Left">
+        <item name="android:layout_marginTop">153.5dp</item>
+    </style>
+
+    <style name="ImageView.Guide.Small.Left.Top" parent="ImageView.Guide.Small.Left">
+        <item name="android:layout_marginTop">-20dp</item>
+    </style>
+
+    <style name="ImageView.Guide.Small.Left.Bottom" parent="ImageView.Guide.Small.Left">
+        <item name="android:layout_marginBottom">-20dp</item>
+    </style>
+
+    <style name="ImageView.Guide.Small.Right" parent="ImageView.Guide.Small">
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
+    <style name="ImageView.Guide.Small.Right.Normal" parent="ImageView.Guide.Small.Right">
+        <item name="android:layout_marginTop">153.5dp</item>
+    </style>
+
+    <style name="ImageView.Guide.Small.Right.Top" parent="ImageView.Guide.Small.Right">
+        <item name="android:layout_marginTop">-20dp</item>
+    </style>
+
+    <style name="ImageView.Guide.Small.Right.Bottom" parent="ImageView.Guide.Small.Right">
+        <item name="android:layout_marginBottom">-20dp</item>
+    </style>
+
+    <style name="TextView.Guide.Title" parent="@android:style/Widget.Holo.Light.TextView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">380dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:paddingLeft">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingRight">@dimen/activity_vertical_margin</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextView.Guide.Content" parent="TextView.Guide.Title">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+</resources>

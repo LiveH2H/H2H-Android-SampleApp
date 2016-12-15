@@ -226,7 +226,7 @@ public class ConferenceFragment extends BaseFragment {
         }
 
         @Override
-        public void onForceLogout() {
+        public void onForceLogout(String message) {
             Log.e("App level", "on Force Logout");
             H2HChat.getInstance().leaveRoom();
             H2HConference.getInstance().closeAllConnections();

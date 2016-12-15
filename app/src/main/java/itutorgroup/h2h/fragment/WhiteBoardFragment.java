@@ -41,9 +41,9 @@ public class WhiteBoardFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_white_board, container, false);
-        webView = ViewUtil.findViewById(view, R.id.webview);
-        myProgressBar = ViewUtil.findViewById(view, R.id.myProgressBar);
-        btnReload = ViewUtil.findViewById(view,R.id.btn_reload);
+//        webView = ViewUtil.findViewById(view, R.id.webview);
+//        myProgressBar = ViewUtil.findViewById(view, R.id.myProgressBar);
+//        btnReload = ViewUtil.findViewById(view,R.id.btn_reload);
         return view;
     }
     @Override

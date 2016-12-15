@@ -1,5 +1,6 @@
 package itutorgroup.h2h.activity;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,22 +9,21 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-
-import com.mosai.utils.ToastUtils;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
 import itutorgroup.h2h.AppManager;
 import itutorgroup.h2h.utils.LogUtils;
-import itutorgroup.h2h.widget.HintDialog;
-import itutorgroup.h2h.widget.progress.DefaultProgressIndicator;
-import itutorgroup.h2h.widget.progress.TextProgressIndicator;
 
 
 /**
@@ -34,10 +34,9 @@ import itutorgroup.h2h.widget.progress.TextProgressIndicator;
  */
 public abstract class MeetingRoomBaseActivity extends AppCompatActivity {
     protected String TAG = getClass().getSimpleName();
-    private TextProgressIndicator textProgressIndicator;
     protected Context context;
-    private HintDialog hintDialog;
-    protected DefaultProgressIndicator progressIndicator;
+    private ProgressDialog loadingDialog;
+    private Toast toast;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,11 +60,12 @@ public abstract class MeetingRoomBaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        dismissLoadingDialog();
         if(openEventBus()){
             EventBus.getDefault().unregister(this);
         }
         unregisterNetworkChanged();
-        AppManager.getAppManager().finishActivity(this);
+        AppManager.getAppManager().removeActivity(this);
     }
 
     protected void initDatas(@Nullable Bundle savedInstanceState) {
@@ -79,73 +79,51 @@ public abstract class MeetingRoomBaseActivity extends AppCompatActivity {
 
     protected abstract void addListener();
 
-    public void showTextProgressDialog(String message) {
-        if (textProgressIndicator == null)
-            textProgressIndicator = TextProgressIndicator.newInstance(this);
-        textProgressIndicator.showDialog(message);
-    }
-
-    public void dismissTextProgressDialog() {
-        if (textProgressIndicator != null)
-            textProgressIndicator.dismissDialg();
-    }
-
-    public void showProgressDialog() {
-        if (progressIndicator == null) {
-            progressIndicator = DefaultProgressIndicator.newInstance(context);
-
+    public void showLoadingDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = new ProgressDialog(this);
+            loadingDialog.setMessage("正在加载中...");
+            loadingDialog.setCanceledOnTouchOutside(false);
         }
-        progressIndicator.show();
+        loadingDialog.show();
     }
 
-    public void dismissProgressDialog() {
-        if (progressIndicator != null && progressIndicator.isShowing()) {
-            progressIndicator.dismiss();
-        }
-    }
-
-    /**
-     * 显示提示框
-     */
-    public HintDialog showHintDialog(int resId) {
-        return showHintDialog(getText(resId));
-    }
-
-    /**
-     * 显示提示框
-     */
-    public HintDialog showHintDialog(CharSequence text) {
-        if (hintDialog == null) {
-            hintDialog = new HintDialog(context);
-        }
-        hintDialog.setMessages(text);
-        if (!hintDialog.isShowing()) {
-            hintDialog.show();
-        }
-        return hintDialog;
-    }
-
-    /**
-     * 隐藏提示框
-     */
-    public void dismissHintDialog() {
-        if (hintDialog != null && hintDialog.isShowing()) {
-            hintDialog.dismiss();
+    public void dismissLoadingDialog() {
+        if (loadingDialog != null) {
+            loadingDialog.dismiss();
         }
     }
 
     /**
      * 显示Toast
      */
-    public void showToast(CharSequence text) {
-        ToastUtils.showToast(context,text);
+    public void showToast(final CharSequence text) {
+        if (Thread.currentThread() == Looper.getMainLooper().getThread()) {
+            showToastUiThread(text);
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showToastUiThread(text);
+                }
+            });
+        }
     }
 
     /**
      * 显示Toast
      */
-    public void showToast(int resId) {
-        ToastUtils.showToast(context,resId);
+    public void showToast(@StringRes int resId) {
+        showToast(getText(resId));
+    }
+
+    private void showToastUiThread(CharSequence text) {
+        if (toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     private void fitsSystemWindows() {

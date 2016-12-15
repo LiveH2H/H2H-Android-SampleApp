@@ -2,11 +2,95 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="standard_margin">10dp</dimen>
-    <dimen name="btn_small_height">40dp</dimen>
+    <dimen name="activity_vertical_margin_double">32dp</dimen>
+    <dimen name="standard_padding_small">5dp</dimen>
+    <dimen name="standard_padding_default">10dp</dimen>
+    <dimen name="standard_padding_medium">15dp</dimen>
+    <dimen name="standard_padding_double">20dp</dimen>
+    <dimen name="standard_padding_large">40dp</dimen>
+    <dimen name="standard_margin_small">5dp</dimen>
+    <dimen name="standard_margin_default">10dp</dimen>
+    <dimen name="standard_margin_medium">15dp</dimen>
+    <dimen name="standard_margin_double">20dp</dimen>
+    <dimen name="standard_margin_large">25dp</dimen>
+    <dimen name="standard_margin_very_large">45dp</dimen>
+    <dimen name="standard_margin_super_large">100dp</dimen>
+    <dimen name="content_margin_left_right">50dp</dimen>
+    <dimen name="scrollview_bottom_padding">60dp</dimen>
+    <dimen name="actionbar_size">55dp</dimen>
+    <dimen name="day_textsize">50sp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="divider_height_small">0.7dp</dimen>
+    <dimen name="meeting_tab_padding">20dp</dimen>
+
+    <dimen name="logo_width">240dp</dimen>
+    <dimen name="login_label_margin_top">45dp</dimen>
+    <dimen name="btn_radius">5dp</dimen>
+    <dimen name="text_padding_default">8dp</dimen>
+    <dimen name="text_padding_top_bottom">5dp</dimen>
+
+    <dimen name="text_size_mini_">10sp</dimen>
+    <dimen name="text_size_mini">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_default">16sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_very_large">25sp</dimen>
+
+    <dimen name="switch_menu_radius">90dp</dimen>
+    <dimen name="side_bar_text_size">12sp</dimen>
+
+    <dimen name="radius_small">3dp</dimen>
+    <dimen name="radius_default">5dp</dimen>
+    <dimen name="radius_large">12dp</dimen>
+    <dimen name="radius_activity_dialog">5dp</dimen>
+
+
     <dimen name="titleheight">48dp</dimen>
     <dimen name="bottomheight">56dp</dimen>
     <dimen name="tabheight">24dp</dimen>
     <dimen name="tabtextmargin">2dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="home_list_head_portrait_width_height">60dp</dimen>
+
+    <dimen name="filter_popup_window_width">150dp</dimen>
+    <dimen name="dashboard_headportrait_width_height">45dp</dimen>
+    <dimen name="flat_tab_marginright">30dp</dimen>
+
+    <dimen name="dashboard_item_expandable_layout_height">45dp</dimen>
+    <dimen name="dashboard_item_expandable_layout_top_shadow">40dp</dimen>
+    <dimen name="nodataview_margin_left_right">@dimen/standard_margin_small</dimen>
+    <dimen name="nodateview_text_size">@dimen/text_size_small</dimen>
+    <dimen name="nodateview_margin_right">0dp</dimen>
+
+    <item name="item_share_view_aspect_ratio" format="float" type="dimen">2.0</item>
+
+    <dimen name="logo_margin_top">45dp</dimen>
+    <dimen name="login_preview_button_width">150dp</dimen>
+
+    <dimen name="candidate_name">@dimen/text_size_small</dimen>
+    <dimen name="candidate_last_submission">@dimen/text_size_mini</dimen>
+    <dimen name="candidate_drawable_padding">@dimen/standard_padding_default</dimen>
+    <dimen name="candidate_text_size_small">@dimen/text_size_small</dimen>
+    <dimen name="candidate_text_size_default">@dimen/text_size_default</dimen>
+    <dimen name="candidate_text_size_medium">@dimen/text_size_medium</dimen>
+    <dimen name="three_grid_unit">24dp</dimen>
+    <dimen name="one_and_a_half_grid_unit">12dp</dimen>
+
+    <dimen name="load_more_final_drag_offset">120dp</dimen>
+    <dimen name="load_more_trigger_offset">88dp</dimen>
+    <dimen name="refresh_final_drag_offset">150dp</dimen>
+    <dimen name="refresh_trigger_offset">100dp</dimen>
+    <dimen name="refresh_header_height_google">100dp</dimen>
+    <dimen name="refresh_trigger_offset_google">100dp</dimen>
+    <dimen name="refresh_final_offset_google">150dp</dimen>
+    <dimen name="refresh_drawable_size_google">40dp</dimen>
+    <dimen name="load_more_footer_height_google">72dp</dimen>
+    <dimen name="load_more_trigger_offset_google">88dp</dimen>
+    <dimen name="load_more_final_offset_google">120dp</dimen>
+    <dimen name="load_more_drawable_size_google">36dp</dimen>
+
+    <dimen name="standard_margin">10dp</dimen>
+    <dimen name="btn_small_height">40dp</dimen>
 </resources>

@@ -58,7 +58,7 @@
                     android:layout_height="1dp"
                     android:layout_below="@+id/signUpTV2"
                     android:layout_marginTop="10dp"
-                    android:background="@android:color/darker_gray"></View>
+                    android:background="@android:color/darker_gray"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -92,7 +92,7 @@
                     android:layout_height="1dp"
                     android:layout_below="@+id/loginTV2"
                     android:layout_marginTop="10dp"
-                    android:background="@android:color/darker_gray"></View>
+                    android:background="@android:color/darker_gray"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -126,7 +126,7 @@
                     android:layout_height="1dp"
                     android:layout_below="@+id/instantTV2"
                     android:layout_marginTop="10dp"
-                    android:background="@android:color/darker_gray"></View>
+                    android:background="@android:color/darker_gray"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -160,7 +160,7 @@
                     android:layout_height="1dp"
                     android:layout_below="@+id/scheduleTV2"
                     android:layout_marginTop="10dp"
-                    android:background="@android:color/darker_gray"></View>
+                    android:background="@android:color/darker_gray"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -194,7 +194,7 @@
                     android:layout_height="1dp"
                     android:layout_below="@+id/joinTV2"
                     android:layout_marginTop="10dp"
-                    android:background="@android:color/darker_gray"></View>
+                    android:background="@android:color/darker_gray"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -228,7 +228,7 @@
                     android:layout_height="1dp"
                     android:layout_below="@+id/signoutTV2"
                     android:layout_marginTop="10dp"
-                    android:background="@android:color/darker_gray"></View>
+                    android:background="@android:color/darker_gray"/>
             </RelativeLayout>
 
         </LinearLayout>

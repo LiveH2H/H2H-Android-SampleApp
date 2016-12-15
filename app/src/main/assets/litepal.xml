@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="liveh2h" ></dbname>
+
+    <version value="3" ></version>
+
+    <list>
+        <mapping class="com.meetingroom.bean.SettingConfig"></mapping>
+    </list>
+    <list>
+        <mapping class="com.meetingroom.bean.MeetingState"></mapping>
+    </list>
+</litepal> 

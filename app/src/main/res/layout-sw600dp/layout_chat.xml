@@ -1,0 +1,120 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_transparent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titleheight"
+        android:background="@android:color/transparent"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titleheight"
+        android:background="@color/gray">
+
+        <TextView
+            android:id="@+id/tv_group_type"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/chatroom"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="visible"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ListView
+                android:id="@+id/lv_chatroom"
+                style="@style/listviewstyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="0dp"/>
+
+            <ListView
+                android:id="@+id/lv_support"
+                style="@style/listviewstyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="0dp"/>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="597dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chat_sendTo"
+                android:textColor="@android:color/black"/>
+
+            <com.meetingroom.view.NiceSpinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:arrowTint="@color/drak_red"
+                app:textTint="@color/drak_red"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/Base.Layout"
+            android:background="@color/chat_input_layout_bg"
+            android:orientation="horizontal"
+            android:padding="@dimen/standard_padding_default">
+
+            <io.github.rockerhieu.emojicon.EmojiconEditText
+                xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/etText"
+                style="@style/Base.EditText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:hint="@string/live_support_chat_edittext_hint"
+                android:imeOptions="actionSend"
+                android:padding="@dimen/standard_padding_default"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/chat_send_btn_text"
+                emojicon:emojiconAlignment="baseline"/>
+
+            <Button
+                android:id="@+id/btnSend"
+                style="@style/Base.Button"
+                android:layout_marginLeft="@dimen/standard_margin_default"
+                android:layout_marginStart="@dimen/standard_margin_default"
+                android:background="@android:color/transparent"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:text="@string/send"
+                android:textColor="@color/chat_send_btn_text"
+                android:textSize="@dimen/text_size_default"
+                android:visibility="visible"
+                tools:visibility="visible"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

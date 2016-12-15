@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr format="color" name="status_bar_bg"/>
+
+    <declare-styleable name="FilterType">
+        <attr name="drawableLeft" format="color|reference"/>
+        <attr name="text" format="string"/>
+        <attr name="expandable" format="boolean"/>
+        <attr name="lineVisible" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="NiceSpinner">
+        <attr name="arrowTint" format="color" />
+        <attr name="hideArrow" format="boolean" />
+        <attr name="backgroundSelector" format="integer"/>
+        <attr name="textTint" format="color"/>
+        <attr name="textItemTint" format="color"/>
+        <attr name="titlebackgroundSelector" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="SwitchButtonLayout">
+        <attr name="sbl_checked" format="boolean"/>
+        <attr name="sbl_text" format="string"/>
+    </declare-styleable>
+
+</resources>

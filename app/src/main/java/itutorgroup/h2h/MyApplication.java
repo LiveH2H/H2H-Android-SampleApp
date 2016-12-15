@@ -5,15 +5,18 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.itutorgroup.h2hchat.H2HChatApplication;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.meetingroom.utils.CrashCatcher;
+import com.meetingroom.utils.LogUtils;
+import com.meetingroom.utils.MRUtils;
+import com.meetingroom.utils.SystemUtil;
 
-import itutorgroup.h2h.common.AbnormalHandler;
-
+import org.litepal.LitePalApplication;
 
 /**
  * Created by Rays on 16/5/9.
  */
-public class MyApplication extends H2HChatApplication {
+public class MyApplication extends LitePalApplication {
     private static final String TAG = "MyApplication";
     public static MyApplication INSTANCE;
     private int appCount = 0;
@@ -21,17 +24,24 @@ public class MyApplication extends H2HChatApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "onCreate");
+        LogUtils.i(this.toString() + " pid=" + android.os.Process.myPid() + " isTablet=" + getResources().getBoolean(R.bool.tablet));
         INSTANCE = this;
-        initAbnormalHandler();
+        if (!SystemUtil.isCurProcess(this)) {
+            LogUtils.i(android.os.Process.myPid() + "不是主进程");
+            return;
+        }
+        long time = System.currentTimeMillis();
+        Fresco.initialize(INSTANCE);
+        MRUtils.clearDatas(INSTANCE);
+        LogUtils.i("Application init finish, Time=" + (System.currentTimeMillis() - time));
+
+        initCrashCatcher();
         setActivityLifecycleCallbacks();
     }
 
-    private void initAbnormalHandler() {
-        if (BuildConfig.DEBUG) {
-            AbnormalHandler crashHandler = AbnormalHandler.getInstance();
-            crashHandler.init(getApplicationContext());
-        }
+    private void initCrashCatcher() {
+        // 崩溃捕捉
+        new CrashCatcher(this);
     }
 
     private void setActivityLifecycleCallbacks() {
@@ -72,7 +82,7 @@ public class MyApplication extends H2HChatApplication {
     }
 
     public boolean isHome() {
-        return appCount > 0 ? true : false;
+        return appCount > 0;
     }
 
     @Override

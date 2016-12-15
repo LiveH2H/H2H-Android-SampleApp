@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#D1D1D1"
-    tools:context="itutorgroup.h2h.activity.SignupActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D1D1D1"
+                tools:context="itutorgroup.h2h.activity.SignupActivity">
 
     <RelativeLayout
         android:background="@android:color/white"
@@ -13,20 +13,11 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/userNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:singleLine="true"
-            android:nextFocusForward="@+id/firstNameEditText"
-            android:hint="Enter your user name" />
-
-        <EditText
             android:id="@+id/firstNameEditText"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:singleLine="true"
             android:nextFocusForward="@+id/lastNameEditText"
-            android:layout_below="@+id/userNameEditText"
             android:hint="Enter your first name" />
 
         <EditText

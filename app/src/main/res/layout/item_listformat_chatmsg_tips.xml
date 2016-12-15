@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="10dp"
-    android:background="@color/black">
-<TextView
-    android:padding="10dp"
-    android:background="@drawable/bg_chat_tips"
-    android:id="@+id/tv_content"
-    android:textColor="@color/black"
-    android:textSize="12sp"
-    android:text="text"
-    android:gravity="center"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    android:padding="10dp">
+
+    <io.github.rockerhieu.emojicon.EmojiconTextView
+        xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_chat_tips"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="text"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        emojicon:emojiconAlignment="baseline"/>
 </LinearLayout>

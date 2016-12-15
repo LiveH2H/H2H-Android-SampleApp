@@ -1,0 +1,252 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.meetingroom.activity.SupportRequestActivity">
+
+    <include layout="@layout/header_text"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TestView.SupportRequest.Title"
+                android:layout_marginBottom="@dimen/standard_margin_small"
+                android:text="@string/support_request_reason"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="true"
+                android:paddingLeft="@dimen/standard_padding_default"
+                android:paddingRight="@dimen/standard_padding_default">
+
+                <com.meetingroom.widget.SwitchButtonLayout
+                    xmlns:sbl="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sblVolumeHigh"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="@string/support_request_reason_value_volume_too_high"
+                    sbl:sbl_text="@string/support_request_reason_volume_too_high"/>
+
+                <com.meetingroom.widget.SwitchButtonLayout
+                    xmlns:sbl="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sblVolumeLow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="@string/support_request_reason_value_volume_too_low"
+                    sbl:sbl_text="@string/support_request_reason_volume_too_low"/>
+
+                <com.meetingroom.widget.SwitchButtonLayout
+                    xmlns:sbl="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sblEcho"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="@string/support_request_reason_value_echo"
+                    sbl:sbl_text="@string/support_request_reason_echo"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="true"
+                android:paddingLeft="@dimen/standard_padding_default"
+                android:paddingRight="@dimen/standard_padding_default">
+
+                <com.meetingroom.widget.SwitchButtonLayout
+                    xmlns:sbl="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sblMaterials"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="@string/support_request_reason_value_materials"
+                    sbl:sbl_text="@string/support_request_reason_materials"/>
+
+                <com.meetingroom.widget.SwitchButtonLayout
+                    xmlns:sbl="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sblDelay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="@string/support_request_reason_value_delay"
+                    sbl:sbl_text="@string/support_request_reason_delay"/>
+
+                <com.meetingroom.widget.SwitchButtonLayout
+                    xmlns:sbl="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sblWhiteboard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="@string/support_request_reason_value_whiteboard"
+                    sbl:sbl_text="@string/support_request_reason_whiteboard"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="true"
+                android:paddingLeft="@dimen/standard_padding_default"
+                android:paddingRight="@dimen/standard_padding_default">
+
+                <com.meetingroom.widget.SwitchButtonLayout
+                    xmlns:sbl="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sblNoVideo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="@string/support_request_reason_value_no_video"
+                    sbl:sbl_text="@string/support_request_reason_no_video"/>
+
+                <com.meetingroom.widget.SwitchButtonLayout
+                    xmlns:sbl="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sblNoise"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="@string/support_request_reason_value_noise"
+                    sbl:sbl_text="@string/support_request_reason_noise"/>
+
+                <com.meetingroom.widget.SwitchButtonLayout
+                    xmlns:sbl="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sblNoSound"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="@string/support_request_reason_value_no_sound"
+                    sbl:sbl_text="@string/support_request_reason_no_sound"/>
+
+            </LinearLayout>
+
+            <com.meetingroom.widget.SwitchButtonLayout
+                xmlns:sbl="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/sblOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/standard_padding_default"
+                android:tag="@string/support_request_reason_value_other"
+                sbl:sbl_text="@string/support_request_reason_other"/>
+
+            <View
+                style="@style/Line.Gray.D"
+                android:layout_marginTop="@dimen/standard_margin_small"/>
+
+            <TextView
+                style="@style/TestView.SupportRequest.Title"
+                android:layout_marginBottom="0dp"
+                android:text="@string/support_request_comments"/>
+
+            <EditText
+                android:id="@+id/etComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard_margin_default"
+                android:background="@drawable/edittext_gray_border"
+                android:gravity="top|left"
+                android:lines="5"
+                android:padding="@dimen/standard_padding_default"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/default_text"
+                android:textSize="@dimen/text_size_small"/>
+
+            <View style="@style/Line.Gray.D"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_padding_default"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/standard_padding_default"
+                android:paddingRight="@dimen/standard_padding_default">
+
+                <TextView
+                    style="@style/TestView.SupportRequest.Title"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/support_request_best_reach"/>
+
+                <RadioGroup
+                    android:id="@+id/rgContacts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbWeChat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/radio_button_bg_blue_left"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:minWidth="80dp"
+                        android:paddingBottom="@dimen/standard_padding_small"
+                        android:paddingTop="@dimen/standard_padding_small"
+                        android:text="@string/support_request_wechat"
+                        android:textColor="@color/text_blue_white_selector"
+                        android:textSize="@dimen/text_size_small"/>
+
+                    <RadioButton
+                        android:id="@+id/rbPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/radio_button_bg_blue_right"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:minWidth="80dp"
+                        android:paddingBottom="@dimen/standard_padding_small"
+                        android:paddingTop="@dimen/standard_padding_small"
+                        android:text="@string/support_request_phone"
+                        android:textColor="@color/text_blue_white_selector"
+                        android:textSize="@dimen/text_size_small"/>
+                </RadioGroup>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etContacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard_margin_default"
+                android:background="@drawable/edittext_gray_border"
+                android:hint="@string/support_request_wechat_input_hint"
+                android:lines="1"
+                android:padding="@dimen/standard_padding_default"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/default_text"
+                android:textSize="@dimen/text_size_small"/>
+
+            <View style="@style/Line.Gray.D"/>
+
+            <TextView
+                android:id="@+id/tvSubmitted"
+                style="@style/TestView.SupportRequest.Title"
+                android:layout_marginBottom="0dp"
+                android:text="@string/support_request_submitted_by"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvVersion"
+                style="@style/TestView.SupportRequest.Title"
+                android:layout_marginBottom="@dimen/standard_margin_default"
+                android:text="@string/support_request_version"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

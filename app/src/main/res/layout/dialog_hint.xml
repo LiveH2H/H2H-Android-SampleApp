@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:background="@drawable/bg_hint_dialog"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/Base.TextView"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/standard_margin_default"
+        android:textStyle="bold"
+        tools:text="Check Your Email" />
+
+    <TextView
+        android:id="@+id/tvMessages"
+        style="@style/Base.TextView"
+        android:layout_below="@id/tvTitle"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.2"
+        android:padding="@dimen/standard_padding_default"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_size_small"
+        tools:text="@string/check_your_email_hint_format" />
+
+    <View
+        android:id="@+id/line"
+        style="@style/Line.Gray.D"
+        android:layout_below="@id/tvMessages"
+        android:layout_margin="@dimen/standard_margin_default" />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line"
+        android:layout_margin="@dimen/standard_margin_default"
+        android:background="@drawable/btn_ok"
+        android:text="@string/ok"
+        android:textSize="@dimen/text_size_medium"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>

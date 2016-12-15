@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.meetingroom.activity.MeetingActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titleheight"
+        android:background="@color/grey_transparent">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:src="@drawable/icon_logo"/>
+
+        <ImageView
+            android:id="@+id/iv_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/iv_logo"
+            android:paddingRight="10dp"
+            android:src="@drawable/ic_wifi_green"
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/tv_meetingId"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/iv_wifi"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/ic_arrowdown"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/ib_hangup"
+            android:layout_toRightOf="@+id/tv_meetingId">
+
+            <Button
+                android:id="@+id/btn_end"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:text="@string/end"
+                android:textColor="@color/end_meeting_text"/>
+        </FrameLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_priticipant"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <ImageButton
+                android:id="@+id/ib_participants"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:padding="10dp"
+                android:src="@drawable/ic_participants"/>
+
+            <ImageView
+                android:id="@+id/ib_raisehand_tips"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/ib_participants"
+                android:src="@drawable/ic_raisehand_red"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/ib_translate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/rl_priticipant"
+            android:background="@null"
+            android:padding="10dp"
+            android:src="@drawable/ic_translate"/>
+
+        <ImageButton
+            android:id="@+id/ib_hangup"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/ib_translate"
+            android:background="@null"
+            android:padding="10dp"
+            android:src="@drawable/selector_raise_hand"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottomheight"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey_transparent"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ib_mic"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/selector_mic"/>
+
+        <ImageButton
+            android:id="@+id/ib_webcam"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/selector_webcam"
+            android:visibility="visible"/>
+
+
+        <!--<ImageButton-->
+        <!--android:id="@+id/ib_conference"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@null"-->
+        <!--android:src="@drawable/selector_conference"-->
+        <!--/>-->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/ib_conference"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:src="@drawable/icon_conference"
+                android:visibility="gone"/>
+
+            <ImageButton
+                android:id="@+id/ib_whiteboard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:src="@drawable/ic_whiteboard"/>
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/ib_chat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:src="@drawable/ic_chat"/>
+
+            <ImageView
+                android:id="@+id/iv_chat_tip"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_chat_tip"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/ib_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/ic_more"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_bottom"
+        android:layout_below="@id/rl_title"/>
+
+    <FrameLayout
+        android:id="@+id/container_all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"/>
+</RelativeLayout>

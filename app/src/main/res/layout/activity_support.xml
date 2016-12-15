@@ -1,0 +1,90 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:mContext=".activity.SupportActivity">
+
+    <include layout="@layout/header_text"/>
+
+    <LinearLayout
+        android:id="@+id/tvCamera"
+        style="@style/Support_Item_LinearLayout">
+
+        <ImageView
+            style="@style/Support_Item_ImageView"
+            android:src="@drawable/ic_camera_pm_on"/>
+
+        <TextView
+            style="@style/Support_TextView_Item"
+            android:text="@string/support_item_camera"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tvMicrophone"
+        style="@style/Support_Item_LinearLayout">
+
+        <ImageView
+            style="@style/Support_Item_ImageView"
+            android:src="@drawable/support_microphone"/>
+
+        <TextView
+            style="@style/Support_TextView_Item"
+            android:text="@string/support_item_microphone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tvConnection"
+        style="@style/Support_Item_LinearLayout">
+
+        <ImageView
+            style="@style/Support_Item_ImageView"
+            android:src="@drawable/support_connection"/>
+
+        <TextView
+            style="@style/Support_TextView_Item"
+            android:text="@string/support_item_connection"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tvBoard"
+        style="@style/Support_Item_LinearLayout">
+
+        <ImageView
+            style="@style/Support_Item_ImageView"
+            android:src="@drawable/ic_whiteboard_black"/>
+
+        <TextView
+            style="@style/Support_TextView_Item"
+            android:text="@string/support_item_board"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tvInvitation"
+        style="@style/Support_Item_LinearLayout">
+
+        <ImageView
+            style="@style/Support_Item_ImageView"
+            android:src="@drawable/support_invate"/>
+
+        <TextView
+            style="@style/Support_TextView_Item"
+            android:text="@string/support_item_invitation"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tvOthers"
+        style="@style/Support_Item_LinearLayout"
+        android:background="@drawable/white_bg_gray_bottom_border_layer">
+
+        <ImageView
+            style="@style/Support_Item_ImageView"
+            android:src="@drawable/support_other"/>
+
+        <TextView
+            style="@style/Support_TextView_Item"
+            android:text="@string/support_item_others"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cpiz.android.bubbleview.BubbleLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:mContext="com.meetingroom.activity.MoreSettingActivity"
+    android:orientation="vertical"
+    app:bb_fillColor = "@color/white"
+    app:bb_arrowDirection="Up"
+    app:bb_arrowOffset="680dp"
+    app:bb_arrowHeight = "10dp"
+    app:bb_arrowWidth = "10dp"
+    app:bb_cornerRadius = "10dp"
+    android:id="@+id/bubble"
+    >
+<com.meetingroom.view.HorizontalListView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/hlv">
+
+</com.meetingroom.view.HorizontalListView>
+    </com.cpiz.android.bubbleview.BubbleLinearLayout>

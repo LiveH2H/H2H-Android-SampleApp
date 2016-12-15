@@ -39,28 +39,28 @@ public class LoginActivity extends MeetingRoomBaseActivity {
         String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString().trim();
         String pwd = ((EditText) findViewById(R.id.pwdEditText)).getText().toString();
         if (email.length()>0 && pwd.length()>0){
+            showLoadingDialog();
             H2HHttpRequest.getInstance().loginH2H(email, pwd, new H2HCallback() {
                 @Override
-                public void onCompleted(Exception ex, H2HCallBackStatus status) {
-                    if (status == H2HCallBackStatus.H2HCallBackStatusOK){
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }else {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(LoginActivity.this,"Failed to Login",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                public void onCompleted(Exception ex, final H2HCallBackStatus status) {
+                    if (isFinishing()) {
+                        return;
                     }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dismissLoadingDialog();
+                            if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+                                showToast("Login Success");
+                            } else {
+                                showToast("Failed to Login");
+                            }
+                        }
+                    });
                 }
             });
         }else {
-            Toast.makeText(this,"Please fill all the blanks",Toast.LENGTH_SHORT).show();
+            showToast("Please fill all the blanks");
         }
     }
 }

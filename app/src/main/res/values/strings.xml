@@ -1,32 +1,614 @@
 <resources>
-    <string name="app_name">H2HSampleApp</string>
-    <string name="title_activity_chat">ChatActivity</string>
-    <string name="error">Error</string>
-    <string name="ok">OK</string>
-    <string name="loading_text">loading&#8230;</string>
-    <string name="crash">Sorry,the program appears unusual, about to exit.</string>
+    <string name="facebook_app_id">1760474947570602</string>
+    <string name="twitter_api_key">TUE2LAgL8zCZO0JAqKyFXffOA</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">H2HSampleApp</string>
+    <string name="login">LOGIN</string>
+    <string name="join_meeting">Join Meeting</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="password_login">Password</string>
+    <string name="send">SEND</string>
+    <string name="forgot_password_hint_title">Forgot Password</string>
+    <string name="forgot_password_hint">Enter your email address. You will receive a confirmation email with instruction to reset your password.</string>
+    <string name="forgot_password_success_hint">An email has been sent regarding instructions on resetting the password.</string>
+    <string name="forgot_success_hint_title">Email Sent</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="ok">OK</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="meeting_id">Meeting Id</string>
+    <string name="edittext_meeting_id_hint">Enter A Meeting ID to Join</string>
+    <string name="not_meeting_hints">You have not scheduled any meetings</string>
+    <string name="upcoming_meetings_normal">Current &amp; Upcoming Meetings</string>
+    <string name="email_cannot_be_empty">Email cannot be empty</string>
+    <string name="meeting_id_cannot_be_empty">Meeting id cannot be empty</string>
+    <string name="first_name_cannot_be_empty">First name cannot be empty</string>
+    <string name="last_name_cannot_be_empty">Last name cannot be empty</string>
+    <string name="email_format_error">Email format error</string>
+    <string name="passwords_do_not_match">Passwords do not match</string>
+    <string name="loading_text">loading&#8230;</string>
+    <string name="network_request_timeout">Network request timeout, please check the network settings</string>
+    <string name="parse_data_error">Parse data error</string>
+    <string name="server_response_value_error">Server response value error, the error code is %1$s</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="meeting_subjec">MEETING SUBJECT</string>
+    <string name="meeting_subjec_hints">Choose a subject</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="description_hints">Add a description</string>
+    <string name="add_attendees_email">Add Attendees Email</string>
+    <string name="add_attendees_email_normal">Add attendees email</string>
+    <string name="invite_attendees">INVITE ATTENDEES</string>
+    <string name="invite_live_translators">INVITE LIVE TRANSLATORS</string>
+    <string name="add_translators">Add Translators</string>
+    <string name="translator_email">TRANSLATOR EMAIL</string>
+    <string name="enter_translator_email">Enter translator email</string>
+    <string name="language">LANGUAGE</string>
+    <string name="select_language">Select Language</string>
+    <string name="please_select_language">Please select language</string>
+    <string name="meeting_type">MEETING TYPE</string>
+    <string name="meeting_type_normal">Meeting Type</string>
+    <string name="turn_on_meeting_recording">Turn on meeting recording</string>
+    <string name="select_server_location">Select server location</string>
+    <string name="date_text">DATE &amp; TIME</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="set_text">Set</string>
+    <string name="please_enter_your_meeting_subject">Please enter your meeting topic!</string>
+    <string name="yes">Yes</string>
+    <string name="please_fill_in_meeting_id">Please fill in meeting ID</string>
+    <string name="upcoming_meetings">Upcoming</string>
+    <string name="join_a_meeting">Join</string>
+    <string name="start_a_meeting">Start</string>
+    <string name="schedule_a_meeting">Schedule</string>
+    <string name="join">Join</string>
+    <string name="start">Start</string>
+    <string name="create">Create</string>
+    <string name="starts">Starts</string>
+    <string name="ends">Ends</string>
+    <string name="exit_meet_dialog_message">Do you want to disconnect the current session?</string>
+    <string name="create_meet_hint">Hint: If you have participants in China, please choose China server. If not, choose the server near your location</string>
+    <string name="password_cannot_be_empty">Password cannot be empty</string>
+    <string name="new_password_cannot_be_empty">New password cannot be empty</string>
+    <string name="password_verify">Your passwords are too short or too long (length: 5&#8211;20).</string>
+    <string name="end_time_before_start_time">The End Time is Before Start Time</string>
+    <string name="start_time_before_current_time">The Start Time is Before Current Time</string>
+    <string name="exit_application_hint">Tap on again to exit H2H Live</string>
+    <string name="default_server_location_name">Default</string>
+    <string name="delete">Delete</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="join_meeting_big">JOIN MEETING</string>
+    <string name="instant_meeting_big">INSTANT MEETING</string>
+    <string name="instant_metting">Instant Meeting</string>
+    <string name="your_name">Your Name</string>
+    <string name="input_email_bottom_label">enter your email for additional features such as recording the meeting, scheduling and more.</string>
+    <string name="meet_now_big">Meet Now</string>
+    <string name="email_address_optional">Email Address (Optional)</string>
+    <string name="name_cannot_be_empty">Name cannot be empty</string>
+    <string name="help">Help</string>
+    <string name="help_">HELP</string>
+    <string name="register">Register</string>
+    <string name="registered">Registered</string>
+    <string name="join_live_now">Join Live Now</string>
+    <string name="account_setting">Account Setting</string>
+    <string name="personal_info">Personal Info</string>
+    <string name="change_password">Change Password</string>
+    <string name="notifications">Notifications</string>
+    <string name="rate_h2h_meet">Rate H2H Meet</string>
+    <string name="feedback">Feedback</string>
+    <string name="photo">Photo</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="phone_to_bind">to bind</string>
+    <string name="album">Album</string>
+    <string name="camera">Camera</string>
+    <string name="default_photo">Default Photo</string>
+    <string name="submit">Submit</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="feedback_subject">Subject</string>
+    <string name="feedback_content_hint">Tap to provide feedback</string>
+    <string name="country_or_region">Country/Region</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="region">Region</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="meet">Meet</string>
+    <string name="share">Share</string>
+    <string name="learn">Learn</string>
+    <string name="Jobs">Jobs</string>
+    <string name="account_info_update_success_hint">Thank you, your profile has been updated.</string>
+    <string name="please_select_region">Please Select Country/Region</string>
+    <string name="phone_cannot_be_empty">Phone cannot be empty</string>
+    <string name="phone_number_cannot_be_empty">Phone number cannot be empty</string>
+    <string name="phone_number_format_error">Phone number format error</string>
+    <string name="amway_id_cannot_be_empty">Amway ID cannot be empty</string>
+    <string name="btn_rate_dialog_left_text">NOT NOW</string>
+    <string name="btn_rate_dialog_right_text">SUBMIT</string>
+    <string name="rate_h2h_meet_star_hint">Tap a Star to Rate</string>
+    <string name="rate_h2h_meet_edittext_hint">Leave a review (Optional)</string>
+    <string name="about">About</string>
+    <string name="about_content">LiveH2H is a video-conferencing platform which enables live human-to-human interactions from anywhere, using any devices connected to Internet.\n\n
+
+This platform can be used for a variety of reasons such as facilitating group meetings for collaboration, webinars, creating educational courses, or simply to engage any two persons for a purpose of a simple conversation.\n\n
+
+LiveH2H applications are built on top of the platform and serve different purposes. Some of the examples are:\n\n
+
+– H2H Meet: For 1-on-1 or group meetings\n
+– H2H Share: Share your content, knowledge with our global audience by hosting a LiveShare session.\n\n
+
+By providing additional modules such as live transcription, live translation and more, LiveH2H allows its users to go beyond traditional online learning.\n\n
+
+By using platform SDK and APIs, anyone can build applications with a video-conferencing component, without doing any coding or setting up infrastructure to support it. It is provided out-of-box, turn-key by the platform\n\n
+
+LiveH2H and its apps are free for individuals or companies to use.\n\n
+
+LiveH2H is brought to you by the team at iTutorGroup.\n\n
+
+iTutorGroup is the premier online education platform, and the largest English language learning institution in the world – thanks to its proprietary online education platform, which dynamically recommends the optimal course size, the best teacher and the right teaching material from more than 10,000 hours of existing course content. Its success is based on a database of user preferences and feedback, gathered from millions of classroom sessions over the last 10 years, coupled with analytical algorithms and predictive capabilities to optimize the relationship between teacher and student, and in real time.
+
+For more information, please visit www.itutorgroup.com.</string>
+    <string name="support">Live Support</string>
+    <string name="terms_of_use">Terms of Use</string>
+    <string name="resources">Resources</string>
+    <string name="more">More</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="instant">Instant</string>
+    <string name="schedule">Schedule</string>
+    <string name="meeting_topic">Meeting Topic</string>
+    <string name="meeting_agenda">Meeting Agenda</string>
+    <string name="save">Save</string>
+
+    <string name="date">DATE</string>
+    <string name="more_options">More option</string>
+    <string name="more_options_title">More Options</string>
+    <string name="enter_attendees_email">Enter attendees email</string>
+    <string name="are_you_or_the_attendees_from_china">Are you or the attendees from China?</string>
+    <string name="select_server_location_title">Hosting a global meeting?</string>
+    <string name="start_time">START TIME</string>
+    <string name="end_time">END TIME</string>
+    <string name="search_email_to_invite_hint">Search to type email to invite</string>
+    <string name="reading_contacts_format">Reading contacts : %1$d/%2$d</string>
+    <string name="invite">Invite</string>
+    <string name="type_email_to_invite">Type email to invite</string>
+    <string name="watched">Watched</string>
+    <string name="duration">Duration</string>
+    <string name="meeting_duration">%1$d Mins</string>
+    <string name="continue_big">CONTINUE</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_wechat">Continue with WeChat</string>
+    <string name="continue_with_email">Continue with your email</string>
+    <string name="continue_with_phone_number">Continue with phone number</string>
+    <string name="continue_with_amway_id">Continue Amway ID</string>
+    <string name="select_an_organization">Select an organization</string>
+    <string name="sign_up_using_your_email">Sign up using your email</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="invite_to_meet">Invite to Meet</string>
+    <string name="continue_with_linkedin">Continue with LinkedIn</string>
+    <string name="continue_with_twitter">Continue with Twitter</string>
+    <string name="start_big">START</string>
+    <string name="join_big">JOIN</string>
+    <string name="password_show">SHOW</string>
+    <string name="password_hide">HIDE</string>
+    <string name="add">Add</string>
+    <string name="contact_list_no_data_hint">You have denied LiveH2H access to your Contacts. To enable it go to device Settings > Privacy > Contacts and turn LiveH2H ON.</string>
+    <string name="check_your_email_hint_format">We sent an email to %1$s. Tap the link in that email to reset your password</string>
+    <string name="check_your_email">Check Your Email</string>
+    <string name="live_support">Live Support</string>
+
+    <string name="support_item_camera">Camera</string>
+    <string name="support_item_microphone">Microphone</string>
+    <string name="support_item_connection">Connection</string>
+    <string name="support_item_board">LiveBoard</string>
+    <string name="support_item_others">Others</string>
+    <string name="support_item_invitation">Invitation</string>
+    <string name="support_dialog_title">Live Support - %1$s</string>
+    <string name="support_dialog_hint">Quick select one of the following issues that you encountered</string>
+    <string name="support_dialog_btn_send">Send</string>
+
+    <string name="home_list_item_type_meet">Meet</string>
+
+    <string name="share_detail_date">%1$s %2$d Minutes</string>
+    <string name="share_detail_translated">Translated Live into: %1$s</string>
+
+    <string name="login_to_start_title">Are you the host of this meeting?</string>
+    <string name="login_to_start_hints">Enter your LiveH2H password to login and start the meeting.</string>
+    <string name="login_to_start_not_the_host">Not the host?</string>
+    <string name="login_to_start_btn_text">LOGIN TO START</string>
+
+    <string name="connection_failed_hint">Connection failed, please check the network Settings</string>
+    <string name="login_failed">Login failed</string>
+    <string name="install_wechat_hint">Please install WeChat first</string>
+    <string name="live_support_chat_edittext_hint">Tap here to chats</string>
+    <string name="friends_list_is_empty">Friends list is empty</string>
+
     <string name="conference">Conference</string>
     <string name="participants">Participants</string>
     <string name="chat">Chat</string>
-    <string name="send">Send</string>
     <string name="input_text">input text</string>
     <string name="msg_empty_tip">Message can\'t be empty</string>
-    <string name="meetingId_tip">MeetingId can\'t be empty</string>
-    <string name="displayName_tip">DisplayName can\'t be empty</string>
-    <string name="emailAddress_tip">Email Address can\'t be empty</string>
-    <string name="add">Add</string>
-    <string name="logout">Logout</string>
-    <string name="logout_tips">Do you want to logout?</string>
+    <string name="logout_tips">Do you want to exit this meeting?</string>
     <string name="new_message">New Message</string>
-    <string name="check_network_tip">Please check the network Settings</string>
     <string name="chat_me_left_tip">You left</string>
     <string name="chat_me_join_tip">You joined</string>
+    <string name="whiteboard">whiteboard</string>
+
+    <string name="view_course">VIEW COURSE</string>
+    <string name="meeting_host"><Data><![CDATA[<b>Host:</b> %1$s]]></Data></string>
+    <string name="learn_category"><Data><![CDATA[<b>Category:</b> %1$s]]></Data></string>
+    <string name="day_and_week"><Data><![CDATA[<font color="#222">%1$s</font><br><small><small>%2$s</small></small>]]></Data></string>
+    <string name="today">Today</string>
+    <string name="tip_offline">You are offline</string>
+    <string name="crash">Sorry,the program appears unusual, about to exit.</string>
+    <string name="forbit_permission">You don\'t have permission to toggle this user</string>
+    <string name="login_cancel">login cancel</string>
+
+    <string name="tip_join_conference">%1$s join meeting</string>
+    <string name="tip_leave_conference">%1$s leave meeting</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="edit_meeting">Edit Meeting</string>
+    <string name="add_to_calendar">Add to Calendar</string>
+
+    <string name="filter_dialog_title">Filter</string>
+    <string name="filter_dialog_item_favorites">Favorites</string>
+    <string name="filter_dialog_item_meet">H2H Meet</string>
+    <string name="filter_dialog_item_share">H2H Live Share</string>
+    <string name="filter_dialog_item_learn">H2H Learn</string>
+
+    <string name="request_google_play_service_hint">This app requires Google Play Services. Please install Google Play Services on your device and relaunch this app.</string>
+    <string name="request_get_google_accounts_hint">This app needs to access your Google account (via Contacts).</string>
+    <string name="no_network_connection_available">No network connection available.</string>
+    <string name="the_following_error_occurred">The following error occurred:\n%1$s</string>
+
+    <string name="unable_to_join_meeting_id">Unable to join Meeting</string>
+    <string name="title_activity_meeting_new_main">MeetingNewMainActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="end">End</string>
+    <string name="invite_participants">Invite Participants</string>
+    <string name="past_events">Past Events</string>
+    <string name="favorites">Favorites</string>
+
+    <string name="invite_contact_byEmail">Invite Contact by Email</string>
+    <string name="send_sms">Send SMS</string>
+    <string name="make_presenter">Make Presenter</string>
+    <string name="mute_audio">Mute Audio</string>
+    <string name="turnoff_video">Turn Off Video</string>
+    <string name="disable_audio">Disable Audio</string>
+    <string name="disable_video">Disable Video</string>
+    <string name="disable_liveboard_tool">Disable LiveBoard Tool</string>
+    <string name="remove_participant">Remove Participant</string>
+    <string name="live_transcript">Live Transcript</string>
+    <string name="allow_chat">Allow Chat</string>
+    <string name="allow_chat_overay">Allow Overay</string>
+    <string name="allow_raiseHand">Allow Raise Hand</string>
+    <string name="showTimer">Show Timer</string>
+    <string name="particiipant_settings">Participant Setting</string>
+    <string name="device_settings">Device Settings</string>
+    <string name="theme_colors">Theme Colors</string>
+    <string name="mins_left">%1$s Mins Left</string>
+    <string name="raise_hand">You Raise Hand</string>
+    <string name="settingmins">Mins…</string>
+    <string name="sure">Sure</string>
+    <string name="time_picker">TimePicker</string>
+    <string name="minute">Minute</string>
+    <string name="meeting_end">Meeting Ended</string>
+    <string name="know_feedback">Let us know your feedback</string>
+    <string name="rate_meeting">How was your meeting experience?</string>
+    <string name="thanks">Thank you</string>
+    <string name="liveh2h_information">This free meeting is provided by LiveH2H. For more information, go to &lt;u>&lt;a href="http://www.liveh2h.com/meet">www.LiveH2H/meet&lt;/a>&lt;/u>.</string>
+    <string name="share_info">Share the LiveTranscript in the meeting</string>
+    <string name="front_camera">Front Camera</string>
+    <string name="back_camera">Back Camera</string>
+    <string name="camera_stop">Stop</string>
+    <string name="wait_to_raisehand">Please wait to raise hand</string>
+    <string name="raise_hand_tips">%1$s raised hand</string>
+    <string name="title_activity_translate_setting">TranslateSettingActivity</string>
+    <string name="translate_default">Default (No Translator)</string>
+    <string name="translate_Japanese">Japanese</string>
+    <string name="about_day_left">%1$d day left</string>
+
+    <string name="review_jobs">REVIEW JOBS</string>
+    <string name="see_list">SEE LIST</string>
+    <string name="start_meeting">Start Meeting</string>
+    <string name="home_filter_all_events">All Events</string>
+    <string name="login_failed_friends_error_msg">This service is not available in your country</string>
+    <string name="wechat_not_installed_reminder">Wechat is not installed on your phone</string>
+
+    <string name="all_events">All Events</string>
+    <string name="participants_count">%1$d Participants</string>
+
+    <string name="filter_item_all">All</string>
+    <string name="filter_item_today">Today</string>
+    <string name="filter_item_week">This Week</string>
+    <string name="filter_item_month">This Month</string>
+    <string name="filter_item_event">Past Events</string>
+    <string name="meet_item_day_and_week"><Data><![CDATA[%1$s <small><small>%2$s</small></small>]]></Data></string>
+    <string name="watch">WATCH</string>
+    <string name="coming_soon">coming soon</string>
+    <string name="last_submission">Last Submission %1$s</string>
+    <string name="see_candidates">SEE CANDIDATES</string>
+    <string name="all_lists">All Lists</string>
+    <string name="candidates_count">%1$d Candidate</string>
+    <string name="open_positions">Open Positions</string>
+    <string name="drafts">Drafts</string>
+    <string name="all">All</string>
+    <string name="this_week">This Week</string>
+    <string name="this_month">This Month</string>
+    <string name="presenter_voice">switchPresenterVoice</string>
+    <string name="no_translator">No translator is in the room</string>
+    <string name="wifi_yellow_tips">Your connection is weak, you  may turn off your video</string>
+    <string name="wifi_red_tips">Your connection is weak, you  may turn off your video</string>
+    <string name="wifi_green_tips">Your connection is strong</string>
+    <string name="favorite_success">Added to Favorite</string>
+    <string name="favorite_cancel">Deleted to Favorite</string>
+    <string name="chatroom">Chatroom</string>
+    <string name="update">update</string>
+    <string name="update_meeting_time">Update Meeting Time</string>
+    <string name="update_success">update succcess</string>
+    <string name="add_to_calendar_success">Added to Calendar</string>
+    <string name="add_to_calendar_fail">Add to Calendar fail</string>
+
+
+    <string name="guide_meet_title">Collaborate with No Obstacles</string>
+    <string name="guide_meet_content">Enjoy features like LiveTranslators, LiveTransript, and LiveBoard to enhance meeting efficiencies.</string>
+    <string name="guide_share_title">Share Your Passion</string>
+    <string name="guide_share_content">Experience features like Live Q&#038;A and LiveTranslators to share with anyone around the world.</string>
+    <string name="guide_learn_title">Continue to Grow</string>
+    <string name="guide_learn_content">Have features such as Course &#038; User Management, Multi-Language Support, and Quizzes to Maximize performance.</string>
+    <string name="guide_jobs_title">Maximize Your Hiring</string>
+    <string name="guide_jobs_content">Utilize features like Collaborative Evaluation and Candidate Tracking to reach hiring efficiency.</string>
+
+    <string name="learn_duration">Duration: %1$d mins</string>
+    <string name="chat_not_allow">Not allow chat</string>
+    <string name="raisehand_not_allow">Not allow raisehand</string>
+    <string name="mandatory">Mandatory</string>
+    <string name="enrolled">Enrolled</string>
+    <string name="public_">Public</string>
+    <string name="completed">Completed</string>
+    <string name="classes_count">%1$d Classes</string>
+    <string name="my_courses">My Courses</string>
+    <string name="live_share">LiveShare</string>
+    <string name="nodataview_item_join">Join Meeting</string>
+    <string name="nodataview_item_instant">Instant Meeting</string>
+    <string name="nodataview_item_schedule">Schedule Meeting</string>
+    <string name="startup_series">Startup Series</string>
+    <string name="change_theme_color">Theme Color</string>
+    <string name="check_phone_hint">this is not a phone</string>
+    <string name="force_exit_tips">You have bean offline,please login again.</string>
+    <string name="copy_link">Copy Meeting Link</string>
+    <string name="bill_and_account_collectors">Bill and Account Collectors</string>
+    <string name="interview_questions">INTERVIEW QUESTIONS</string>
+    <string name="complete_feedback">Complete Feedback</string>
+    <string name="how_would_you_rate_this_candidate">How would you rate this candidate?</string>
+    <string name="enter_interview_question_hint">Enter interview question notes (Optional)</string>
+    <string name="host_left_the_meeting">Host Has Left the meeting</string>
+    <string name="left_room_the_meeting">Host disconnected you from the meeting.</string>
+    <string name="blocked_user_the_meeting">User is blocked.</string>
+    <string name="left_room_button">Exit the meeting</string>
+    <string name="warning">Warning</string>
+    <string name="submit_feedback">SUBMIT FEEDBACK</string>
+    <string name="video_not_found">video not found</string>
+    <string name="edit_candidate_feedback_hint">Summary Feedback (Required)</string>
+    <string name="strong_no">Strong No</string>
+    <string name="no">No</string>
+    <string name="maybe">Maybe</string>
+    <string name="strong_yes">Strong Yes</string>
+    <string name="finish_share"><![CDATA[Finish & Share]]></string>
+    <string name="finish_later">Finish Later</string>
+    <string name="feedback_for">Feedback for %1$s</string>
+    <string name="translators">Translators</string>
+    <string name="switch_host">Switch to Host</string>
+    <string name="tisp_language_select">Please select one translator</string>
+    <string name="language_default">Default (No Translator)</string>
+    <string name="see_detail">SEE DETAIL</string>
+    <string name="waiting_for_response">Waiting for response</string>
+    <string name="interviewing">Interviewing</string>
+    <string name="ready_for_review">Ready for review</string>
+    <string name="ready_and_suggestion">Ready and suggestion</string>
+    <string name="review_completed">Review completed</string>
+    <string name="complete">Complete</string>
+    <string name="unknown">unknown</string>
+    <string name="submission_succeeded">Submission Succeeded</string>
+    <string name="interview_feedback_suggestion_title">Did %1$s Pass the Interview?</string>
+
+    <string name="add_to_calendar_description">https://www.liveh2h.com/%1$s\nHost: %2$s</string>
+    <string name="optional">Optional</string>
+    <string name="job_position">Position:</string>
+    <string name="job_company">Company:</string>
+    <string name="job_description">Description:</string>
+    <string name="webinar_host_offline">Webinar host is offline</string>
+    <string name="token_invalid_hint">Token is invalid, please login again</string>
+    <string name="jobs_count">%d Jobs</string>
+    <string name="poll">Poll</string>
+    <string name="next_question">Next</string>
+    <string name="poll_answer_unfinished">Please fill all the questionses</string>
+    <string name="submit_message">Do you want to submit?</string>
+    <string name="no_candidates_hint">No candidates are assigned to you</string>
+    <string name="hire_your_best_candidates">Hire your best candidates</string>
+    <string name="hire_your_best_candidates_content">Quickly and efficiently scan \nthe best candidates interview video</string>
+    <string name="about_h2h_jobs">About H2H Jobs</string>
+    <string name="about_h2h_jobs_hint">H2H Jobs is an Applicant Tracking System (ATS) and video interviewing platform that makes it easier for companies to find the best talent and streamline the hiring process.</string>
+    <string name="create_an_organization">Create an Organization</string>
+    <string name="deadline">Deadline</string>
+    <string name="start_poll_tips">Host would like you to take a poll\n%1$s</string>
+    <string name="close_poll_tips">Are you sure to close the poll?</string>
+
+    <string name="free_sign_up">FREE SIGN UP</string>
+    <string name="amway_id">Amway ID</string>
+    <string name="powered_by_liveh2h">Powered by LiveH2H</string>
+    <string name="external_id">External ID</string>
+    <string name="poll_result">Poll Result</string>
+    <string name="poll_title">Title</string>
+    <string name="election_result">Election Results</string>
+
+    <string name="open_in_browser_hint">Do you want to open in browser ?</string>
+    <string name="confirm">Confirm</string>
+
+    <string name="email_templates_meeting_subject">%1$s has shared this meeting with you.</string>
+    <string name="email_templates_meeting_content">Hi there,\n\n%1$s has shared this meeting with you. Please check out the %2$s.\n\nMeeting Subject: %3$s\nMeeting ID: %4$s\nStart: %5$s\nEnd: %6$s\n\nOnline meetings with LiveH2H is easy and free: Start an instant presentation, perform a live demo, collaborate with colleagues on LiveBoard, get a live translator, and many more.\n\nSincerely,\nThe LiveH2H Team\n\nExplore LiveH2H products: H2H Meet, H2H Share, H2H Learn, H2H Jobs</string>
+
+    <string name="email_templates_share_subject">%1$s has shared this LiveShare with you.</string>
+    <string name="email_templates_share_content">Hi there,\n\n%1$s has shared this LiveShare with you. Please check out the %2$s.\n\nSession Topic: %3$s\nSession summary: %4$s\nStart: %5$s\nEnd: %6$s\n\nSincerely,\nThe LiveH2H Team\n\nExplore LiveH2H products: H2H Meet, H2H Share, H2H Learn, H2H Jobs</string>
+
+    <string name="email_templates_share_subject_no_login">LiveShare</string>
+    <string name="email_templates_share_content_no_login">Hi there,\n\nPlease check out the %1$s.\n\nSession Topic: %2$s\nSession summary: %3$s\nStart: %4$s\nEnd: %5$s\n\nSincerely,\nThe LiveH2H Team\n\nExplore LiveH2H products: H2H Meet, H2H Share, H2H Learn, H2H Jobs</string>
+
+    <string name="email_templates_jobs_subject">%1$s has shared this job position with you.</string>
+    <string name="email_templates_jobs_content">Hi there,\n\n%1$s has shared this job position with you. Please check out the %2$s.\n\nSincerely,\nThe LiveH2H Team\n\nExplore LiveH2H products: H2H Meet, H2H Share, H2H Learn, H2H Jobs</string>
+
+
+    <string name="confirm_password_verify">The confirm password don\'t match</string>
+    <string name="send_a_verification_code_hint">We will send a verification code to your phone</string>
+    <string name="get_verification_code">Get verification code</string>
+    <string name="seconds">%d s</string>
+    <string name="verification_code_cannot_be_empty">Verification code cannot be empty</string>
+    <string name="passcode">Passcode</string>
+    <string name="user_has_already_signup">User has already signup</string>
+    <string name="phone_confirmation_code_has_been_sent">Phone confirmation code has been sent</string>
+    <string name="passcode_cannot_be_empty">passcode cannot be empty</string>
+    <string name="the_meeting_password_does_not_match">The meeting password does not match</string>
+    <string name="search_participant">Search for Participants</string>
+    <string name="polling_ends">Polling ends</string>
+    <string name="invalid_phone_confirmation_code">Invalid phone confirmation code</string>
+    <string name="username_or_password_error">Username or password error</string>
+    <string name="default_area_code" translatable="false">+86</string>
+
+    <string name="share_title">Share</string>
+    <string name="meeting_room_share_subject">Please join LiveH2H meeting in progress</string>
+    <string name="meeting_room_share_content">Meeting ID:%1$s\n\nJoin from PC,Mac,Linux,iOS or Android:%2$s/meet/login?join=%3$s\n\nThank You!\n\n</string>
+
+    <string name="take_attendance">Take Attendance\n%1$s</string>
+    <string name="take_attendance_btn">OK</string>
+    <string name="employee_id_not_exist">Employee id not exist</string>
+    <string name="sign_up_using_your_phone">Sign up using your phone</string>
+    <string name="already_over">already over</string>
+    <string name="open_my_video">Open My Video</string>
+    <string name="stop_my_video">Stop My Video</string>
+
+    <string name="meeting_not_found">Meeting not found</string>
+    <string name="meeting_is_passed">Meeting is passed</string>
+    <string name="you_are_not_invited">You are not invited</string>
+    <string name="you_do_not_belong_same_company">You doesn\'t belong to the same company</string>
+    <string name="you_do_not_belong_a_company">You doesn\'t belong to a company</string>
+    <string name="you_do_not_provide_valid_password">You didn\'t provide valid password.</string>
+    <string name="phone_format_error">Phone format error</string>
+    <string name="phone_was_used_already">Phone was used already</string>
+    <string name="fail_to_send_phone_confirmation_code">Fail to send phone confirmation code</string>
+    <string name="error_when_search_user_by_phone">Error when search user by phone</string>
+    <string name="phone_confirmation_code_is_expired">Phone confirmation code is expired</string>
+
+    <string name="request_get_contacts_hint">This app needs access to your contacts.</string>
+    <string name="request_camera_hint">This app needs access to your camera so you can take pictures.</string>
+    <string name="rationale_ask_again">This app may not work correctly without the requested permissions. Open the app settings screen to modify app permissions.</string>
+    <string name="title_settings_dialog">Permissions Required</string>
+    <string name="setting">Settings</string>
+    <string name="rationale_camera_audio">This app needs access to your camera , audio and contact to support meeting.</string>
+    <string name="user_not_found">User not found</string>
+    <string name="failed_to_update_user">Failed to update user</string>
+    <string name="enter_live_share_password_hint">Enter a Live Share password if needed</string>
+    <string name="meeting_passowrd">Meeting Password</string>
+    <string name="failed_to_request_signup">Failed to request signup</string>
+    <string name="host_join_from_web_hint">You are this Share\'s host, please join the meeting from web</string>
+    <string name="internal_error">Internal error</string>
+    <string name="start_time_format">MMM dd yyyy, hh:mm a</string>
+    <string name="end_time_format">hh:mm a zz</string>
+    <string name="share_detail_date_format">EEE, MMM dd yyyy hh:mm a zz</string>
+    <string name="login_expired">Login has expired</string>
+    <string name="group">group</string>
+    <string name="customer_service">customer service</string>
+
+    <string name="live_share_title">LiveShare Title</string>
+    <string name="live_share_type">LiveShare Type</string>
+    <string name="time_zone">Time Zone</string>
+    <string name="email_address">Email address</string>
+    <string name="create_liveshare">Create LiveShare</string>
+    <string name="please_enter_your_share_subject">Please enter your liveshare topic!</string>
+    <string name="speaker_email">Speaker Email</string>
+    <string name="access">Access</string>
+    <string name="speaker_title">Speaker Title</string>
+    <string name="speaker_biography">Speaker Biography</string>
+    <string name="language_setting">Language Setting</string>
+    <string name="maximum_number_of_attendees">Maximum number of attendees</string>
+    <string name="please_enter_passcode">Please enter passcode</string>
+    <string name="passcode_length_too_short_hint">Passcode length cannot be less than 4</string>
+    <string name="create_fail">Create fail</string>
+    <string name="create_success">Create successfully</string>
+
+    <string name="support_request_title_submit">Submit Support Request</string>
+    <string name="support_request_title">Support Request(Meeting ID: %1$s)</string>
+    <string name="support_request_reason">Reason*</string>
+    <string name="support_request_reason_volume_too_high">Volume too high</string>
+    <string name="support_request_reason_volume_too_low">Volume too low</string>
+    <string name="support_request_reason_echo">Echo</string>
+    <string name="support_request_reason_materials">Materials</string>
+    <string name="support_request_reason_delay">Delay</string>
+    <string name="support_request_reason_whiteboard">Whiteboard</string>
+    <string name="support_request_reason_no_video">No Video</string>
+    <string name="support_request_reason_noise">Noise</string>
+    <string name="support_request_reason_no_sound">No Sound</string>
+    <string name="support_request_reason_other">Other</string>
+    <string name="support_request_comments">Comments</string>
+    <string name="support_request_best_reach">Best way to reach you</string>
+    <string name="support_request_wechat">WeChat</string>
+    <string name="support_request_wechat_input_hint">WeChat ID</string>
+    <string name="support_request_phone">Phone</string>
+    <string name="support_request_phone_input_hint">Enter your phone number</string>
+    <string name="support_request_submitted_by">Submitted By: %1$s</string>
+    <string name="support_request_version">Version: %1$s(build %2$d)</string>
+    <string name="support_request_submit_fail">submit fail</string>
+    <string name="support_request_reason_check">Please select at least one reason</string>
+
+    <string name="support_request_reason_value_volume_too_high" translatable="false">Volume too high</string>
+    <string name="support_request_reason_value_volume_too_low" translatable="false">Volume too low</string>
+    <string name="support_request_reason_value_echo" translatable="false">Echo</string>
+    <string name="support_request_reason_value_materials" translatable="false">Materials</string>
+    <string name="support_request_reason_value_delay" translatable="false">Delay</string>
+    <string name="support_request_reason_value_whiteboard" translatable="false">Whiteboard</string>
+    <string name="support_request_reason_value_no_video" translatable="false">No Video</string>
+    <string name="support_request_reason_value_noise" translatable="false">Noise</string>
+    <string name="support_request_reason_value_no_sound" translatable="false">No Sound</string>
+    <string name="support_request_reason_value_other" translatable="false">Other</string>
+    <string name="endline_tips">Refresh to see the latest result</string>
+    <string name="submit_request_success">Your request is submitted</string>
+
+    <string name="pick_image_intent_chooser_title">Select source</string>
+    <string name="duplicate_user">Someone else used your credential to join the meeting. You are forced to logout.</string>
+    <string name="error">error</string>
+	<string name="live">live</string>
+
+    <string name="mr_nav_participant">participant</string>
+    <string name="mr_nav_raise_hand">Raise Hand</string>
+    <string name="mr_nav_chat">Chat</string>
+    <string name="mr_nav_video">Video</string>
+    <string name="mr_nav_whiteboard">Whiteboard</string>
+    <string name="mr_nav_microphone">Microphone</string>
+    <string name="mr_nav_other">Other</string>
+    <string name="tip_request_audio">The host asks to turn on your audio</string>
+    <string name="disagree">Disagree</string>
+    <string name="agree">Agree</string>
+    <string name="no_permission_mic">Do not have permission to control</string>
+    <string name="chat_sendTo">send to:</string>
+
+    <string name="crop_image_menu_crop">Crop</string>
+
+    <string name="share_meeting_link">Share Meeting Link</string>
+    <string name="error_hint_meeting_has_ended">Meeting has ended</string>
+    <string name="wait_host">Waiting for the host&#8230;</string>
+    <string name="poll_not_result">没有参会者参与此项投票</string>
+
+    <string name="title_activity_schedule_meeting">ScheduleMeetingActivity</string>
     <string name="hint_meeingId">9 Digit Meeting ID</string>
     <string name="hint_displayName">Display Name</string>
     <string name="hint_emailAddress">Email Address</string>
-    <string name="whiteboard">whiteboard</string>
-    <string name="title_activity_schedule_meeting">ScheduleMeetingActivity</string>
+    <string name="meetingId_tip">MeetingId can\'t be empty</string>
+    <string name="displayName_tip">DisplayName can\'t be empty</string>
+    <string name="emailAddress_tip">Email Address can\'t be empty</string>
+    <string name="logout">Logout</string>
+    <string name="check_network_tip">Please check the network Settings</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

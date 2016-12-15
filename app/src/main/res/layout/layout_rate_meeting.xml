@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_black_transparent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/standard_padding_large">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_margin_default"
+                android:gravity="center"
+                android:text="@string/meeting_end"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_very_large"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_margin="@dimen/standard_margin_medium"
+                android:background="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/know_feedback"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/rate_meeting"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/rating_bar_default"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/standard_margin_large" />
+
+            <TextView
+                android:id="@+id/tv_thanks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/standard_margin_large"
+                android:drawableLeft="@drawable/ic_check_green"
+                android:drawablePadding="@dimen/standard_padding_medium"
+                android:gravity="center"
+                android:text="@string/thanks"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_large"
+                android:visibility="gone">
+
+            </TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_margin="@dimen/standard_margin_medium"
+                android:background="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/standard_margin_default"
+                android:layout_marginRight="@dimen/standard_margin_default"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_liveh2h_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/standard_margin_default"
+                    android:gravity="center"
+                    android:text="@string/liveh2h_information"
+                    android:linksClickable="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_default" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tv_share_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/standard_margin_default"
+                    android:layout_marginTop="20dp"
+                    android:drawableLeft="@drawable/ic_share_white"
+                    android:drawablePadding="10dp"
+                    android:text="@string/share_info"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_default" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/standard_padding_double"
+        android:src="@drawable/icon_close" />
+
+</FrameLayout>

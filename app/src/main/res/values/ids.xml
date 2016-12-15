@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="home" type="id">id</item>
+    <item name="meet" type="id">id</item>
+    <item name="share" type="id">id</item>
+    <item name="learn" type="id">id</item>
+</resources>

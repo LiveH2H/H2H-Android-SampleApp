@@ -1,23 +1,87 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ParticipantsFragment"
-    android:background="@color/black"
+    android:background="@color/white"
     android:orientation="vertical">
+
     <RelativeLayout
-        android:background="@color/colorTitlebar"
+        android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/titleheight">
+        android:layout_height="@dimen/titleheight"
+        android:background="@color/grey_transparent">
+
+        <include
+            layout="@layout/layout_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/participants"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
 
     </RelativeLayout>
     <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:id="@+id/ll_invite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/btn_bg_grey"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_invite"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/invite_participants"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_d"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_copy_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/btn_bg_grey"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/copy_link"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_d"
+        android:visibility="gone"/>
+
     <ListView
         android:id="@+id/iv_participants"
         style="@style/listviewstyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@drawable/inset_divider_partipicant"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp"/>
 
 </LinearLayout>

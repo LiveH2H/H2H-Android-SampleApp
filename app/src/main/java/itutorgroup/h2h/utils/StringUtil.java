@@ -25,17 +25,18 @@ public class StringUtil {
 		return sb.toString();
 	}
 	public static String formatMeetingId(String reverseStr) {
-		String resultStr = "";
-		for (int i = 0; i < reverseStr.length(); i++) {
-			if (i * 3 + 3 > reverseStr.length()) {
-				resultStr += reverseStr.substring(i * 3, reverseStr.length());
-				break;
-			}
-			resultStr += reverseStr.substring(i * 3, i * 3 + 3) + "-";
-		}
-		if (resultStr.endsWith("-")) {
-			resultStr = resultStr.substring(0, resultStr.length() - 1);
-		}
-		return resultStr;
+        String resultStr = "";
+        if (reverseStr == null) return resultStr;
+        for (int i = 0; i < reverseStr.length(); i++) {
+            if (i * 3 + 3 > reverseStr.length()) {
+                resultStr += reverseStr.substring(i * 3, reverseStr.length());
+                break;
+            }
+            resultStr += reverseStr.substring(i * 3, i * 3 + 3) + "-";
+        }
+        if (resultStr.endsWith("-")) {
+            resultStr = resultStr.substring(0, resultStr.length() - 1);
+        }
+        return resultStr;
 	}
 }

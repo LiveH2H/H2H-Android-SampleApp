@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/candidate_window_bg"
+        android:orientation="vertical">
+
+        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+            android:id="@+id/player"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/standard_margin_small"
+            android:layout_marginLeft="@dimen/standard_margin_default"
+            android:layout_marginRight="@dimen/standard_margin_default"
+            android:layout_marginTop="@dimen/standard_margin_small"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/standard_padding_default">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/how_would_you_rate_this_candidate"
+                android:textColor="@color/default_text"
+                android:textSize="@dimen/text_size_default" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/standard_margin_default"
+                android:maxHeight="20dp"
+                android:minHeight="20dp"
+                android:numStars="5"
+                android:progressDrawable="@drawable/ratingbar_feedback_star_blue"
+                android:rating="0"
+                android:stepSize="1" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/feedbackEditIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="@dimen/standard_padding_small"
+                    android:src="@drawable/feedback_pen" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/feedbackEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_margin_small"
+        android:background="@drawable/bg_gray_line_transparent_content"
+        android:gravity="top"
+        android:hint="@string/enter_interview_question_hint"
+        android:inputType="textMultiLine"
+        android:lines="3"
+        android:padding="@dimen/standard_padding_small"
+        android:textSize="@dimen/text_size_default" />
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,38 +22,45 @@
                 android:id="@+id/subjectEditText"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:hint="Enter Meeting Subject" />
+                android:hint="Enter Meeting Subject"/>
 
             <EditText
                 android:id="@+id/descriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:hint="Enter Meeting Description" />
+                android:hint="Enter Meeting Description"/>
 
             <TextView
                 android:id="@+id/attendeeTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Invite a list of Attendees" />
+                android:text="Invite a list of Attendees"/>
 
             <EditText
                 android:id="@+id/attendeesEditText"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:hint="emails, separated by comma" />
+                android:hint="emails, separated by comma"/>
 
 
             <TextView
                 android:id="@+id/translatorTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Invite a list of live Translators" />
+                android:text="Invite a list of live Translators"/>
 
-            <EditText
-                android:id="@+id/translatorEditText"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:hint="emails, separated by comma" />
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/translatorEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:hint="Input example: a@vipabc.com:zh, b@vipabc.com:en"/>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,15 +71,15 @@
                     android:id="@+id/meetingTypeTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Select Meeting Type" />
+                    android:text="Select Meeting Type"/>
 
                 <ToggleButton
                     android:id="@+id/meetingTypeToggle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:textOff="LiveShare"
-                    android:textOn="GroupMeeting" />
+                    android:textOff="Webinar"
+                    android:textOn="GroupMeeting"/>
             </LinearLayout>
 
             <LinearLayout
@@ -83,29 +91,60 @@
                     android:id="@+id/recordingTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recording" />
+                    android:text="Recording"/>
 
                 <ToggleButton
                     android:id="@+id/recordToggle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false" />
+                    android:checked="false"/>
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Starting Time:" />
+                android:text="Starting Time:"/>
 
-            <DatePicker
-                android:id="@+id/datePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TimePicker
-                android:id="@+id/timePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                <Button
+                    android:id="@+id/btnStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="startDateClicked"
+                    android:text="2016-12-15"/>
+
+                <Button
+                    android:id="@+id/btnStartTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="startTimeClicked"
+                    android:text="10:00"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Duration:"/>
+
+                <Button
+                    android:id="@+id/btnDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="durationClicked"
+                    android:text="30"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="minute"/>
+            </LinearLayout>
 
             <Button
                 android:layout_width="match_parent"
@@ -117,7 +156,7 @@
                 android:background="#e85e30"
                 android:onClick="scheduleMeetingClicked"
                 android:text="Schedule Meeting"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"/>
         </LinearLayout>
     </ScrollView>
 

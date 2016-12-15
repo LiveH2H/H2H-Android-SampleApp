@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/cyan"/>
+        </shape>
+    </item>
+    <item android:bottom="@dimen/dashboard_item_expandable_layout_top_shadow">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="#50585656"
+                android:endColor="@android:color/transparent"/>
+        </shape>
+    </item>
+</layer-list>

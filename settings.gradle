@@ -1,1 +1,1 @@
-include ':app', ':ui', ':utils'
+include ':app', ':ui', ':utils', ':litepal', ':MPChartLib', ':library', ':jcvideoplayer-lib'

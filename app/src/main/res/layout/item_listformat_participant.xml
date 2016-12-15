@@ -5,13 +5,24 @@
     android:gravity="center_vertical"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    android:descendantFocusability="blocksDescendants">
-<TextView
+    android:descendantFocusability="blocksDescendants"
+    >
+    <ImageView
+        android:visibility="visible"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/iv_raise_hand"
+        android:src="@drawable/ic_raisehand_red"
+        android:layout_width="@dimen/tabheight"
+        android:layout_height="@dimen/tabheight" />
+<com.meetingroom.view.MarqueeTextView
+    android:singleLine="true"
+    android:maxEms="10"
+    android:layout_toRightOf="@+id/iv_raise_hand"
     android:id="@+id/tv_name"
     android:textSize="18sp"
-    android:textColor="@color/white"
+    android:textColor="@color/black"
     android:layout_marginLeft="20dp"
-    android:text="test member"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
     <ImageView
@@ -34,7 +45,7 @@
         android:layout_toLeftOf="@+id/iv_audio"
         android:id="@+id/iv_whiteboard"
         android:layout_marginRight="20dp"
-        android:src="@drawable/icon_whiteboard"
+        android:src="@drawable/selector_operate_whiteboard"
         android:layout_width="@dimen/tabheight"
         android:layout_height="@dimen/tabheight" />
 </RelativeLayout>

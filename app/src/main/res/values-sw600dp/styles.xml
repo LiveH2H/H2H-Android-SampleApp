@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="LinearLayout.InputLayout" parent="LinearLayout.InputLayout.Base">
+        <item name="android:layout_width">360dp</item>
+    </style>
+
+    <style name="FloatingActionMenu" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom|right</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginBottom">@dimen/standard_margin_default</item>
+        <item name="android:layout_marginRight">@dimen/standard_margin_small</item>
+    </style>
+
+    <style name="RelativeLayout.PersonHeader" parent="Base">
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:background">@drawable/ic_header_bg</item>
+        <item name="android:paddingLeft">@dimen/standard_padding_double</item>
+        <item name="android:paddingRight">@dimen/standard_padding_double</item>
+        <item name="android:paddingBottom">@dimen/standard_padding_default</item>
+        <item name="android:paddingTop">@dimen/standard_padding_default</item>
+    </style>
+
+    <style name="TextView.PersonHeader.MeetingIcon" parent="Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/standard_padding_default</item>
+        <item name="android:layout_marginRight">@dimen/standard_margin_large</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_mini</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/header"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/actionbar_size"
+    android:background="@drawable/white_bg_gray_bottom_border_layer">
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="100dp"
+        android:gravity="center"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:drawableLeft="@drawable/back_arrow"
+        android:drawablePadding="@dimen/standard_padding_small"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/default_text"
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold"
+        tools:text="@string/app_name"/>
+
+    <TextView
+        android:id="@+id/header_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:adjustViewBounds="true"
+        android:gravity="center"
+        android:paddingLeft="@dimen/standard_padding_default"
+        android:paddingRight="@dimen/standard_padding_default"
+        android:textColor="@color/btn_login_bg"
+        android:textSize="@dimen/text_size_default"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="@string/invite"/>
+
+</RelativeLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseActivityDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item> <!-- 点击空白处是否消失 -->
+        <!-- 兼容JCVideoPlayer Dialog Theme 下 fullscreen 效果 -->
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AccountSettingTheme" parent="BaseActivityDialogTheme">
+        <item name="android:windowBackground">@drawable/window_bg_account_setting_shape</item>
+    </style>
+
+    <style name="FilterTheme" parent="BaseActivityDialogTheme">
+        <item name="android:windowBackground">@drawable/window_bg_filter_shape</item>
+    </style>
+
+    <style name="InviteContactTheme" parent="BaseActivityDialogTheme">
+        <item name="android:windowBackground">@drawable/window_bg_filter_shape</item>
+    </style>
+    <style name="PollTheme" parent="BaseActivityDialogTheme">
+        <item name="android:windowBackground">@drawable/window_bg_filter_shape</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+    <style name="DashboardTheme" parent="AppTheme">
+        <item name="status_bar_bg">@android:color/black</item>
+        <item name="android:windowBackground">@drawable/bg_dashboard</item>
+    </style>
+    <style name="LoginPreviewTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_dashboard</item>
+        <item name="status_bar_bg">@android:color/transparent</item>
+    </style>
+    <style name="ChangeColorTheme" parent="BaseActivityDialogTheme">
+        <item name="android:windowBackground">@drawable/window_bg_account_setting_shape</item>
+    </style>
+    <style name="CandidateTheme" parent="BaseActivityDialogTheme">
+        <item name="android:windowBackground">@drawable/window_bg_account_setting_shape</item>
+    </style>
+</resources>

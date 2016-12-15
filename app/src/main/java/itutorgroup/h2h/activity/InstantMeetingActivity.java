@@ -96,7 +96,7 @@ public class InstantMeetingActivity extends MeetingRoomBaseActivity {
     private void launchMeeting(String origin,String serverURL, final String userToken) {
 
         final H2HModel model = H2HModel.getInstance();
-        model.getLaunchParameters(origin, serverURL, userToken, new H2HCallback() {
+        model.getLaunchParameters(origin, serverURL, userToken, this, new H2HCallback() {
             @Override
             public void onCompleted(Exception ex, H2HCallBackStatus status) {
                 if (status == H2HCallBackStatus.H2HCallBackStatusOK) {

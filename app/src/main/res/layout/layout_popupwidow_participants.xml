@@ -1,0 +1,113 @@
+<com.cpiz.android.bubbleview.BubbleFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:bb_arrowDirection="Up"
+    app:bb_arrowHeight="10dp"
+    app:bb_arrowOffset="280dp"
+    app:bb_arrowWidth="10dp"
+    app:bb_cornerRadius="10dp"
+    app:bb_fillColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <!-- TODO: Update blank fragment layout -->
+        <!--<RelativeLayout-->
+        <!--android:visibility="visible"-->
+        <!--android:id="@+id/rl_invite"-->
+        <!--android:background="@color/btn_bg_grey"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:textSize="18sp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/invite_participants"/>-->
+        <!--<ImageView-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:src="@drawable/ic_invite"/>-->
+        <!--</RelativeLayout>-->
+        <LinearLayout
+            android:id="@+id/ll_invite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/btn_bg_grey"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_invite"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/invite_participants"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_d"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_copy_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/btn_bg_grey"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/copy_link"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_d"
+            android:visibility="gone"/>
+
+        <ListView
+            android:id="@+id/iv_participants"
+            style="@style/listviewstyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@drawable/inset_divider_partipicant"
+            android:dividerHeight="1dp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_black_transparent"
+        android:gravity="bottom"
+        android:visibility="gone">
+
+    </RelativeLayout>
+</com.cpiz.android.bubbleview.BubbleFrameLayout>
