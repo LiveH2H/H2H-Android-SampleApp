@@ -136,9 +136,6 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
 
     private ArrayList<Poll> polls = new ArrayList<>();
     private ArrayList<Poll> waitPolls = new ArrayList<>();
-//    private Timer timer;
-//    long dTime;
-//    long cTime;
     private int tempIndex = -1;
     private static final int PERMISSION_BOTH = 2000;
     private boolean isShowWhiteboardLocatingPoll;
@@ -298,9 +295,6 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
         if (presenceCheckDialog != null) {
             presenceCheckDialog.dismiss();
         }
-//        if (timer != null) {
-//            timer.cancel();
-//        }
     }
 
     @Override
@@ -335,7 +329,6 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                 languageCode = data.getStringExtra(MeetingConstants.languageCode);
             } else if (data.hasExtra(MeetingConstants.tempIndex)) {
                 tempIndex = data.getIntExtra(MeetingConstants.tempIndex, -1);
-//                checkTempIndex(true);
             }
         } else if (requestCode == PERMISSION_BOTH) {
             requestPermission();
