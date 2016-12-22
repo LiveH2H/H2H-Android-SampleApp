@@ -1,3 +1,24 @@
+
+
+Step 1.
+
+  Download Android Studio and SDK Tools | Android Studio
+
+Step 2.
+
+  Copy the following code into your app level build.gradle file, under dependencies:
+
+
+	compile 'com.liveh2h:h2h-video-conference:1+'
+	compile 'io.pristine:libjingle:9694@aar'
+	compile 'com.koushikdutta.async:androidasync:2.+'
+Step 3.
+
+   See how you can use LiveH2H on Android:
+
+	Follow along with these detailed guides to learn set up your environment and start using H2H concepts.
+
+
 H2H Sample Android App uses H2H SDK
 ===
 
