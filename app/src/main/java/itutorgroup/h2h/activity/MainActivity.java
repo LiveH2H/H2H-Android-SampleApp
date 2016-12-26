@@ -55,7 +55,7 @@ public class MainActivity extends MeetingRoomBaseActivity {
     }
 
     public void scheduleBtnClicked(View view) {
-        if (!H2HUserManager.getInstance().didLogin()) {
+        if (!H2HUserManager.getInstance().isLogin()) {
             showToast("You need to login first");
         } else {
             startActivity(new Intent(this, ScheduleMeetingActivity.class));

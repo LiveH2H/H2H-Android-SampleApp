@@ -65,21 +65,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/meetingTypeTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Select Meeting Type"/>
+                    android:text="Select Meeting Type: "/>
 
-                <ToggleButton
-                    android:id="@+id/meetingTypeToggle"
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/meetingTypeSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:textOff="Webinar"
-                    android:textOn="GroupMeeting"/>
+                    android:spinnerMode="dropdown"/>
             </LinearLayout>
 
             <LinearLayout

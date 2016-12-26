@@ -6,9 +6,12 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatSpinner;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,6 +31,7 @@ import itutorgroup.h2h.R;
 public class ScheduleMeetingActivity extends MeetingRoomBaseActivity {
     private static final String[] DURATION_ARRAY = {"30", "60", "90", "120", "180", "240"};
     Button btnStartDate, btnStartTime, btnDuration;
+    AppCompatSpinner meetingTypeSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,20 @@ public class ScheduleMeetingActivity extends MeetingRoomBaseActivity {
         btnStartTime.setTag(new int[]{c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE)});
 
         btnDuration.setText(DURATION_ARRAY[1]);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.meeting_type_names));
+        meetingTypeSpinner.setAdapter(adapter);
+        meetingTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.i(TAG, "onItemSelected() " + getMeetingType());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -57,6 +75,7 @@ public class ScheduleMeetingActivity extends MeetingRoomBaseActivity {
         btnStartDate = (Button) findViewById(R.id.btnStartDate);
         btnStartTime = (Button) findViewById(R.id.btnStartTime);
         btnDuration = (Button) findViewById(R.id.btnDuration);
+        meetingTypeSpinner = (AppCompatSpinner) findViewById(R.id.meetingTypeSpinner);
     }
 
     @Override
@@ -132,8 +151,7 @@ public class ScheduleMeetingActivity extends MeetingRoomBaseActivity {
             param.emailList = Arrays.asList(attendees);
         }
 
-        boolean isGroupMeeting = ((ToggleButton) findViewById(R.id.meetingTypeToggle)).isChecked();
-        param.meetingType = isGroupMeeting ? H2HScheduleMeetingParamEntity.MEETING_TYPE_GROUP_MEETING : H2HScheduleMeetingParamEntity.MEETING_TYPE_LIVE_SHARE;
+        param.meetingType = getMeetingType();
 
         param.recordMeeting = ((ToggleButton) findViewById(R.id.recordToggle)).isChecked();
 
@@ -185,5 +203,16 @@ public class ScheduleMeetingActivity extends MeetingRoomBaseActivity {
                 });
             }
         });
+    }
+
+    private int getMeetingType() {
+        switch (meetingTypeSpinner.getSelectedItemPosition()) {
+            case 0:
+                return H2HScheduleMeetingParamEntity.MEETING_TYPE_GROUP_MEETING;
+            case 1:
+                return H2HScheduleMeetingParamEntity.MEETING_TYPE_WEBINAR;
+            default:
+                return H2HScheduleMeetingParamEntity.MEETING_TYPE_LIVE_SHARE;
+        }
     }
 }

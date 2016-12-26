@@ -634,5 +634,11 @@
         <item>@string/open_positions</item>
         <item>@string/drafts</item>
     </string-array>
+    
+    <string-array name="meeting_type_names">
+        <item>Group Meeting</item>
+        <item>Webinar</item>
+        <item>Live Share</item>
+    </string-array>
 
 </resources>

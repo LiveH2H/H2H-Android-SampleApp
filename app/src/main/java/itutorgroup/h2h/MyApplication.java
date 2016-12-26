@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.itutorgroup.h2hmodel.H2HUserManager;
 import com.meetingroom.utils.CrashCatcher;
 import com.meetingroom.utils.LogUtils;
 import com.meetingroom.utils.MRUtils;
@@ -33,6 +34,8 @@ public class MyApplication extends LitePalApplication {
         long time = System.currentTimeMillis();
         Fresco.initialize(INSTANCE);
         MRUtils.clearDatas(INSTANCE);
+//        H2HUserManager.getInstance().init("BzQeq93cXEnD+bY7Pi61y7N7oTO8", "34AB9868-0593-4949-8725-6FF8B36BD494");
+        H2HUserManager.getInstance().init("fpFTYgQSNOVEThFa4xjOq3uLq60e", "2B679984-9755-462D-9AC6-BCFAE5680CE5");
         LogUtils.i("Application init finish, Time=" + (System.currentTimeMillis() - time));
 
         initCrashCatcher();
