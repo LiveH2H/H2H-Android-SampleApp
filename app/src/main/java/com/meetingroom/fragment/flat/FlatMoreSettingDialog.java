@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.itutorgroup.h2hconference.H2HConference;
+import com.itutorgroup.h2hmodel.H2HFeatures;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.meetingroom.activity.SupportActivity;
 import com.meetingroom.activity.SupportRequestActivity;
@@ -60,6 +61,7 @@ public class FlatMoreSettingDialog extends RelativeDialog implements View.OnClic
     }
     private void initData(){
         beforeConfig();
+        ViewUtil.setVisibility(tvLiveSupport, H2HFeatures.isLiveSupportEnabled() ? View.VISIBLE : View.GONE);
     }
     private void addListener() {
         tvThemeColor.setOnClickListener(this);

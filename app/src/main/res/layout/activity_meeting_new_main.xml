@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.meetingroom.activity.MeetingActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/titleheight"
@@ -23,7 +23,6 @@
             android:id="@+id/iv_wifi"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/iv_logo"
             android:paddingRight="10dp"
             android:src="@drawable/ic_wifi_green"
             android:visibility="visible"/>
@@ -32,18 +31,14 @@
             android:id="@+id/tv_meetingId"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/iv_wifi"
-            android:drawablePadding="5dp"
-            android:drawableRight="@drawable/ic_arrowdown"
             android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/ib_hangup"
-            android:layout_toRightOf="@+id/tv_meetingId">
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/btn_end"
@@ -55,12 +50,26 @@
                 android:textColor="@color/end_meeting_text"/>
         </FrameLayout>
 
+        <ImageButton
+            android:id="@+id/ib_hangup"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:padding="10dp"
+            android:src="@drawable/selector_raise_hand"/>
+
+        <ImageButton
+            android:id="@+id/ib_translate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:padding="10dp"
+            android:src="@drawable/ic_translate"/>
 
         <RelativeLayout
             android:id="@+id/rl_priticipant"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true">
+            android:layout_height="match_parent">
 
             <ImageButton
                 android:id="@+id/ib_participants"
@@ -79,25 +88,7 @@
                 android:src="@drawable/ic_raisehand_red"
                 android:visibility="gone"/>
         </RelativeLayout>
-
-        <ImageButton
-            android:id="@+id/ib_translate"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/rl_priticipant"
-            android:background="@null"
-            android:padding="10dp"
-            android:src="@drawable/ic_translate"/>
-
-        <ImageButton
-            android:id="@+id/ib_hangup"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/ib_translate"
-            android:background="@null"
-            android:padding="10dp"
-            android:src="@drawable/selector_raise_hand"/>
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_bottom"
@@ -125,36 +116,25 @@
             android:visibility="visible"/>
 
 
-        <!--<ImageButton-->
-        <!--android:id="@+id/ib_conference"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="@null"-->
-        <!--android:src="@drawable/selector_conference"-->
-        <!--/>-->
-        <FrameLayout
+        <ImageButton
+            android:id="@+id/ib_conference"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/icon_conference"
+            android:visibility="visible"/>
 
-            <ImageButton
-                android:id="@+id/ib_conference"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:src="@drawable/icon_conference"
-                android:visibility="gone"/>
-
-            <ImageButton
-                android:id="@+id/ib_whiteboard"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:src="@drawable/ic_whiteboard"/>
-        </FrameLayout>
+        <ImageButton
+            android:id="@+id/ib_whiteboard"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/ic_whiteboard"/>
 
         <RelativeLayout
+            android:id="@+id/rl_chat"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">

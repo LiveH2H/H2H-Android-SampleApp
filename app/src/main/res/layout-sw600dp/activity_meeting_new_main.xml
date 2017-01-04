@@ -13,13 +13,12 @@
         android:layout_height="@dimen/titleheight"
         android:background="@color/grey_transparent"
         android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:weightSum="5">
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/iv_logo_liveh2h"
@@ -43,8 +42,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/iv_wifi"
-                android:drawablePadding="5dp"
-                android:drawableRight="@drawable/ic_arrowdown"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"/>
@@ -62,46 +59,46 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="3"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/ib_mic"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@null"
+                android:minWidth="70dp"
                 android:src="@drawable/selector_mic"/>
 
             <ImageButton
                 android:id="@+id/ib_webcam"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@null"
+                android:minWidth="70dp"
                 android:src="@drawable/selector_webcam"
                 android:visibility="visible"/>
 
             <ImageButton
-                android:id="@+id/ib_video"
-                android:layout_width="0dp"
+                android:id="@+id/ib_conference"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@null"
+                android:minWidth="70dp"
                 android:src="@drawable/selector_conference"/>
 
             <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:id="@+id/rl_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
                 <ImageButton
                     android:id="@+id/ib_chat"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@null"
+                    android:minWidth="70dp"
                     android:src="@drawable/selector_chat"/>
 
                 <ImageView
@@ -117,42 +114,42 @@
 
             <ImageButton
                 android:id="@+id/ib_whiteboard"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@null"
+                android:minWidth="70dp"
                 android:src="@drawable/selector_whiteboard"/>
 
             <ImageButton
                 android:id="@+id/ib_hangup"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@null"
+                android:minWidth="70dp"
                 android:src="@drawable/selector_raise_hand"/>
 
             <ImageButton
                 android:id="@+id/ib_translate"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@null"
+                android:minWidth="70dp"
                 android:src="@drawable/ic_translate"
                 android:visibility="visible"/>
 
             <RelativeLayout
                 android:id="@+id/rl_priticipant"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:visibility="visible">
 
                 <ImageButton
                     android:id="@+id/ib_participants"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:background="@null"
+                    android:minWidth="70dp"
                     android:src="@drawable/selector_participants"/>
 
                 <ImageView
@@ -169,10 +166,10 @@
 
             <ImageButton
                 android:id="@+id/ib_more"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@null"
+                android:minWidth="70dp"
                 android:src="@drawable/selector_more"/>
 
         </LinearLayout>

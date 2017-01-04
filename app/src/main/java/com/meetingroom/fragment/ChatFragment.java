@@ -25,6 +25,7 @@ import com.itutorgroup.h2hSupport.H2HSupportManager;
 import com.itutorgroup.h2hSupport.SupportCallbackListener;
 import com.itutorgroup.h2hchat.H2HChat;
 import com.itutorgroup.h2hconference.H2HConference;
+import com.itutorgroup.h2hmodel.H2HFeatures;
 import com.meetingroom.activity.MeetingActivity;
 import com.meetingroom.adapter.ChatMessageAdapter;
 import com.meetingroom.adapter.SupportMessageAdapter;
@@ -268,7 +269,8 @@ public class ChatFragment extends BaseFragment {
 
             }
         });
-        niceSpinner.setShowInCenter(true,groupType,0);
+        niceSpinner.setShowInCenter(true, groupType, 0);
+        niceSpinner.setClickable(H2HFeatures.isLiveSupportEnabled());
 
         H2HSupportManager.getInstance().attachListener(new SupportCallbackListener() {
             @Override

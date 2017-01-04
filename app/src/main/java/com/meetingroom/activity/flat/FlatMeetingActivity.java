@@ -36,6 +36,7 @@ import com.itutorgroup.h2hconference.H2HConference;
 import com.itutorgroup.h2hconference.H2HPeer;
 import com.itutorgroup.h2hconference.H2HRTCListener;
 import com.itutorgroup.h2hmodel.H2HCallback;
+import com.itutorgroup.h2hmodel.H2HFeatures;
 import com.itutorgroup.h2hmodel.H2HModel;
 import com.itutorgroup.h2hwhiteboard.H2HWhiteboardListener;
 import com.itutorgroup.h2hwhiteboard.H2HWhiteboardManager;
@@ -121,10 +122,12 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
     LinearLayout llTitle;
     @BindView(R.id.iv_wifi)
     ImageView ivWifi;
-    @BindView(R.id.ib_video)
-    ImageButton ibVideo;
+    @BindView(R.id.ib_conference)
+    ImageButton ibConference;
     @BindView(R.id.rl_priticipant)
-    RelativeLayout rlParticipant;
+    RelativeLayout rlPriticipant;
+    @BindView(R.id.rl_chat)
+    View rlChat;
 
     private H2HBroadcastReceiver chatMessageReceiver;
     private H2HBroadcastReceiver chatUserStatusReceiver;
@@ -167,7 +170,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
         ButterKnife.bind(this);
         serverConfig = (ServerConfig) getIntent().getSerializableExtra("serverConfig");
         ibMic.setSelected(false);
-        selectIcon(ibVideo);
+        selectIcon(ibConference);
         tvMeetingId.setText(StringUtil.formatMeetingId(H2HModel.getInstance().getMeetingId()));
         ibHangup.setVisibility(MRUtils.isHost() ? View.GONE : View.VISIBLE);
     }
@@ -250,8 +253,15 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
             whiteBoardFragment = WhiteBoardFragment.newInstance(polls, isShowWhiteboardLocatingPoll);
             transaction.add(R.id.container, conferenceFragment, FlatConferenceFragment.class.getSimpleName())
                     .add(R.id.container, whiteBoardFragment, WhiteBoardFragment.class.getSimpleName())
+                    .hide(conferenceFragment)
                     .hide(whiteBoardFragment);
-            fragment = conferenceFragment;
+            if (H2HFeatures.isVideoEnabled()) {
+                fragment = conferenceFragment;
+                transaction.show(conferenceFragment);
+            } else if (H2HFeatures.isWhiteboardEnabled()) {
+                fragment = whiteBoardFragment;
+                transaction.show(whiteBoardFragment);
+            }
         } else {
             transaction.show(fragment);
         }
@@ -263,7 +273,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
     }
 
     @OnClick({R.id.tv_meetingId, R.id.btn_end, R.id.ib_participants, R.id.ib_translate, R.id.ib_mic,
-            R.id.ib_webcam, R.id.ib_chat, R.id.ib_whiteboard, R.id.ib_more, R.id.ib_hangup, R.id.ib_video})
+            R.id.ib_webcam, R.id.ib_chat, R.id.ib_whiteboard, R.id.ib_more, R.id.ib_hangup, R.id.ib_conference})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_hangup:
@@ -309,7 +319,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
                 selectIcon(ibMore);
                 showMoreSettingPopupwin(view);
                 break;
-            case R.id.ib_video:
+            case R.id.ib_conference:
                 showConferenceFragment();
                 break;
         }
@@ -321,7 +331,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
     }
 
     private void showConferenceFragment() {
-        selectIcon(ibVideo);
+        selectIcon(ibConference);
         show(FlatConferenceFragment.class.getSimpleName());
     }
 
@@ -525,18 +535,55 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
 
     private void afterLaunchMeeting() {
         loadingDialog.dismiss();
-        ibMic.setSelected(true);
-        ibWebcam.setSelected(true);
         tvMeetingId.setText(StringUtil.formatMeetingId(H2HModel.getInstance().getMeetingId()));
-        ibHangup.setVisibility(MRUtils.isHost() ? View.GONE : View.VISIBLE);
+
+        initVideo();
+        initWhiteboard();
+        initChat();
+        initRaiseHand();
+        initLiveTranslator();
+
         H2HConference.getInstance().listener = new RTCListener();
         initSettingConfig();
         initChatroomDialog();
         initParticipantDialog();
-        show(FlatConferenceFragment.class.getSimpleName());
+        showConferenceFragment();
         registerBroadcast();
-        if (H2HModel.getInstance().getMeetingType() == H2HModel.H2H_MEETINGTYPE.H2H_BROADCAST) {
+    }
+
+    private void initVideo() {
+        ibMic.setSelected(true);
+        ibWebcam.setSelected(true);
+        if (H2HFeatures.isVideoEnabled()) {
+            ViewUtil.setVisibility(ibMic, View.VISIBLE);
+            ViewUtil.setVisibility(ibWebcam, View.VISIBLE);
+            ViewUtil.setVisibility(ibConference, View.VISIBLE);
+            ViewUtil.setVisibility(rlPriticipant, View.VISIBLE);
+        } else {
+            ViewUtil.setVisibility(ibMic, View.GONE);
+            ViewUtil.setVisibility(ibWebcam, View.GONE);
+            ViewUtil.setVisibility(ibConference, View.GONE);
+            ViewUtil.setVisibility(rlPriticipant, View.GONE);
+        }
+    }
+
+    private void initWhiteboard() {
+        ViewUtil.setVisibility(ibWhiteboard, H2HFeatures.isWhiteboardEnabled() ? View.VISIBLE : View.GONE);
+    }
+
+    private void initChat() {
+        ViewUtil.setVisibility(rlChat, H2HFeatures.isChatEnabled() ? View.VISIBLE : View.GONE);
+    }
+
+    private void initRaiseHand() {
+        ibHangup.setVisibility(MRUtils.isHost() || !H2HFeatures.isRaiseHandEnabled() ? View.GONE : View.VISIBLE);
+    }
+
+    private void initLiveTranslator() {
+        if (H2HModel.getInstance().getMeetingType() == H2HModel.H2H_MEETINGTYPE.H2H_BROADCAST || !H2HFeatures.isLiveTranslatorEnabled()) {
             ViewUtil.setVisibility(ibTranslate, View.GONE);
+        } else {
+            ViewUtil.setVisibility(ibTranslate, View.VISIBLE);
         }
     }
 
@@ -1251,7 +1298,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
 //        ibMic.setSelected(false);
         ibChat.setSelected(false);
         ibWhiteboard.setSelected(false);
-        ibVideo.setSelected(false);
+        ibConference.setSelected(false);
         ibParticipants.setSelected(false);
         ibMore.setSelected(false);
     }
@@ -1261,7 +1308,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
         if (currentFragment != null && TextUtils.equals(currentFragment.getClass().getSimpleName(), WhiteBoardFragment.class.getSimpleName())) {
             selectIcon(ibWhiteboard);
         } else {
-            selectIcon(ibVideo);
+            selectIcon(ibConference);
         }
     }
 

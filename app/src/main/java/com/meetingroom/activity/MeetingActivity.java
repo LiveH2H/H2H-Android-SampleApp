@@ -33,6 +33,7 @@ import com.itutorgroup.h2hconference.H2HConferenceConstant;
 import com.itutorgroup.h2hconference.H2HPeer;
 import com.itutorgroup.h2hconference.H2HRTCListener;
 import com.itutorgroup.h2hmodel.H2HCallback;
+import com.itutorgroup.h2hmodel.H2HFeatures;
 import com.itutorgroup.h2hmodel.H2HModel;
 import com.itutorgroup.h2hwhiteboard.H2HWhiteboardListener;
 import com.itutorgroup.h2hwhiteboard.H2HWhiteboardManager;
@@ -104,6 +105,10 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
     ImageButton ibConference;
     @BindView(R.id.ib_translate)
     ImageButton ibTranslate;
+    @BindView(R.id.rl_chat)
+    View rlChat;
+    @BindView(R.id.rl_priticipant)
+    View rlPriticipant;
 
     private Fragment currentFragment;
     private ConferenceFragment conferenceFragment;
@@ -158,15 +163,52 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
 
     private void afterLaunchMeeting() {
         loadingDialog.dismiss();
-        ibMic.setSelected(true);
-        ibWebcam.setSelected(true);
         tvMeetingId.setText(StringUtil.formatMeetingId(H2HModel.getInstance().getMeetingId()));
-        ibHangup.setVisibility(MRUtils.isHost() ? View.GONE : View.VISIBLE);
+
+        initVideo();
+        initWhiteboard();
+        initChat();
+        initRaiseHand();
+        initLiveTranslator();
+
         initSettingConfig();
         H2HConference.getInstance().listener = new RTCListener();
         showConferenceFragment();
-        if (H2HModel.getInstance().getMeetingType() == H2HModel.H2H_MEETINGTYPE.H2H_BROADCAST) {
+    }
+
+    private void initVideo() {
+        ibMic.setSelected(true);
+        ibWebcam.setSelected(true);
+        if (H2HFeatures.isVideoEnabled()) {
+            ViewUtil.setVisibility(ibMic, View.VISIBLE);
+            ViewUtil.setVisibility(ibWebcam, View.VISIBLE);
+            ViewUtil.setVisibility(ibConference, View.VISIBLE);
+            ViewUtil.setVisibility(rlPriticipant, View.VISIBLE);
+        } else {
+            ViewUtil.setVisibility(ibMic, View.GONE);
+            ViewUtil.setVisibility(ibWebcam, View.GONE);
+            ViewUtil.setVisibility(ibConference, View.GONE);
+            ViewUtil.setVisibility(rlPriticipant, View.GONE);
+        }
+    }
+
+    private void initWhiteboard() {
+        ViewUtil.setVisibility(ibWhiteboard, H2HFeatures.isWhiteboardEnabled() ? View.VISIBLE : View.GONE);
+    }
+
+    private void initChat() {
+        ViewUtil.setVisibility(rlChat, H2HFeatures.isChatEnabled() ? View.VISIBLE : View.GONE);
+    }
+
+    private void initRaiseHand() {
+        ibHangup.setVisibility(MRUtils.isHost() || !H2HFeatures.isRaiseHandEnabled() ? View.GONE : View.VISIBLE);
+    }
+
+    private void initLiveTranslator() {
+        if (H2HModel.getInstance().getMeetingType() == H2HModel.H2H_MEETINGTYPE.H2H_BROADCAST || !H2HFeatures.isLiveTranslatorEnabled()) {
             ViewUtil.setVisibility(ibTranslate, View.GONE);
+        } else {
+            ViewUtil.setVisibility(ibTranslate, View.VISIBLE);
         }
     }
 
@@ -308,11 +350,16 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
     }
 
     private void back() {
-        if (currentFragment != null && !TextUtils.equals(currentFragment.getClass().getSimpleName(), ConferenceFragment.class.getSimpleName())) {
-            showConferenceFragment();
-        } else {
-            showExitDialog();
+        if (currentFragment != null) {
+            if (!currentFragment.getClass().getSimpleName().equals(ConferenceFragment.class.getSimpleName()) && H2HFeatures.isVideoEnabled()) {
+                showConferenceFragment();
+                return;
+            } else if (!currentFragment.getClass().getSimpleName().equals(WhiteBoardFragment.class.getSimpleName()) && H2HFeatures.isWhiteboardEnabled()) {
+                showWhiteboardFragment();
+                return;
+            }
         }
+        showExitDialog();
     }
 
     @Override
@@ -399,17 +446,10 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
 
     private void showWhiteboardFragment() {
         show(WhiteBoardFragment.class.getSimpleName());
-        showConferenceButton(true);
     }
 
     private void showConferenceFragment() {
         show(ConferenceFragment.class.getSimpleName());
-        showConferenceButton(false);
-    }
-
-    private void showConferenceButton(boolean isShow) {
-        ViewUtil.setVisibility(ibConference, isShow ? View.VISIBLE : View.GONE);
-        ViewUtil.setVisibility(ibWhiteboard, isShow ? View.GONE : View.VISIBLE);
     }
 
 //    private void showInviteSheetBottom() {
@@ -461,10 +501,20 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                     .add(R.id.container_all, participantsFragment, ParticipantsFragment.class.getSimpleName())
                     .add(R.id.container_all, chatFragment, ChatFragment.class.getSimpleName())
                     .add(R.id.container, whiteBoardFragment, WhiteBoardFragment.class.getSimpleName())
+                    .hide(conferenceFragment)
                     .hide(whiteBoardFragment)
                     .hide(participantsFragment)
                     .hide(chatFragment);
-            fragment = conferenceFragment;
+            if (H2HFeatures.isVideoEnabled()) {
+                fragment = conferenceFragment;
+                transaction.show(conferenceFragment);
+            } else if (H2HFeatures.isWhiteboardEnabled()) {
+                fragment = whiteBoardFragment;
+                transaction.show(whiteBoardFragment);
+            } else if(H2HFeatures.isChatEnabled()) {
+                fragment = chatFragment;
+                transaction.show(chatFragment);
+            }
         } else {
             transaction.show(fragment);
         }
@@ -631,6 +681,10 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                     return;
                 }
                 if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+
+                    H2HFeatures.add(H2HFeatures.FEATURES_WHITEBOARD);
+                    H2HFeatures.add(H2HFeatures.FEATURES_CHAT);
+
                     H2HConference.getInstance().connect(context, new H2HCallback() {
                         @Override
                         public void onCompleted(Exception ex, H2HCallBackStatus status) {

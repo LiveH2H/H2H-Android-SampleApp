@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.itutorgroup.h2hconference.H2HConference;
+import com.itutorgroup.h2hmodel.H2HFeatures;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.meetingroom.bean.SettingConfig;
 import com.meetingroom.constants.MeetingConstants;
@@ -21,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import itutorgroup.h2h.R;
+import itutorgroup.h2h.utils.ViewUtil;
 
 public class MoreSettingActivity extends MeetingRoomBaseActivity {
 
@@ -58,6 +60,7 @@ public class MoreSettingActivity extends MeetingRoomBaseActivity {
     @Override
     protected void initDatas() {
         beforeConfig();
+        ViewUtil.setVisibility(tvLiveSupport, H2HFeatures.isLiveSupportEnabled() ? View.VISIBLE : View.GONE);
     }
 
     @Override
