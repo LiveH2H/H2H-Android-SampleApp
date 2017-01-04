@@ -32,7 +32,6 @@ import com.itutorgroup.h2hchat.H2HBroadcastReceiver;
 import com.itutorgroup.h2hchat.H2HChat;
 import com.itutorgroup.h2hchat.H2HChatConstant;
 import com.itutorgroup.h2hchat.H2HChatMessage;
-import com.itutorgroup.h2hchat.H2HChatUser;
 import com.itutorgroup.h2hconference.H2HConference;
 import com.itutorgroup.h2hconference.H2HPeer;
 import com.itutorgroup.h2hconference.H2HRTCListener;
@@ -155,7 +154,6 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
     private ArrayList<Poll> polls = new ArrayList<>();
     private boolean presenceChecking;
     private ArrayList<Poll> waitPolls = new ArrayList<>();
-    private int tempIndex = -1;
     private static final int PERMISSION_BOTH = 2000;
     private boolean isShowWhiteboardLocatingPoll;
 
@@ -241,23 +239,24 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
 
     //show fragment
     private void show(String tag) {
+        if (currentFragment != null && TextUtils.equals(tag, currentFragment.getClass().getSimpleName())) {
+            return;
+        }
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
         if (fragment == null) {
-            if (TextUtils.equals(tag, FlatConferenceFragment.class.getSimpleName())) {
-                conferenceFragment = FlatConferenceFragment.newInstance(serverConfig);
-                fragment = conferenceFragment;
-            } else {
-                whiteBoardFragment = WhiteBoardFragment.newInstance(polls, isShowWhiteboardLocatingPoll);
-                fragment = whiteBoardFragment;
-            }
-            if (currentFragment != null) {
-                transaction.hide(currentFragment);
-            }
-            transaction.add(R.id.container, fragment, tag);
+            conferenceFragment = FlatConferenceFragment.newInstance(serverConfig);
+            whiteBoardFragment = WhiteBoardFragment.newInstance(polls, isShowWhiteboardLocatingPoll);
+            transaction.add(R.id.container, conferenceFragment, FlatConferenceFragment.class.getSimpleName())
+                    .add(R.id.container, whiteBoardFragment, WhiteBoardFragment.class.getSimpleName())
+                    .hide(whiteBoardFragment);
+            fragment = conferenceFragment;
         } else {
-            transaction.hide(currentFragment).show(fragment);
+            transaction.show(fragment);
+        }
+        if (currentFragment != null) {
+            transaction.hide(currentFragment);
         }
         transaction.commitAllowingStateLoss();
         currentFragment = fragment;
@@ -518,9 +517,6 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
         } else if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
             if (data.hasExtra(MeetingConstants.supportForOther)) {
                 showSupporMessage();
-            } else if (data.hasExtra(MeetingConstants.tempIndex)) {
-                tempIndex = data.getIntExtra(MeetingConstants.tempIndex, -1);
-//                checkTempIndex(true);
             }
         } else if(requestCode == MeetingConstants.startPoll){
             checkWaitPolls();
@@ -590,7 +586,6 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
                                     return;
                                 }
                             }
-                            Log.e("App Level", (ex == null ? "H2HConference connect fail" : ex.toString()));
                             if (ex != null) {
                                 ex.printStackTrace();
                             }
@@ -615,7 +610,6 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
                             if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
                                 Log.e("App Level", "start chat");
                             } else {
-                                Log.e("App Level", (ex == null ? "something went wrong" : ex.toString()));
                                 if (ex != null) {
                                     ex.printStackTrace();
                                 }
@@ -681,8 +675,8 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     //A user status changed
-                    H2HChatUser chatUser = (H2HChatUser) intent.getSerializableExtra(H2HChatConstant.H2HChatUser);
-                    receiveUserState(chatUser);
+//                H2HChatUser chatUser = (H2HChatUser) intent.getSerializableExtra(H2HChatConstant.H2HChatUser);
+                    receiveUserState();
                 }
             };
             context.registerReceiver(chatUserStatusReceiver, new IntentFilter(H2HChatConstant.CHAT_USER_STATUS_CHANGE));
@@ -724,7 +718,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
         }
     }
 
-    private void receiveUserState(H2HChatUser chatUser) {
+    private void receiveUserState() {
         if (chatRoomDialog != null) {
 //            ChatMessage message = MRUtils.parseUserState(chatUser);
 //            messages.add(message);
@@ -1011,29 +1005,24 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
                 if (poll == null) {
                     return;
                 }
-                poll.setEndTime(System.currentTimeMillis()+poll.getDuration());
-                if(polls.contains(poll)){
-                    int index = polls.indexOf(poll);
-                    polls.remove(index);
-                    polls.add(index,poll);
-                }else{
+                poll.setEndTime(System.currentTimeMillis() + poll.getDuration());
+                int index = polls.indexOf(poll);
+                if (index >= 0) {
+                    polls.set(index, poll);
+                } else {
                     polls.add(poll);
                 }
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (AppManager.getAppManager().currentActivity() != FlatMeetingActivity.this) {
+                        if (System.currentTimeMillis() >= poll.getEndTime()) {
+                            return;
+                        }
+                        if (AppManager.getAppManager().currentActivity() != FlatMeetingActivity.this || polling) {
                             waitPolls.add(poll);
                             return;
                         }
-//                        if (MRUtils.getCurrentTimeMillis() >= poll.getEndTime()) {
-//                            return;
-//                        }
-                        if(polling){
-                            waitPolls.add(poll);
-                            return;
-                        }
-                        showPoll(poll, -1);
+                        showPoll(poll);
                     }
                 });
 
@@ -1098,8 +1087,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
 
     }
 
-    private void showPoll(Poll poll, final int tempIndex) {
-        this.tempIndex = tempIndex;
+    private void showPoll(Poll poll) {
         if (startPollDialog == null) {
             startPollDialog = new AutoDismissMaterialDialog(this);
             startPollDialog.setMessage(getString(R.string.start_poll_tips, ""))
@@ -1112,7 +1100,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
                             dialog.dismiss();
                             polling = false;
                             if (isPositiveButton) {
-                                startPoll(FlatMeetingActivity.this.poll, FlatMeetingActivity.this.tempIndex);
+                                startPoll(FlatMeetingActivity.this.poll);
                             } else {
                                 checkWaitPolls();
                             }
@@ -1137,7 +1125,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
         }
     }
 
-    private void startPoll(Poll poll, int tempIndex) {
+    private void startPoll(Poll poll) {
 //        MeetingActions.startPoll(this, poll, tempIndex);
     }
 
@@ -1280,7 +1268,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
     private void checkWaitPolls() {
         for (Poll poll : waitPolls) {
             if (poll.getEndTime() > System.currentTimeMillis()) {
-                showPoll(poll, -1);
+                showPoll(poll);
                 waitPolls.remove(poll);
                 break;
             }

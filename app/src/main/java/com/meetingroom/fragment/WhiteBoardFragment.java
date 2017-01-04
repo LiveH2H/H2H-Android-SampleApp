@@ -1,9 +1,8 @@
 package com.meetingroom.fragment;
 
-
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,82 +10,34 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 
 import com.itutorgroup.h2hmodel.H2HMeetingWhiteboard;
 import com.itutorgroup.h2hwhiteboard.H2HWhiteboardItem;
 import com.itutorgroup.h2hwhiteboard.H2HWhiteboardListener;
 import com.itutorgroup.h2hwhiteboard.H2HWhiteboardManager;
-import com.itutorgroup.h2hwhiteboard.widget.MyWebView;
 import com.meetingroom.bean.poll.summary.Poll;
 import com.meetingroom.constants.MeetingConstants;
 import com.meetingroom.view.PlusMinButton;
 import com.meetingroom.view.PollView;
-import com.meetingroom.view.RelativeDialog;
-import com.meetingroom.view.WhiteBoardHorizontalDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import itutorgroup.h2h.R;
 import itutorgroup.h2h.utils.FastJsonUtils;
-import itutorgroup.h2h.utils.LogUtils;
 import itutorgroup.h2h.utils.ViewUtil;
-
 
 public class WhiteBoardFragment extends BaseFragment {
     private List<Poll> polls = new ArrayList<>();
     private List<PollView> pollViews = new ArrayList<>();
-    private WhiteBoardHorizontalDialog whiteBoardHorizontalDialog;
-    private ImageView ivVideo, ivChangeWhiteboard;
-    private ViewPager viewPager, viewPager2;
+    private ViewPager pollViewPager;
     private PlusMinButton plusMinButton;
-    private boolean isChange;
+    private FrameLayout whiteboardContainer;
+    private PagerAdapter pollPagerAdapter;
+    private Handler handler = new Handler(Looper.getMainLooper());
 
     public WhiteBoardFragment() {
-    }
-
-    private void initPoll() {
-        if (getArguments().getSerializable("polls") != null) {
-            List<Poll> polls = (List<Poll>) getArguments().getSerializable("polls");
-            if (polls != null) {
-                for (Poll poll : polls) {
-                    getPoll(poll);
-                }
-                if (polls.size() != 0) {
-                    pagerAdapter2.notifyDataSetChanged();
-                }
-            }
-        }
-
-    }
-
-    private void getPoll(Poll poll) {
-        if (!polls.contains(poll)) {
-            polls.add(poll);
-            PollView pollView = new PollView(mContext, poll, new PollView.RefreshListener() {
-                @Override
-                public void onRefresh(boolean isRefresh) {
-                    pagerAdapter2.notifyDataSetChanged();
-                }
-            });
-            pollViews.add(pollView);
-        } else {
-            int index = polls.indexOf(poll);
-            polls.remove(index);
-            polls.add(index, poll);
-            pollViews.get(index).setPoll(poll);
-        }
-    }
-
-    private WhiteBoardFragmentCallback whiteBoardFragmentCallback;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof WhiteBoardFragmentCallback) {
-            whiteBoardFragmentCallback = (WhiteBoardFragmentCallback) context;
-        }
     }
 
     public static WhiteBoardFragment newInstance(ArrayList<Poll> polls, boolean isShowWhiteboardLocatingPoll) {
@@ -99,22 +50,18 @@ public class WhiteBoardFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_white_board, container, false);
-        viewPager = ViewUtil.findViewById(view, R.id.viewPager);
-        viewPager2 = ViewUtil.findViewById(view, R.id.viewPager2);
-        ivVideo = ViewUtil.findViewById(view, R.id.iv_video);
-        ivChangeWhiteboard = ViewUtil.findViewById(view, R.id.iv_changewhiteboard);
-        plusMinButton = ViewUtil.findViewById(view, R.id.ll_plus_min_button);
-        return view;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_white_board, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        pollViewPager = ViewUtil.findViewById(view, R.id.viewPager2);
+        plusMinButton = ViewUtil.findViewById(view, R.id.ll_plus_min_button);
+        whiteboardContainer = ViewUtil.findViewById(view, R.id.whiteboardContainer);
+
         showLoadingDialog();
-        H2HWhiteboardManager.getInstance().initWhiteboardSocket(mContext);
         H2HWhiteboardManager.getInstance().attachWhiteboardListener(new H2HWhiteboardListener() {
             @Override
             public void onWhiteboardInitFinish() {
@@ -129,11 +76,7 @@ public class WhiteBoardFragment extends BaseFragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        H2HWhiteboardManager.getInstance().addWhiteboardSocket(getActivity(), meetingWhiteboard, 2000);
-                        if (pagerAdapter != null) {
-                            showWhiteboardViewPager(true);
-                            pagerAdapter.notifyDataSetChanged();
-                        }
+                        H2HWhiteboardManager.getInstance().addWhiteboardSocketAndChange(getActivity(), meetingWhiteboard, 1000);
                     }
                 });
             }
@@ -147,41 +90,31 @@ public class WhiteBoardFragment extends BaseFragment {
                     @Override
                     public void run() {
                         H2HWhiteboardManager.getInstance().removeWhiteboardSocket(whiteboardId);
-                        if (pagerAdapter != null) {
-                            showWhiteboardViewPager(true);
-                            pagerAdapter.notifyDataSetChanged();
-                        }
                     }
                 });
             }
 
             @Override
-            public void onSelected(final int position, final boolean isRefresh) {
-                if (isFinishing() || viewPager == null) {
+            public void onSelected(final int position) {
+                if (isFinishing()) {
                     return;
                 }
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        showWhiteboardViewPager(true);
-                        if (position < pagerAdapter.getCount()) {
-                            isChange = true;
-                            viewPager.setCurrentItem(position, false);
-                            isChange = false;
-                        }
-                        setPlusMinButtonText(position, isRefresh);
+                        showCurrentWhiteboardView(position);
                     }
                 });
             }
 
             @Override
             public void onSelectedPoll(String pollId) {
-                if (isFinishing() || pagerAdapter2 == null) {
+                if (isFinishing() || pollPagerAdapter == null) {
                     return;
                 }
                 for (int i = 0; i < pollViews.size(); i++) {
                     if (TextUtils.equals(pollId, pollViews.get(i).getPoll().getPollId())) {
-                        if (i < pagerAdapter2.getCount()) {
+                        if (i < pollPagerAdapter.getCount()) {
                             selectedPollItem(i);
                         }
                         break;
@@ -194,14 +127,14 @@ public class WhiteBoardFragment extends BaseFragment {
                     @Override
                     public void run() {
                         showWhiteboardViewPager(false);
-                        viewPager2.setCurrentItem(index, false);
+                        pollViewPager.setCurrentItem(index, false);
                     }
                 });
             }
 
             @Override
             public void onGetPoll(final Object... args) {
-                if (pagerAdapter2 == null || isFinishing()) {
+                if (pollPagerAdapter == null || isFinishing()) {
                     return;
                 }
                 getActivity().runOnUiThread(new Runnable() {
@@ -209,9 +142,9 @@ public class WhiteBoardFragment extends BaseFragment {
                     public void run() {
                         Poll poll = FastJsonUtils.parseObject(args[0].toString(), Poll.class);
                         if (poll != null) {
-                            poll.setEndTime(poll.getEndTime() - poll.getStartTime() + System.currentTimeMillis());
-                            getPoll(poll);
-                            pagerAdapter2.notifyDataSetChanged();
+                            poll.setEndTime(poll.getDuration() + System.currentTimeMillis());
+                            addPoll(poll);
+                            pollPagerAdapter.notifyDataSetChanged();
                         }
                     }
                 });
@@ -220,143 +153,79 @@ public class WhiteBoardFragment extends BaseFragment {
 
             @Override
             public void onUpdatePoll(final Object object) {
-                if (pagerAdapter2 == null || isFinishing()) {
+                if (pollPagerAdapter == null || isFinishing()) {
                     return;
                 }
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Poll poll = (Poll) object;
-                        getPoll(poll);
-                        pagerAdapter2.notifyDataSetChanged();
+                        addPoll(poll);
+                        pollPagerAdapter.notifyDataSetChanged();
                     }
                 });
 
             }
         });
-
-        ivVideo.setOnClickListener(new View.OnClickListener() {
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                if (whiteBoardFragmentCallback != null) {
-                    whiteBoardFragmentCallback.turnToConference();
-                }
+            public void run() {
+                H2HWhiteboardManager.getInstance().initWhiteboardSocket(mContext);
+                showCurrentWhiteboardView(0);
             }
-        });
+        }, 3000);
 
-        ivChangeWhiteboard.setVisibility(View.GONE);
-        ivChangeWhiteboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                views.clear();
-                for (int i = 0; i < pollViews.size(); i++) {
-                    pollViews.get(i).setTag(polls.get(i).getTitle());
-                    views.add(pollViews.get(i));
-                }
-                for (int j = 0; j < H2HWhiteboardManager.getInstance().itemList.size(); j++) {
-                    getCurrentWebView(j).webView.setTag(H2HWhiteboardManager.getInstance().itemList.get(j).whiteboard_presentation);
-                    views.add(getCurrentWebView(j).webView);
-                }
-                int position;
-                if (viewPager.getVisibility() == View.VISIBLE) {
-                    position = pollViews.size() + viewPager.getCurrentItem();
-                } else {
-                    position = viewPager2.getCurrentItem();
-                }
-                whiteBoardHorizontalDialog.refresh(views, position);
-                whiteBoardHorizontalDialog.showOnAnchor(v, RelativeDialog.Orientation.right);
-            }
-        });
-
-        plusMinButton.setOnPageChangeListener(new PlusMinButton.OnPageChangeListener() {
-
-            @Override
-            public void onPageChange(int currentPage) {
-                H2HWhiteboardItem item = H2HWhiteboardManager.getInstance().itemList.get(viewPager.getCurrentItem());
-                if (currentPage - 1 < item.pageList.size()) {
-                    item.currentPage = item.pageList.get(currentPage - 1);
-                    H2HWhiteboardManager.getInstance().onChange(item);
-                }
-            }
-        });
-
-        initWhitboard();
-        initHorizontalView();
-        viewPager2.setOffscreenPageLimit(100);
-        showWhiteboardViewPager(true);
+        initPollViewPager();
         initPoll();
-        locatePoll(null);
+        showWhiteboardViewPager(true);
+    }
+
+    private void initPoll() {
+        if (getArguments() != null && getArguments().containsKey("polls")) {
+            @SuppressWarnings("unchecked") List<Poll> polls = (List<Poll>) getArguments().getSerializable("polls");
+            if (polls != null && !polls.isEmpty()) {
+                for (Poll poll : polls) {
+                    addPoll(poll);
+                }
+                pollPagerAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    private void addPoll(Poll poll) {
+        int index = polls.indexOf(poll);
+        if (index < 0) {
+            polls.add(poll);
+            PollView pollView = new PollView(mContext, poll, new PollView.RefreshListener() {
+                @Override
+                public void onRefresh(boolean isRefresh) {
+                    pollPagerAdapter.notifyDataSetChanged();
+                }
+            });
+            pollViews.add(pollView);
+        } else {
+            polls.set(index, poll);
+            pollViews.get(index).setPoll(poll);
+        }
     }
 
     private void showWhiteboardViewPager(boolean isShow) {
         if (isShow) {
-            ViewUtil.setVisibility(viewPager, View.VISIBLE);
-            ViewUtil.setVisibility(viewPager2, View.GONE);
+            ViewUtil.setVisibility(whiteboardContainer, View.VISIBLE);
+            ViewUtil.setVisibility(plusMinButton, View.VISIBLE);
+            ViewUtil.setVisibility(pollViewPager, View.GONE);
         } else {
-            ViewUtil.setVisibility(viewPager, View.GONE);
-            ViewUtil.setVisibility(viewPager2, View.VISIBLE);
+            ViewUtil.setVisibility(whiteboardContainer, View.GONE);
+            ViewUtil.setVisibility(plusMinButton, View.GONE);
+            ViewUtil.setVisibility(pollViewPager, View.VISIBLE);
         }
-        viewPager.refreshDrawableState();
-        viewPager2.refreshDrawableState();
+        whiteboardContainer.refreshDrawableState();
+        pollViewPager.refreshDrawableState();
     }
 
-    private void initHorizontalView() {
-        whiteBoardHorizontalDialog = new WhiteBoardHorizontalDialog(mContext, views, new WhiteBoardHorizontalDialog.onItemClickListener() {
-            @Override
-            public void onItemclick(int position) {
-                if (whiteBoardHorizontalDialog.isShowing()) {
-                    whiteBoardHorizontalDialog.dismiss();
-                    int pollviewCount = pollViews.size();
-                    if (pollviewCount > 0 && position <= pollviewCount - 1) {
-                        viewPager.setVisibility(View.GONE);
-                        viewPager2.setVisibility(View.VISIBLE);
-                        viewPager2.setCurrentItem(position, false);
-                    } else {
-                        viewPager.setVisibility(View.VISIBLE);
-                        viewPager2.setVisibility(View.GONE);
-                        position -= pollviewCount;
-                        H2HWhiteboardManager.getInstance().onChange(position);
-                    }
-                }
-            }
-        });
-    }
-
-    private List<View> views = new ArrayList<>();
-    private PagerAdapter pagerAdapter, pagerAdapter2;
-
-    private void initWhitboard() {
-        viewPager.setAdapter(pagerAdapter = new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return H2HWhiteboardManager.getInstance().itemList.size();
-            }
-
-            @Override
-            public boolean isViewFromObject(View arg0, Object arg1) {
-                return arg0 == arg1;
-            }
-
-            @Override
-            public void destroyItem(ViewGroup container, int position, Object object) {
-                LogUtils.i("WhiteBoardFragment destroyItem() position=" + position);
-                container.removeView((View) object);
-            }
-
-            @Override
-            public Object instantiateItem(ViewGroup container, int position) {
-                LogUtils.i("WhiteBoardFragment instantiateItem() position=" + position);
-                View view = getPageViewpager(container, position);
-                container.addView(view);
-                return view;
-            }
-
-            @Override
-            public int getItemPosition(Object object) {//重写此方法 强制adapter.notify刷新
-                return POSITION_NONE;
-            }
-        });
-        viewPager2.setAdapter(pagerAdapter2 = new PagerAdapter() {
+    private void initPollViewPager() {
+        pollViewPager.setOffscreenPageLimit(100);
+        pollPagerAdapter = new PagerAdapter() {
             @Override
             public int getCount() {
                 return pollViews.size();
@@ -377,93 +246,23 @@ public class WhiteBoardFragment extends BaseFragment {
                 container.addView(pollViews.get(position));
                 return pollViews.get(position);
             }
-        });
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                LogUtils.i(this.toString() + " onPageSelected() potition=" + position);
-                if (!isChange) {
-                    setPlusMinButtonText(position, false);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        };
+        pollViewPager.setAdapter(pollPagerAdapter);
     }
 
-    private View getPageViewpager(ViewGroup container, final int position) {
-        final View view = LayoutInflater.from(mContext).inflate(R.layout.item_viewpager_whiteboard, container, false);
-        view.setTag(position);
-        ViewPager viewpager = (ViewPager) view.findViewById(R.id.item_whiteboard_page);
-        viewpager.setAdapter(new PagerAdapter() {
-
-            @Override
-            public int getCount() {
-                H2HWhiteboardManager whiteboardManager = H2HWhiteboardManager.getInstance();
-                return position < whiteboardManager.itemList.size() ? whiteboardManager.itemList.get(position).pageList.size() : 0;
-            }
-
-            @Override
-            public boolean isViewFromObject(View view, Object object) {
-                return view == object;
-            }
-
-            @Override
-            public void destroyItem(ViewGroup container, int position, Object object) {
-                LogUtils.i("getPageViewpager destroyItem() position=" + position);
-                container.removeView((View) object);
-            }
-
-            @Override
-            public Object instantiateItem(ViewGroup container1, int position1) {
-                LogUtils.i("getPageViewpager instantiateItem() position=" + position1);
-
-                MyWebView view = H2HWhiteboardManager.getInstance().itemList.get(position).pageList.get(position1).currentWebview;
-                if (view.getParent() != null) {
-                    ((ViewGroup) view.getParent()).removeView(view);
-                }
-                container1.addView(view);
-                return view;
-            }
-
-            @Override
-            public int getItemPosition(Object object) {
-                return POSITION_NONE;
-            }
-        });
-        return view;
-    }
-
-    private void setPlusMinButtonText(int position, boolean isRefresh) {
+    private void showCurrentWhiteboardView(int position) {
+        showWhiteboardViewPager(true);
         H2HWhiteboardManager whiteboardManager = H2HWhiteboardManager.getInstance();
-        if (position < whiteboardManager.itemList.size()) {
+        if (position >= 0 && position < whiteboardManager.itemList.size()) {
             H2HWhiteboardItem item = whiteboardManager.itemList.get(position);
             plusMinButton.setCountPage(Integer.toString(item.pageList.size()));
-            plusMinButton.setCurrentPage(Integer.toString(item.currentPage.pageNumber + 1));
-            View view = null;
-            for (int i = 0; i < viewPager.getChildCount(); i++) {
-                view = viewPager.getChildAt(i);
-                if (((int) view.getTag()) == position) {
-                    break;
-                }
-                view = null;
-            }
-            if (view != null) {
-                ViewPager pager = ViewUtil.findViewById(view, R.id.item_whiteboard_page);
-                if (isRefresh) {
-                    pager.getAdapter().notifyDataSetChanged();
-                }
-                if (item.currentPage.pageNumber < pager.getAdapter().getCount()) {
-                    pager.setCurrentItem(item.currentPage.pageNumber, false);
+            plusMinButton.setCurrentPage(Integer.toString(item.getCurrentPageNumber() + 1));
+
+            if (item.currentPage != null && item.currentPage.currentWebview != null) {
+                if (item.currentPage.currentWebview != whiteboardContainer.getChildAt(0)) {
+                    whiteboardContainer.removeAllViews();
+                    whiteboardContainer.addView(item.currentPage.currentWebview, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                    whiteboardContainer.setTag(item.whiteboardId);
                 }
                 item.currentPage.currentWebview.refreshDrawableState();
                 item.currentPage.currentWebview.webView.refreshDrawableState();
@@ -472,18 +271,11 @@ public class WhiteBoardFragment extends BaseFragment {
         }
     }
 
-    public MyWebView getCurrentWebView(int i) {
-        return H2HWhiteboardManager.getInstance().itemList.get(i).currentPage.currentWebview;
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
         H2HWhiteboardManager.getInstance().clearWhiteboardSocket();
-    }
-
-    public interface WhiteBoardFragmentCallback {
-        void turnToConference();
     }
 
     public void locatePoll(final Poll poll) {
@@ -491,23 +283,22 @@ public class WhiteBoardFragment extends BaseFragment {
             if (getArguments().getBoolean(MeetingConstants.isShowWhiteboardLocatingPoll)) {
                 //处理第一次进来的定位poll item
                 showWhiteboardViewPager(false);
-                new Handler(mContext.getMainLooper()).postDelayed(new Runnable() {
+                handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        viewPager2.setCurrentItem(polls.size() - 1, false);
-                        pagerAdapter2.notifyDataSetChanged();
+                        pollViewPager.setCurrentItem(polls.size() - 1, false);
+                        pollPagerAdapter.notifyDataSetChanged();
                     }
                 }, 30);
-
             }
         } else {
             //处理非第一次进来的定位poll item
-            new Handler(mContext.getMainLooper()).postDelayed(new Runnable() {
+            handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     showWhiteboardViewPager(false);
-                    viewPager2.setCurrentItem(polls.indexOf(poll), false);
-                    pagerAdapter2.notifyDataSetChanged();
+                    pollViewPager.setCurrentItem(polls.indexOf(poll), false);
+                    pollPagerAdapter.notifyDataSetChanged();
                 }
             }, 30);
 

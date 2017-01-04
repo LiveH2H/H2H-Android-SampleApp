@@ -3,46 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
-    <com.meetingroom.view.CantScrollViewPager
-        android:background="@color/white"
-        android:visibility="gone"
-        android:id="@+id/viewPager"
+
+    <FrameLayout
+        android:id="@+id/whiteboardContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent"/>
+
     <com.meetingroom.view.PlusMinButton
         android:id="@+id/ll_plus_min_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_marginBottom="20dp"/>
+
     <com.meetingroom.view.CantScrollViewPager
-        android:background="@color/white"
-        android:visibility="gone"
         android:id="@+id/viewPager2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
-    <ImageView
-        android:id="@+id/iv_video"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="10dp"
-        android:padding="10dp"
-        android:src="@drawable/ic_video_tips"
         android:visibility="gone"/>
-
-    <ImageView
-        android:layout_alignParentRight="true"
-        android:id="@+id/iv_changewhiteboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_switch_whiteboard"
-        />
-
 
 
 </RelativeLayout>

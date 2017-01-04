@@ -28,7 +28,6 @@ import com.itutorgroup.h2hchat.H2HBroadcastReceiver;
 import com.itutorgroup.h2hchat.H2HChat;
 import com.itutorgroup.h2hchat.H2HChatConstant;
 import com.itutorgroup.h2hchat.H2HChatMessage;
-import com.itutorgroup.h2hchat.H2HChatUser;
 import com.itutorgroup.h2hconference.H2HConference;
 import com.itutorgroup.h2hconference.H2HConferenceConstant;
 import com.itutorgroup.h2hconference.H2HPeer;
@@ -136,7 +135,6 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
 
     private ArrayList<Poll> polls = new ArrayList<>();
     private ArrayList<Poll> waitPolls = new ArrayList<>();
-    private int tempIndex = -1;
     private static final int PERMISSION_BOTH = 2000;
     private boolean isShowWhiteboardLocatingPoll;
 
@@ -172,12 +170,11 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
         }
     }
 
-    private void startPoll(Poll poll, int tempIndex) {
-//        MeetingActions.startPoll(this, poll, tempIndex);
+    private void startPoll(Poll poll) {
+//        MeetingActions.startPoll(this, poll);
     }
 
-    private void showPoll(Poll poll, final int tempIndex) {
-        this.tempIndex = tempIndex;
+    private void showPoll(Poll poll) {
         if (startPollDialog == null) {
             startPollDialog = new AutoDismissMaterialDialog(this);
             startPollDialog.setMessage(getString(R.string.start_poll_tips, ""))
@@ -190,7 +187,7 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                             dialog.dismiss();
                             polling = false;
                             if (isPositiveButton) {
-                                startPoll(MeetingActivity.this.poll, MeetingActivity.this.tempIndex);
+                                startPoll(MeetingActivity.this.poll);
                             } else {
                                 checkWaitPolls();
                             }
@@ -327,8 +324,6 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                 showSupporMessage();
             } else if (data.hasExtra(MeetingConstants.languageCode)) {
                 languageCode = data.getStringExtra(MeetingConstants.languageCode);
-            } else if (data.hasExtra(MeetingConstants.tempIndex)) {
-                tempIndex = data.getIntExtra(MeetingConstants.tempIndex, -1);
             }
         } else if (requestCode == PERMISSION_BOTH) {
             requestPermission();
@@ -456,28 +451,28 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
-        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (fragment == null) {
-            if (TextUtils.equals(tag, ConferenceFragment.class.getSimpleName())) {
-                conferenceFragment = ConferenceFragment.newInstance(serverConfig);
-                participantsFragment = ParticipantsFragment.newInstance(serverConfig);
-                chatFragment = ChatFragment.newInstance(serverConfig);
-                transaction.add(R.id.container, conferenceFragment, ConferenceFragment.class.getSimpleName())
-                        .add(R.id.container_all, participantsFragment, ParticipantsFragment.class.getSimpleName())
-                        .add(R.id.container_all, chatFragment, ChatFragment.class.getSimpleName())
-                        .hide(participantsFragment)
-                        .hide(chatFragment);
-                currentFragment = conferenceFragment;
-            } else if (TextUtils.equals(tag, WhiteBoardFragment.class.getSimpleName())) {
-                whiteBoardFragment = WhiteBoardFragment.newInstance(polls, isShowWhiteboardLocatingPoll);
-                transaction.hide(currentFragment).add(R.id.container, whiteBoardFragment, WhiteBoardFragment.class.getSimpleName());
-                currentFragment = whiteBoardFragment;
-            }
+            conferenceFragment = ConferenceFragment.newInstance(serverConfig);
+            participantsFragment = ParticipantsFragment.newInstance(serverConfig);
+            chatFragment = ChatFragment.newInstance(serverConfig);
+            whiteBoardFragment = WhiteBoardFragment.newInstance(polls, isShowWhiteboardLocatingPoll);
+            transaction.add(R.id.container, conferenceFragment, ConferenceFragment.class.getSimpleName())
+                    .add(R.id.container_all, participantsFragment, ParticipantsFragment.class.getSimpleName())
+                    .add(R.id.container_all, chatFragment, ChatFragment.class.getSimpleName())
+                    .add(R.id.container, whiteBoardFragment, WhiteBoardFragment.class.getSimpleName())
+                    .hide(whiteBoardFragment)
+                    .hide(participantsFragment)
+                    .hide(chatFragment);
+            fragment = conferenceFragment;
         } else {
-            transaction.hide(currentFragment).show(fragment);
-            currentFragment = fragment;
+            transaction.show(fragment);
+        }
+        if (currentFragment != null) {
+            transaction.hide(currentFragment);
         }
         transaction.commitAllowingStateLoss();
+        currentFragment = fragment;
     }
 
     //control audio
@@ -629,8 +624,6 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
 
     private void launchMeeting() {
         ServerConfig serverConfig = (ServerConfig) getIntent().getSerializableExtra("serverConfig");
-//        H2HWhiteboardManager.getInstance().connect(context);
-//        afterLaunchMeeting();
         H2HModel.getInstance().getLaunchParameters(serverConfig.origin, serverConfig.serverURL, serverConfig.userToken, context, new H2HCallback() {
             @Override
             public void onCompleted(Exception ex, H2HCallBackStatus status) {
@@ -660,7 +653,7 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                             }
                             LogUtils.e("App Level", (ex == null ? "H2HConference connect fail" : ex.toString()));
                             if (!isMeetingLauched) {
-                                        mHandler.post(new Runnable() {
+                                mHandler.post(new Runnable() {
                                     @Override
                                     public void run() {
                                         launchFail();
@@ -719,10 +712,14 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (polling || AppManager.getAppManager().currentActivity() != MeetingActivity.this) {
+                        if (System.currentTimeMillis() >= poll.getEndTime()) {
                             return;
                         }
-                        showPoll(poll, -1);
+                        if (polling || AppManager.getAppManager().currentActivity() != MeetingActivity.this) {
+                            waitPolls.add(poll);
+                            return;
+                        }
+                        showPoll(poll);
                     }
                 });
             }
@@ -850,8 +847,8 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     //A user status changed
-                    H2HChatUser chatUser = (H2HChatUser) intent.getSerializableExtra(H2HChatConstant.H2HChatUser);
-                    receiveUserState(chatUser);
+//                    H2HChatUser chatUser = (H2HChatUser) intent.getSerializableExtra(H2HChatConstant.H2HChatUser);
+                    receiveUserState();
                 }
             };
             context.registerReceiver(chatUserStatusReceiver, new IntentFilter(H2HChatConstant.CHAT_USER_STATUS_CHANGE));
@@ -891,11 +888,8 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
         }
     }
 
-    private void receiveUserState(H2HChatUser chatUser) {
+    private void receiveUserState() {
         if (chatFragment != null && chatFragment.isCreated) {
-//            ChatMessage message = MRUtils.parseUserState(chatUser);
-//            messages.add(message);
-//            chatFragment.receiveUserState(message);
             chatFragment.receiveUserState();
 
         }
@@ -919,7 +913,6 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
 
     @Override
     public void conferenceFragmentviewCreated() {
-//        H2HConference.getInstance().initRTCConnection();
         if (H2HModel.getInstance().getMeetingType() == H2HModel.H2H_MEETINGTYPE.H2H_BROADCAST) {
             ibMic.setSelected(false);
             ibWebcam.setSelected(false);
@@ -1210,7 +1203,7 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
         for (Poll poll : waitPolls) {
             if (poll.getEndTime() > System.currentTimeMillis()) {
                 LogUtils.i(poll.getPollId());
-                showPoll(poll, -1);
+                showPoll(poll);
                 waitPolls.remove(poll);
                 break;
             }

@@ -14,10 +14,10 @@
         android:background="@android:color/white">
 
         <EditText
-            android:id="@+id/emailAddressEditText"
+            android:id="@+id/displayNameEditText"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:hint="@string/hint_emailAddress"
+            android:hint="@string/hint_displayName"
             android:inputType="textEmailAddress"
             android:lines="1"
             android:nextFocusForward="@+id/meetingidEditText"/>
@@ -26,7 +26,7 @@
             android:id="@+id/meetingidEditText"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_below="@+id/emailAddressEditText"
+            android:layout_below="@+id/displayNameEditText"
             android:hint="@string/hint_meeingId"
             android:inputType="number"
             android:lines="1"

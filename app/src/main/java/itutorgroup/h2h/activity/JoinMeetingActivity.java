@@ -28,8 +28,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class JoinMeetingActivity extends MeetingRoomBaseActivity implements EasyPermissions.PermissionCallbacks {
     private static final int PERMISSION_BOTH = 2000;
-    private EditText etMeetingId, etEmailAddress;
-    private String email;
+    private EditText etMeetingId, etName;
     private Button joinMeetingBtn;
 
     @Override
@@ -39,12 +38,11 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity implements Easy
     @Override
     protected void initView() {
         etMeetingId = (EditText) findViewById(R.id.meetingidEditText);
-        etEmailAddress = (EditText) findViewById(R.id.emailAddressEditText);
+        etName = (EditText) findViewById(R.id.displayNameEditText);
         joinMeetingBtn = (Button) findViewById(R.id.joinMeetingBtn);
         String meetingId = getIntent().getStringExtra("meetingId");
         if (meetingId != null) {
             etMeetingId.setText(StringUtil.formatMeetingId(meetingId));
-            etEmailAddress.setVisibility(View.GONE);
         }
     }
 
@@ -74,17 +72,16 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity implements Easy
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                if (s.length() > 0 && s.length() % 4 == 0) {
+                    s = StringUtil.space(s.toString(), "-", 3);
+                    etMeetingId.setText(s.toString());
+                    etMeetingId.setSelection(s.length());
+                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String email = etMeetingId.getText().toString().replace("-", "");
-                if (!TextUtils.isEmpty(email) && !TextUtils.equals(email, JoinMeetingActivity.this.email)) {
-                    JoinMeetingActivity.this.email = email;
-                    etMeetingId.setText(StringUtil.formatMeetingId(email));
-                    etMeetingId.setSelection(etMeetingId.length());
-                }
             }
         });
     }
@@ -101,8 +98,8 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity implements Easy
             cancelJoinMeeting();
             return;
         }
-        if (TextUtils.isEmpty(etEmailAddress.getText().toString().trim()) && !getIntent().hasExtra("meetingId")) {
-            showToast(getString(R.string.emailAddress_tip));
+        if (TextUtils.isEmpty(etName.getText().toString().trim())) {
+            showToast(getString(R.string.displayName_tip));
             cancelJoinMeeting();
             return;
         }
@@ -127,7 +124,7 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity implements Easy
 
     private void joinMeeting() {
         showLoadingDialog();
-        String email = etEmailAddress.getText().toString().trim();
+        String email = etName.getText().toString().trim();
         String meetingId = etMeetingId.getText().toString().trim().replace("-", "");
         final H2HHttpRequest h2HHttpRequest = H2HHttpRequest.getInstance();
         h2HHttpRequest.joinMeeting(meetingId, email, new H2HCallback() {
