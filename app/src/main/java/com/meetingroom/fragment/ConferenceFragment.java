@@ -23,6 +23,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.itutorgroup.h2hchat.H2HChat;
 import com.itutorgroup.h2hconference.H2HConference;
 import com.itutorgroup.h2hconference.H2HHLSListener;
+import com.itutorgroup.h2hmodel.H2HFeatures;
 import com.itutorgroup.h2hmodel.H2HModel;
 import com.meetingroom.activity.MeetingActivity;
 import com.meetingroom.adapter.delegate.ChatOverlayAdapter;
@@ -245,7 +246,7 @@ public class ConferenceFragment extends BaseFragment {
     private void showAndPlayHLSVideo(boolean isPlay) {
         Log.i(tag, "showAndPlayHLSVideo() isPlay=" + isPlay);
         showHLSVideo(isPlay);
-        if (isPlay) {
+        if (isPlay && H2HFeatures.isVideoEnabled()) {
             videoview.startPlayLogic();
         }
     }
