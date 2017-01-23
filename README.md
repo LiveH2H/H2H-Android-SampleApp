@@ -9,9 +9,9 @@ Step 2.
   Copy the following code into your app level build.gradle file, under dependencies:
 
 
-	compile 'com.liveh2h:h2h-video-conference:1+'
+	compile 'com.liveh2h:h2h-video-conference:1.0.37'
 	compile 'io.pristine:libjingle:9694@aar'
-	compile 'com.koushikdutta.async:androidasync:2.+'
+	compile 'com.koushikdutta.async:androidasync:2.1.8'
 Step 3.
 
    See how you can use LiveH2H on Android:
@@ -26,9 +26,9 @@ How to Get H2H SDK
 ---
 Copy the following code into your app level build.gradle file, under dependencies:
 ```
-compile 'com.liveh2h:h2h-video-conference:1.0.16'
+compile 'com.liveh2h:h2h-video-conference:1.0.37'
 compile 'io.pristine:libjingle:9694@aar'
-compile 'com.koushikdutta.async:androidasync:2.+'
+compile 'com.koushikdutta.async:androidasync:2.1.8'
 ```
 
 H2H Video Conference APIs
@@ -41,48 +41,40 @@ H2H Video Conference APIs
 ####How to login####
 ```
 H2HHttpRequest.getInstance().loginH2H(email, pwd, new H2HCallback() {
-	@Override
-	public void onCompleted(Exception ex, H2HCallBackStatus status) {
-		if (status == H2HCallBackStatus.H2HCallBackStatusOK){
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
-				}
-			});
-		}else {
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(LoginActivity.this,"Failed to Login",Toast.LENGTH_SHORT).show();
-				}
-			});
-		}
-	}
+    @Override
+    public void onCompleted(Exception ex, final H2HCallBackStatus status) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                dismissLoadingDialog();
+                if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+                    showToast("Login Success");
+                } else {
+                    showToast("Failed to Login");
+                }
+            }
+        });
+    }
 });
 ```
 
 ####How to signup####
 ```
-H2HHttpRequest.getInstance().signUpH2HUser(userName, firstName, lastName, email, pwd, new H2HCallback() {
-	@Override
-	public void onCompleted(Exception ex, H2HCallBackStatus status) {
-		if (status==H2HCallBackStatus.H2HCallBackStatusOK){
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(SignupActivity.this,"User Sign Up Success",Toast.LENGTH_SHORT).show();
-				}
-			});
-		}else {
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(SignupActivity.this,"Sign Up Failed",Toast.LENGTH_SHORT).show();
-				}
-			});
-		}
-	}
+H2HHttpRequest.getInstance().signUpH2HUser(firstName, lastName, email, pwd, new H2HCallback() {
+
+@Override
+public void onCompleted(Exception ex, final H2HCallBackStatus status) {
+    runOnUiThread(new Runnable() {
+        @Override
+        public void run() {
+            dismissLoadingDialog();
+            if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+                showToast("User Sign Up Success");
+            } else {
+                showToast("Sign Up Failed");
+            }
+        }
+    });
 });
 ```
 
@@ -91,102 +83,126 @@ If you are the host, you need to schedule a meeting or create an instant meeting
 
 ####Schedule a Meeting####
 ```
-H2HHttpRequest.getInstance().scheduleMeeting(subject, description, startTime,invitees, translators, isGroupMeeting, shouldRecord, new H2HScheduleMeetingCallback() {
-	@Override
-	public void onCompleted(final Exception ex, final H2HCallBackStatus status) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				if (status == H2HCallBackStatus.H2HCallBackStatusOK){
-					Toast.makeText(ScheduleMeetingActivity.this,"Schedule a meeting success: "+meetingID,Toast.LENGTH_SHORT).show();
-					//You can put Join meeting code here
-				}else {
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							Toast.makeText(ScheduleMeetingActivity.this,"Failed to schedule a meeting",Toast.LENGTH_SHORT).show();
-						}
-					});
-				}
-			}
-		});
-	}
+H2HHttpRequest.getInstance().scheduleMeeting(param, new H2HScheduleMeetingCallback() {
+    @Override
+    public void onCompleted(final Exception ex, final H2HCallBackStatus status) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                dismissLoadingDialog();
+                if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+                    showToast("Schedule a meeting success: " + meetingID);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ScheduleMeetingActivity.this)
+                    .setMessage("Do you want to join the meeting now?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            Intent i = new Intent(ScheduleMeetingActivity.this, JoinMeetingActivity.class);
+                            i.putExtra("meetingId", meetingID);
+                            startActivity(i);
+                        }
+                    })
+                    .setNegativeButton("No", null);
+                    builder.create().show();
+                } else {
+                    showToast("Failed to schedule a meeting");
+                }
+            }
+        });
+    }
 });
-
 ```
 ####Join a Meeting####
 
 ```
-h2HHttpRequest = H2HHttpRequest.getInstance();
-h2HHttpRequest.joinMeeting(
-		etMeetingId.getText().toString().trim().replace("-", ""),
-		email,
-		new H2HCallback() {
-	@Override
-	public void onCompleted(Exception ex, H2HCallBackStatus status) {
-		if (status == H2HCallBackStatus.H2HCallBackStatusOK){
-			launchMeeting(h2HHttpRequest.getOrigin(),h2HHttpRequest.getServerURL(),h2HHttpRequest.getUserToken());
-		}
-	}
+final H2HHttpRequest h2HHttpRequest = H2HHttpRequest.getInstance();
+h2HHttpRequest.joinMeeting(meetingId, email, new H2HCallback() {
+    @Override
+    public void onCompleted(Exception ex, final H2HCallBackStatus status) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+                launchMeeting(h2HHttpRequest.getOrigin(), h2HHttpRequest.getServerURL(), h2HHttpRequest.getUserToken());
+                } else {
+                    showToast("Meeting Not Found, Please Enter an Exiting Meeting id");
+                }
+                dismissLoadingDialog();
+                cancelJoinMeeting();
+            }
+        });
+    }
 });
 ```
 
 ####Instant Meeting####
 ```
-h2HHttpRequest = H2HHttpRequest.getInstance();
-h2HHttpRequest.instantMeeting(
-		etDisplayName.getText().toString().trim(),
-		etEmailAddress.getText().toString().trim(),
-		new H2HCallback() {
-			@Override
-			public void onCompleted(Exception ex, H2HCallBackStatus status) {
-				if (status == H2HCallBackStatus.H2HCallBackStatusOK){
-					launchMeeting(h2HHttpRequest.getOrigin(),h2HHttpRequest.getServerURL(),h2HHttpRequest.getUserToken());
-				}
-			}
-		});
+H2HConference.getInstance().connect(InstantMeetingActivity.this, new H2HCallback() {
+    @Override
+        public void onCompleted(Exception ex, H2HCallBackStatus status) {
+        if (ex != null) {
+            Log.e("App Level", ex.getMessage());
+        } else {
+            if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+                Log.d("App Level", "Launch a Meeting");
+            if(TextUtils.equals(AppManager.getAppManager().currentActivity().getClass().getSimpleName(),InstantMeetingActivity.class.getSimpleName())){
+                    Intent intent = new Intent(InstantMeetingActivity.this, MeetingActivity.class);
+                    ServerConfig serverConfig = new ServerConfig();
+                    serverConfig.userToken = userToken;
+                    intent.putExtra("serverConfig", serverConfig);
+                    startActivityForResult(intent,0);
+                }
+            }
+        }
+    }
+});
 ```
 
 ####Launch a Meeting: Pass origin, serverURL and userToken to the H2HSDK####
 ```
 final H2HModel model = H2HModel.getInstance();
-model.getLaunchParameters(origin, serverURL, userToken, new H2HCallback() {
-	@Override
-	public void onCompleted(Exception ex, H2HCallBackStatus status) {
-		if (status == H2HCallBackStatus.H2HCallBackStatusOK){
-			H2HConference.getInstance().connect(MainActivity.this, new H2HCallback() {
-				@Override
-				public void onCompleted(Exception ex, H2HCallBackStatus status) {
-					if (ex != null){
-						Log.e("App Level",ex.getMessage());
-					}else{
-						if (status == H2HCallBackStatus.H2HCallBackStatusOK){
-							Log.d("App Level","Launch a meeting");
-							Intent intent = new Intent(MainActivity.this, VideoConferenceActivity.class);
-							startActivity(intent);
-						}
-					}
-				}
-			});
-
-			H2HChat.getInstance().connect(MainActivity.this, new H2HCallback() {
-				@Override
-				public void onCompleted(Exception ex, H2HCallBackStatus status) {
-					if (ex != null){
-						Log.e("App Level",ex.getMessage());
-					}else{
-						if (status == H2HCallBackStatus.H2HCallBackStatusOK){
-						}else {
-							Log.d("App Level","something went wrong");
-						}
-					}
-				}
-			});
-		}else if(status == H2HCallBackStatus.H2HCallBackStatusFail){
-			Toast.makeText(MainActivity.this,"Unable to join meeting",Toast.LENGTH_SHORT).show();
-		}
-	}
- });
+model.getLaunchParameters(origin, serverURL, userToken, this, new H2HCallback() {
+    @Override
+    public void onCompleted(Exception ex, H2HCallBackStatus status) {
+        if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+            H2HConference.getInstance().connect(InstantMeetingActivity.this, new H2HCallback() {
+                @Override
+                public void onCompleted(Exception ex, H2HCallBackStatus status) {
+                    if (ex != null) {
+                        Log.e("App Level", ex.getMessage());
+                    } else {
+                        if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+                        Log.d("App Level", "Launch a Meeting");
+                        if(TextUtils.equals(AppManager.getAppManager().currentActivity().getClass().getSimpleName(),InstantMeeting  Activity.class.getSimpleName())){
+                                Intent intent = new Intent(InstantMeetingActivity.this, MeetingActivity.class);
+                                ServerConfig serverConfig = new ServerConfig();
+                                serverConfig.userToken = userToken;
+                                intent.putExtra("serverConfig", serverConfig);
+                                startActivityForResult(intent,0);
+                            }
+                        }
+                    }
+                }
+            });
+            H2HChat.getInstance().connect(InstantMeetingActivity.this, new H2HCallback() {
+                @Override
+                public void onCompleted(Exception ex, H2HCallBackStatus status) {
+                    if (ex != null) {
+                        Log.e("App Level", ex.getMessage());
+                    } else {
+                        if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+                            Log.e("App Level", "start chat");
+                        } else {
+                            Log.e("App Level", "something went wrong");
+                        }
+                    }
+                }
+            });
+        } else if (status == H2HCallBackStatus.H2HCallBackStatusFail) {
+            Toast.makeText(InstantMeetingActivity.this, "Unable to join a meeting", Toast.LENGTH_SHORT).show();
+        }
+    }
+});
 ```
 
 In your Activity or Fragment that displays the videos, you should have a GLSurfaceView that contains Video Renders. First, you should set your GLSurfaceView as VideoRendererGui: VideoRendererGui.setView(videoView, null), then pass a H2HRTCListener to H2HConference.java to receive callbacks, finally init the WebRTC connection. 
@@ -236,20 +252,21 @@ H2H Chat APIs
 Connect to the Server
 ```
 H2HChat.getInstance().connect(context, new H2HCallback() {
-	@Override
-	public void onCompleted(Exception ex, H2HCallBackStatus status) {
-		if (ex != null){
-			Log.e("App Level",ex.getMessage());
-		}else{
-			if (status == H2HCallBackStatus.H2HCallBackStatusOK){
-				Log.d("App Level","connect to server, ready to chat");
-				Intent intent = new Intent(MainActivity.this, ChatActivity.class);
-				startActivity(intent);
-			}
-		}
-	}
+    @Override
+    public void onCompleted(Exception ex, H2HCallBackStatus status) {
+
+        if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+            Log.e("App Level", "start chat");
+        } else {
+            if (ex != null) {
+                ex.printStackTrace();
+            }
+        }
+    }
 });
 ```
+
+
 Receive Chat Message Notification
 ```
 broadcastReceiver = new H2HBroadcastReceiver(){
@@ -326,31 +343,5 @@ public String getDomain()
 public H2HChatUser getSelfChatUser()
 public String getJid()
 
-```
-
-H2H Whiteboard URL
----
-Currently, we use webview, we can get the url:
-```
-H2HModel.getInstance().getWhiteboardUrls();
-
-webView.getSettings().setJavaScriptEnabled(true);
-webView.setInitialScale(99);
-MyBrowser myBrowser = new MyBrowser();
-myBrowser.shouldOverrideUrlLoading(webView,whiteboardURL);
-webView.setWebViewClient(myBrowser);
-
-private class MyBrowser extends WebViewClient {
-	@Override
-	public boolean shouldOverrideUrlLoading(WebView view, String url) {
-		view.loadUrl(url);
-		return true;
-	}
-
-	@Override
-	public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error){
-		handler.proceed();
-	}
-}
 ```
 
