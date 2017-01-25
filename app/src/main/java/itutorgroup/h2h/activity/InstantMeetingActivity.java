@@ -6,9 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +19,8 @@ import com.itutorgroup.h2hconference.H2HConference;
 import com.itutorgroup.h2hmodel.H2HCallback;
 import com.itutorgroup.h2hmodel.H2HHttpRequest;
 import com.itutorgroup.h2hmodel.H2HModel;
+import com.meetingroom.activity.*;
+import com.meetingroom.utils.SystemUtil;
 import com.mosai.utils.Tools;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
@@ -29,7 +29,6 @@ import com.zhy.m.permission.PermissionGrant;
 import itutorgroup.h2h.AppManager;
 import itutorgroup.h2h.R;
 import itutorgroup.h2h.bean.ServerConfig;
-import itutorgroup.h2h.utils.StringUtil;
 
 public class InstantMeetingActivity extends MeetingRoomBaseActivity {
 
@@ -94,50 +93,61 @@ public class InstantMeetingActivity extends MeetingRoomBaseActivity {
     }
 
     private void launchMeeting(String origin,String serverURL, final String userToken) {
-
-        final H2HModel model = H2HModel.getInstance();
-        model.getLaunchParameters(origin, serverURL, userToken, this, new H2HCallback() {
-            @Override
-            public void onCompleted(Exception ex, H2HCallBackStatus status) {
-                if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
-                    H2HConference.getInstance().connect(InstantMeetingActivity.this, new H2HCallback() {
-                        @Override
-                        public void onCompleted(Exception ex, H2HCallBackStatus status) {
-                            if (ex != null) {
-                                Log.e("App Level", ex.getMessage());
-                            } else {
-                                if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
-                                    Log.d("App Level", "Launch a Meeting");
-                                    if(TextUtils.equals(AppManager.getAppManager().currentActivity().getClass().getSimpleName(),InstantMeetingActivity.class.getSimpleName())){
-                                        Intent intent = new Intent(InstantMeetingActivity.this, MeetingActivity.class);
-                                        ServerConfig serverConfig = new ServerConfig();
-                                        serverConfig.userToken = userToken;
-                                        intent.putExtra("serverConfig", serverConfig);
-                                        startActivityForResult(intent,0);
-                                    }
-                                }
-                            }
-                        }
-                    });
-                    H2HChat.getInstance().connect(InstantMeetingActivity.this, new H2HCallback() {
-                        @Override
-                        public void onCompleted(Exception ex, H2HCallBackStatus status) {
-                            if (ex != null) {
-                                Log.e("App Level", ex.getMessage());
-                            } else {
-                                if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
-                                    Log.e("App Level", "start chat");
-                                } else {
-                                    Log.e("App Level", "something went wrong");
-                                }
-                            }
-                        }
-                    });
-                } else if (status == H2HCallBackStatus.H2HCallBackStatusFail) {
-                    Toast.makeText(InstantMeetingActivity.this, "Unable to join a meeting", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        Intent intent;
+        if (SystemUtil.isTablet(this)) {
+            intent = new Intent(this, com.meetingroom.activity.flat.FlatMeetingActivity.class);
+        } else {
+            intent = new Intent(this, com.meetingroom.activity.MeetingActivity.class);
+        }
+        com.meetingroom.bean.ServerConfig serverConfig = new com.meetingroom.bean.ServerConfig();
+        serverConfig.userToken = userToken;
+        serverConfig.origin = origin;
+        serverConfig.serverURL = serverURL;
+        intent.putExtra("serverConfig", serverConfig);
+        startActivityForResult(intent, 0);
+//        final H2HModel model = H2HModel.getInstance();
+//        model.getLaunchParameters(origin, serverURL, userToken, this, new H2HCallback() {
+//            @Override
+//            public void onCompleted(Exception ex, H2HCallBackStatus status) {
+//                if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+//                    H2HConference.getInstance().connect(InstantMeetingActivity.this, new H2HCallback() {
+//                        @Override
+//                        public void onCompleted(Exception ex, H2HCallBackStatus status) {
+//                            if (ex != null) {
+//                                Log.e("App Level", ex.getMessage());
+//                            } else {
+//                                if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+//                                    Log.d("App Level", "Launch a Meeting");
+//                                    if(TextUtils.equals(AppManager.getAppManager().currentActivity().getClass().getSimpleName(),InstantMeetingActivity.class.getSimpleName())){
+//                                        Intent intent = new Intent(InstantMeetingActivity.this, com.meetingroom.activity.MeetingActivity.class);
+//                                        ServerConfig serverConfig = new ServerConfig();
+//                                        serverConfig.userToken = userToken;
+//                                        intent.putExtra("serverConfig", serverConfig);
+//                                        startActivityForResult(intent,0);
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    });
+//                    H2HChat.getInstance().connect(InstantMeetingActivity.this, new H2HCallback() {
+//                        @Override
+//                        public void onCompleted(Exception ex, H2HCallBackStatus status) {
+//                            if (ex != null) {
+//                                Log.e("App Level", ex.getMessage());
+//                            } else {
+//                                if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+//                                    Log.e("App Level", "start chat");
+//                                } else {
+//                                    Log.e("App Level", "something went wrong");
+//                                }
+//                            }
+//                        }
+//                    });
+//                } else if (status == H2HCallBackStatus.H2HCallBackStatusFail) {
+//                    Toast.makeText(InstantMeetingActivity.this, "Unable to join a meeting", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
     }
 
 

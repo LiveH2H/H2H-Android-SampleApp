@@ -682,8 +682,8 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                 }
                 if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
 
-                    H2HFeatures.add(H2HFeatures.FEATURES_WHITEBOARD);
-                    H2HFeatures.add(H2HFeatures.FEATURES_CHAT);
+//                    H2HFeatures.add(H2HFeatures.FEATURES_WHITEBOARD);
+//                    H2HFeatures.add(H2HFeatures.FEATURES_CHAT);
 
                     H2HConference.getInstance().connect(context, new H2HCallback() {
                         @Override
