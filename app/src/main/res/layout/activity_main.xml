@@ -97,39 +97,39 @@
                     android:background="@android:color/darker_gray"/>
             </RelativeLayout>
 
-            <!--<RelativeLayout-->
-                <!--android:id="@+id/instant"-->
-                <!--android:onClick="instantMeetingBtnClicked"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="15dp"-->
-                <!--android:layout_marginRight="15dp">-->
+            <RelativeLayout
+                android:id="@+id/instant"
+                android:onClick="instantMeetingBtnClicked"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
 
-                <!--<TextView-->
-                    <!--android:id="@+id/instantTV1"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Instant Meeting"-->
-                    <!--android:textColor="#e85e30"-->
-                    <!--android:textSize="20sp"-->
-                    <!--android:textStyle="bold" />-->
+                <TextView
+                    android:id="@+id/instantTV1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Instant Meeting"
+                    android:textColor="#e85e30"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/instantTV2"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/instantTV1"-->
-                    <!--android:layout_marginTop="6dp"-->
-                    <!--android:text="Start an Instant meeting, no need to login." />-->
+                <TextView
+                    android:id="@+id/instantTV2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/instantTV1"
+                    android:layout_marginTop="6dp"
+                    android:text="Start an Instant meeting, no need to login." />
 
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_below="@+id/instantTV2"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:background="@android:color/darker_gray"/>-->
-            <!--</RelativeLayout>-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/instantTV2"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/darker_gray"/>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/schedule"
