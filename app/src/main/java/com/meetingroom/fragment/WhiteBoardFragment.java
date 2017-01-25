@@ -151,8 +151,7 @@ public class WhiteBoardFragment extends BaseFragment {
 
             }
 
-            @Override
-            public void onUpdatePoll(final Object object) {
+           public void onUpdatePoll(final Object object) {
                 if (pollPagerAdapter == null || isFinishing()) {
                     return;
                 }

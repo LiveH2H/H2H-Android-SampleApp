@@ -70,7 +70,8 @@ public class PollResultActivity extends MeetingRoomBaseActivity {
         niceSpinner.setVisibility(summary.getPoll().getQuestions().size()==1?View.GONE:View.VISIBLE);
         niceSpinner.setSelectedIndex(0);
         setData(0);
-        H2HWhiteboardManager.getInstance().updatePolls(summary.getPoll());
+        // TODO: Fixme
+//        H2HWhiteboardManager.getInstance().updatePolls(summary.getPoll());
     }
 
     @Override

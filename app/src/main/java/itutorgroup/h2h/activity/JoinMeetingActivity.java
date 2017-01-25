@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.itutorgroup.h2hmodel.H2HCallback;
 import com.itutorgroup.h2hmodel.H2HHttpRequest;
+import com.itutorgroup.h2hmodel.H2HResponse;
 import com.meetingroom.meet.MeetingActions;
 import com.meetingroom.utils.LogUtils;
 import com.meetingroom.utils.SystemUtil;
@@ -130,7 +131,7 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity implements Easy
         h2HHttpRequest.joinMeeting(meetingId, email, new H2HCallback() {
 
             @Override
-            public void onCompleted(Exception ex, final H2HCallBackStatus status) {
+            public void onCompleted(final Exception ex, final H2HCallBackStatus status, final H2HResponse response) {
                 if (isFinishing()) {
                     return;
                 }
@@ -140,7 +141,10 @@ public class JoinMeetingActivity extends MeetingRoomBaseActivity implements Easy
                         if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
                             launchMeeting(h2HHttpRequest.getOrigin(), h2HHttpRequest.getServerURL(), h2HHttpRequest.getUserToken());
                         } else {
-                            showToast("Meeting Not Found, Please Enter an Exiting Meeting id");
+                            final String message = response != null && !TextUtils.isEmpty(response.message)
+                                    ? response.message : "Meeting Not Found, Please Enter an Exiting Meeting id";
+
+                            showToast(message);
                         }
                         dismissLoadingDialog();
                         cancelJoinMeeting();

@@ -35,6 +35,7 @@ import com.itutorgroup.h2hconference.H2HRTCListener;
 import com.itutorgroup.h2hmodel.H2HCallback;
 import com.itutorgroup.h2hmodel.H2HFeatures;
 import com.itutorgroup.h2hmodel.H2HModel;
+import com.itutorgroup.h2hmodel.H2HResponse;
 import com.itutorgroup.h2hwhiteboard.H2HWhiteboardListener;
 import com.itutorgroup.h2hwhiteboard.H2HWhiteboardManager;
 import com.meetingroom.bean.ChatMessage;
@@ -511,7 +512,7 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
             } else if (H2HFeatures.isWhiteboardEnabled()) {
                 fragment = whiteBoardFragment;
                 transaction.show(whiteBoardFragment);
-            } else if(H2HFeatures.isChatEnabled()) {
+            } else if (H2HFeatures.isChatEnabled()) {
                 fragment = chatFragment;
                 transaction.show(chatFragment);
             }
@@ -528,11 +529,11 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
     //control audio
     private void changeAudio() {
         if (H2HModel.getInstance().getMeetingType() == H2HModel.H2H_MEETINGTYPE.H2H_BROADCAST) {
-            if(ibMic.isSelected()){
+            if (ibMic.isSelected()) {
                 H2HConference.getInstance().turnOffAudioForUser(H2HModel.getInstance().getRealDisplayName());
                 ibMic.setSelected(false);
-            }else{
-                ToastUtils.showToast(context,getString(R.string.no_permission_mic));
+            } else {
+                ToastUtils.showToast(context, getString(R.string.no_permission_mic));
             }
             return;
         }
@@ -676,7 +677,7 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
         ServerConfig serverConfig = (ServerConfig) getIntent().getSerializableExtra("serverConfig");
         H2HModel.getInstance().getLaunchParameters(serverConfig.origin, serverConfig.serverURL, serverConfig.userToken, context, new H2HCallback() {
             @Override
-            public void onCompleted(Exception ex, H2HCallBackStatus status) {
+            public void onCompleted(final Exception ex, final H2HCallBackStatus status, final H2HResponse response) {
                 if (isFinishing()) {
                     return;
                 }
@@ -687,14 +688,14 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
 
                     H2HConference.getInstance().connect(context, new H2HCallback() {
                         @Override
-                        public void onCompleted(Exception ex, H2HCallBackStatus status) {
+                        public void onCompleted(final Exception ex, final H2HCallBackStatus status, final H2HResponse response1) {
                             if (isFinishing()) {
-                                LogUtils.e("App Level", "isFinishing()");
+                                LogUtils.i("App Level", "isFinishing()");
                                 return;
                             }
 
                             if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
-                                LogUtils.e("App Level", "Launch a etMeetingId");
+                                LogUtils.i("App Level", "Launch a etMeetingId");
                                 if (!isMeetingLauched) {
                                     isMeetingLauched = true;
                                     hasConferenceConnected = true;
@@ -705,7 +706,10 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                                     return;
                                 }
                             }
-                            LogUtils.e("App Level", (ex == null ? "H2HConference connect fail" : ex.toString()));
+                            final String message = "H2HConference connect fail"
+                                    + response1 != null && !TextUtils.isEmpty(response1.message)
+                                    ? ": " + response1.message : "";
+                            LogUtils.e("App Level", (ex == null ? message : ex.toString()));
                             if (!isMeetingLauched) {
                                 mHandler.post(new Runnable() {
                                     @Override
@@ -718,7 +722,7 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                     });
                     H2HChat.getInstance().connect(context, new H2HCallback() {
                         @Override
-                        public void onCompleted(Exception ex, H2HCallBackStatus status) {
+                        public void onCompleted(final Exception ex, final H2HCallBackStatus status, final H2HResponse response1) {
                             if (isFinishing()) {
                                 LogUtils.e("App Level", "isFinishing()");
                                 return;
@@ -726,7 +730,10 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                             if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
                                 LogUtils.e("App Level", "start chat");
                             } else {
-                                LogUtils.e("App Level", (ex == null ? "something went wrong" : ex.toString()));
+                                final String message = "something went wrong"
+                                        + response1 != null && !TextUtils.isEmpty(response1.message)
+                                        ? ": " + response1.message : "";
+                                LogUtils.e("App Level", (ex == null ? message : ex.toString()));
                             }
                         }
                     });
@@ -1130,7 +1137,7 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
 
         @Override
         public void onHostToggleRaiseHandAudio(boolean enable) {
-            if(enable){
+            if (enable) {
                 final MaterialDialog dialog = new MaterialDialog(context);
                 dialog.setMessage(getString(R.string.tip_request_audio))
                         .setNegativeButton(getString(R.string.disagree), new View.OnClickListener() {
@@ -1149,7 +1156,7 @@ public class MeetingActivity extends MeetingRoomBaseActivity implements Conferen
                             }
                         });
                 dialog.show();
-            }else{
+            } else {
                 H2HConference.getInstance().turnOffAudioForUser(H2HModel.getInstance().getRealDisplayName());
                 ibMic.setSelected(false);
             }

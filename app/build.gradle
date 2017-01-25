@@ -56,7 +56,7 @@ dependencies {
     apt 'com.zhy:mpermission-compiler:1.0.0'
     compile 'com.zhy:mpermission-api:1.0.0'
     //H2H SDK
-    compile 'com.liveh2h:h2h-video-conference:1.0.37'
+    compile 'com.liveh2h:h2h-video-conference:1.0.39'
     compile 'io.pristine:libjingle:9694@aar'
     compile 'com.github.anrwatchdog:anrwatchdog:1.3.0'
     compile 'com.kyleduo.switchbutton:library:1.4.1'

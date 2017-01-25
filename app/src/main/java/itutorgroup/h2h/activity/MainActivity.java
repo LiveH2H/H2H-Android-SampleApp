@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.itutorgroup.h2hmodel.H2HCallback;
 import com.itutorgroup.h2hmodel.H2HHttpRequest;
+import com.itutorgroup.h2hmodel.H2HResponse;
 import com.itutorgroup.h2hmodel.H2HUserManager;
 
 import itutorgroup.h2h.R;
@@ -65,7 +66,7 @@ public class MainActivity extends MeetingRoomBaseActivity {
     public void signoutBtnClicked(View view) {
         H2HHttpRequest.getInstance().logoutH2H(new H2HCallback() {
             @Override
-            public void onCompleted(Exception ex, H2HCallBackStatus status) {
+            public void onCompleted(final Exception ex, final H2HCallBackStatus status, final H2HResponse response) {
                 showToast("You have signed out");
             }
         });

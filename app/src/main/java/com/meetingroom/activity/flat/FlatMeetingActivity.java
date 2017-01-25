@@ -38,6 +38,7 @@ import com.itutorgroup.h2hconference.H2HRTCListener;
 import com.itutorgroup.h2hmodel.H2HCallback;
 import com.itutorgroup.h2hmodel.H2HFeatures;
 import com.itutorgroup.h2hmodel.H2HModel;
+import com.itutorgroup.h2hmodel.H2HResponse;
 import com.itutorgroup.h2hwhiteboard.H2HWhiteboardListener;
 import com.itutorgroup.h2hwhiteboard.H2HWhiteboardManager;
 import com.meetingroom.activity.MeetingRoomBaseActivity;
@@ -90,7 +91,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * 时间：2016年07月12日 15:34
  * 邮箱：nianbin@mosainet.com
  */
-public class FlatMeetingActivity extends MeetingRoomBaseActivity implements FlatConferenceFragment.FlatConferenceFragmentCallback, EasyPermissions.PermissionCallbacks,MDialogmissCallback
+public class FlatMeetingActivity extends MeetingRoomBaseActivity implements FlatConferenceFragment.FlatConferenceFragmentCallback, EasyPermissions.PermissionCallbacks, MDialogmissCallback
 
 
 {
@@ -339,11 +340,11 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
     //control audio
     private void changeAudio() {
         if (H2HModel.getInstance().getMeetingType() == H2HModel.H2H_MEETINGTYPE.H2H_BROADCAST) {
-            if(ibMic.isSelected()){
+            if (ibMic.isSelected()) {
                 H2HConference.getInstance().turnOffAudioForUser(H2HModel.getInstance().getRealDisplayName());
                 ibMic.setSelected(false);
-            }else{
-                ToastUtils.showToast(context,getString(R.string.no_permission_mic));
+            } else {
+                ToastUtils.showToast(context, getString(R.string.no_permission_mic));
             }
             return;
         }
@@ -528,7 +529,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
             if (data.hasExtra(MeetingConstants.supportForOther)) {
                 showSupporMessage();
             }
-        } else if(requestCode == MeetingConstants.startPoll){
+        } else if (requestCode == MeetingConstants.startPoll) {
             checkWaitPolls();
         }
     }
@@ -609,14 +610,14 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
         ServerConfig serverConfig = (ServerConfig) getIntent().getSerializableExtra("serverConfig");
         H2HModel.getInstance().getLaunchParameters(serverConfig.origin, serverConfig.serverURL, serverConfig.userToken, context, new H2HCallback() {
             @Override
-            public void onCompleted(Exception ex, H2HCallBackStatus status) {
+            public void onCompleted(final Exception ex, final H2HCallBackStatus status, final H2HResponse response) {
                 if (isFinishing()) {
                     return;
                 }
                 if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
                     H2HConference.getInstance().connect(context, new H2HCallback() {
                         @Override
-                        public void onCompleted(Exception ex, H2HCallBackStatus status) {
+                        public void onCompleted(final Exception ex, final H2HCallBackStatus status, final H2HResponse response1) {
                             if (isFinishing()) {
                                 Log.e("App Level", "isFinishing()");
                                 return;
@@ -649,7 +650,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
                     });
                     H2HChat.getInstance().connect(context, new H2HCallback() {
                         @Override
-                        public void onCompleted(Exception ex, H2HCallBackStatus status) {
+                        public void onCompleted(final Exception ex, final H2HCallBackStatus status, final H2HResponse response1) {
                             if (isFinishing()) {
                                 Log.e("App Level", "isFinishing()");
                                 return;
@@ -1011,9 +1012,10 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
                 Log.e("App level", e.getMessage());
             }
         }
+
         @Override
         public void onHostToggleRaiseHandAudio(boolean enable) {
-            if(enable){
+            if (enable) {
                 final MaterialDialog dialog = new MaterialDialog(context);
                 dialog.setMessage(getString(R.string.tip_request_audio))
                         .setNegativeButton(getString(R.string.disagree), new View.OnClickListener() {
@@ -1032,7 +1034,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
                             }
                         });
                 dialog.show();
-            }else{
+            } else {
                 H2HConference.getInstance().turnOffAudioForUser(H2HModel.getInstance().getRealDisplayName());
                 ibMic.setSelected(false);
             }
@@ -1106,6 +1108,7 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
                     }
                 });
             }
+
             @Override
             public void onSocketConnected() {
 //                mHandler.post(new Runnable() {
@@ -1289,12 +1292,12 @@ public class FlatMeetingActivity extends MeetingRoomBaseActivity implements Flat
 //        sheetDialog.show();
 //    }
 
-    private void selectIcon(ImageButton ib){
+    private void selectIcon(ImageButton ib) {
         initIcons();
         ib.setSelected(true);
     }
 
-    private void initIcons(){
+    private void initIcons() {
 //        ibMic.setSelected(false);
         ibChat.setSelected(false);
         ibWhiteboard.setSelected(false);

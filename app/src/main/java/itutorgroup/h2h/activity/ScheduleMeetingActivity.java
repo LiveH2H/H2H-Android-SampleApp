@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
 import com.itutorgroup.h2hmodel.H2HHttpRequest;
+import com.itutorgroup.h2hmodel.H2HResponse;
 import com.itutorgroup.h2hmodel.H2HScheduleMeetingCallback;
 import com.itutorgroup.h2hmodel.H2HScheduleMeetingParamEntity;
 
@@ -174,7 +176,7 @@ public class ScheduleMeetingActivity extends MeetingRoomBaseActivity {
         showLoadingDialog();
         H2HHttpRequest.getInstance().scheduleMeeting(param, new H2HScheduleMeetingCallback() {
             @Override
-            public void onCompleted(final Exception ex, final H2HCallBackStatus status) {
+            public void onCompleted(final Exception ex, final H2HCallBackStatus status, final H2HResponse response) {
                 if (isFinishing()) {
                     return;
                 }
@@ -197,7 +199,10 @@ public class ScheduleMeetingActivity extends MeetingRoomBaseActivity {
                                     .setNegativeButton("No", null);
                             builder.create().show();
                         } else {
-                            showToast("Failed to schedule a meeting");
+                            final String message = "Failed to schedule a meeting"
+                                    + response != null && !TextUtils.isEmpty(response.message)
+                                    ? ": " + response.message : "";
+                            showToast(message);
                         }
                     }
                 });

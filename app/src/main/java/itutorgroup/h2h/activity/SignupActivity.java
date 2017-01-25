@@ -1,12 +1,14 @@
 package itutorgroup.h2h.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.itutorgroup.h2hmodel.H2HCallback;
 import com.itutorgroup.h2hmodel.H2HHttpRequest;
+import com.itutorgroup.h2hmodel.H2HResponse;
 
 import itutorgroup.h2h.R;
 
@@ -47,7 +49,7 @@ public class SignupActivity extends MeetingRoomBaseActivity {
             H2HHttpRequest.getInstance().signUpH2HUser(firstName, lastName, email, pwd, new H2HCallback() {
 
                 @Override
-                public void onCompleted(Exception ex, final H2HCallBackStatus status) {
+                public void onCompleted(final Exception ex, final H2HCallBackStatus status, final H2HResponse response) {
                     if (isFinishing()) {
                         return;
                     }
@@ -58,7 +60,11 @@ public class SignupActivity extends MeetingRoomBaseActivity {
                             if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
                                 showToast("User Sign Up Success");
                             } else {
-                                showToast("Sign Up Failed");
+                                final String message = "Sign Up Failed"
+                                        + response != null && !TextUtils.isEmpty(response.message)
+                                        ? ": " + response.message : "";
+
+                                showToast(message);
                             }
                         }
                     });

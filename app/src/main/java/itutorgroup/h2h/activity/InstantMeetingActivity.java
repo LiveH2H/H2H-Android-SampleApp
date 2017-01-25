@@ -19,6 +19,7 @@ import com.itutorgroup.h2hconference.H2HConference;
 import com.itutorgroup.h2hmodel.H2HCallback;
 import com.itutorgroup.h2hmodel.H2HHttpRequest;
 import com.itutorgroup.h2hmodel.H2HModel;
+import com.itutorgroup.h2hmodel.H2HResponse;
 import com.meetingroom.activity.*;
 import com.meetingroom.utils.SystemUtil;
 import com.mosai.utils.Tools;
@@ -34,7 +35,7 @@ public class InstantMeetingActivity extends MeetingRoomBaseActivity {
 
     private static final int PERMISSION_CAMERA = 0;
     private static final int PERMISSION_RECORD_AUDIO = 1;
-    private EditText  etDisplayName, etEmailAddress;
+    private EditText etDisplayName, etEmailAddress;
     private String email;
     private Button joinMeetingBtn;
     private ProgressBar spinner;
@@ -49,7 +50,7 @@ public class InstantMeetingActivity extends MeetingRoomBaseActivity {
         etDisplayName = (EditText) findViewById(R.id.displayNameEditText);
         etEmailAddress = (EditText) findViewById(R.id.emailAddressEditText);
         joinMeetingBtn = (Button) findViewById(R.id.joinMeetingBtn);
-        spinner = (ProgressBar)findViewById(R.id.progressBar);
+        spinner = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     @Override
@@ -68,7 +69,7 @@ public class InstantMeetingActivity extends MeetingRoomBaseActivity {
     }
 
 
-    private void cancelJoinMeeting(){
+    private void cancelJoinMeeting() {
         spinner.setVisibility(View.INVISIBLE);
         joinMeetingBtn.setClickable(true);
     }
@@ -92,7 +93,7 @@ public class InstantMeetingActivity extends MeetingRoomBaseActivity {
         requestAudioPermission();
     }
 
-    private void launchMeeting(String origin,String serverURL, final String userToken) {
+    private void launchMeeting(String origin, String serverURL, final String userToken) {
         Intent intent;
         if (SystemUtil.isTablet(this)) {
             intent = new Intent(this, com.meetingroom.activity.flat.FlatMeetingActivity.class);
@@ -166,14 +167,17 @@ public class InstantMeetingActivity extends MeetingRoomBaseActivity {
                         etEmailAddress.getText().toString().trim(),
                         new H2HCallback() {
                             @Override
-                            public void onCompleted(Exception ex, H2HCallBackStatus status) {
-                                if (status == H2HCallBackStatus.H2HCallBackStatusOK){
-                                    launchMeeting(h2HHttpRequest.getOrigin(),h2HHttpRequest.getServerURL(),h2HHttpRequest.getUserToken());
-                                }else {
+                            public void onCompleted(final Exception ex, final H2HCallBackStatus status, final H2HResponse response) {
+                                if (status == H2HCallBackStatus.H2HCallBackStatusOK) {
+                                    launchMeeting(h2HHttpRequest.getOrigin(), h2HHttpRequest.getServerURL(), h2HHttpRequest.getUserToken());
+                                } else {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(InstantMeetingActivity.this,"Meeting Not Found, Please Enter an Exiting Meeting id",Toast.LENGTH_SHORT).show();
+                                            final String message = response != null && !TextUtils.isEmpty(response.message)
+                                                    ? response.message : "Meeting Not Found, Please Enter an Exiting Meeting id";
+
+                                            Toast.makeText(InstantMeetingActivity.this, message, Toast.LENGTH_SHORT).show();
                                             cancelJoinMeeting();
                                         }
                                     });
@@ -203,9 +207,9 @@ public class InstantMeetingActivity extends MeetingRoomBaseActivity {
     @PermissionGrant(PERMISSION_RECORD_AUDIO)
     public void requestAudioSuccess() {
         if ((ContextCompat.checkSelfPermission(context,
-                Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)){
+                Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)) {
             handler.sendEmptyMessage(0);
-        }else {
+        } else {
             requestCameraPermission();
         }
     }
@@ -231,7 +235,7 @@ public class InstantMeetingActivity extends MeetingRoomBaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK){
+        if (resultCode == RESULT_OK) {
         }
     }
 }
