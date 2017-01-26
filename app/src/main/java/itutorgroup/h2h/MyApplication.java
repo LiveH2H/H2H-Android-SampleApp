@@ -23,6 +23,12 @@ public class MyApplication extends LitePalApplication {
     public static MyApplication INSTANCE;
     private int appCount = 0;
 
+
+    private static final String APPLICATION_ID = "73F427EA-0226-42FA-8A89-BA8B62F0A6D6";
+    private static final String TOKEN = "i/ZwbU9epNah5Dk0WXRFtvxMWkhm";
+    //private static final String APPLICATION_ID = "10F40A1B-4DBB-4590-B540-0169947B4ADF";
+    //private static final String TOKEN = "zEV7/xBVCUi2zhDXR2Z19OGW1G7/";
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -38,7 +44,7 @@ public class MyApplication extends LitePalApplication {
 
         H2HConstant.BASE_URL = H2HConstant.SERVER_QA;
         // qa server: test9@qq.com / 123456
-        H2HUserManager.getInstance().init("i/ZwbU9epNah5Dk0WXRFtvxMWkhm", "73F427EA-0226-42FA-8A89-BA8B62F0A6D6");
+        H2HUserManager.getInstance().init(TOKEN, APPLICATION_ID);
 
         initCrashCatcher();
         setActivityLifecycleCallbacks();
